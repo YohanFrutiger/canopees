@@ -1,14 +1,11 @@
-// src/App.jsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
-
-// Import de tes pages (crée-les au fur et à mesure, même vides pour l'instant)
 import Home from "./pages/Home";
-// import About from "./pages/About";
-// import Prestations from "./pages/Prestations";
-// import Prices from "./pages/Prices";
-// import Contact from "./pages/Contact";
+import About from "./pages/About";
+import Prestations from "./pages/Prestations";
+import Prices from "./pages/Prices";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
@@ -17,18 +14,16 @@ function App() {
         <Header />
         
 
-        <main className="flex-grow pt-20">
+        <main className="flex-grow pt-[40px] lg:pt-[50px]">
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/qui-sommes-nous" element={<About />} />
-            <Route path="/prestations" element={<Services />} />
-            <Route path="/tarifs" element={<Tarifs />} />
-            <Route path="/contact" element={<Contact />} /> */}
+            <Route path="/qui-sommes-nous" element={<About />} />
+            <Route path="/prestations" element={<Prestations />} />
+            <Route path="/tarifs" element={<Prices />} />
+            <Route path="/contact" element={<Contact />} />
           </Routes>
         </main>
         <Footer />
-
-        {/* Le Footer viendra ici plus tard ici */}
       </div>
     </Router>
   );

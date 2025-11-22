@@ -1,9 +1,9 @@
-import { useState } from "react";           // AJOUTE CETTE LIGNE EN HAUT
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import logo from "../../assets/logo.png";
 
 export default function Header() {
-  // état pour ouvrir/fermer le menu mobile
+
   const [isOpen, setIsOpen] = useState(false);
 
   const navItems = [
@@ -20,11 +20,11 @@ export default function Header() {
         <div className="h-full max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo + bande verte */}
           <div className="flex items-center">
-            <div className="w-6 bg-green hidden md:block" />
+            <div className="w-6 bg-green md:block" />
             <img
               src={logo}
               alt="Canopées"
-              className="bg-white h-[76px] px-5 w-auto max-w-[150px] lg:max-w-[200px] object-contain"
+              className="bg-white h-[40px] lg:h-[50px] px-5 w-auto max-w-[150px] lg:max-w-[200px] object-contain"
             />
           </div>
 
@@ -45,7 +45,7 @@ export default function Header() {
           </nav>
 
 
-          {/* BOUTON BURGER */}
+          {/* BURGER BUTTON */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-4xl focus:outline-none mr-6"
@@ -88,7 +88,7 @@ export default function Header() {
             <li key={item.to}>
               <NavLink
                 to={item.to}
-                onClick={() => setIsOpen(false)}   // ferme le menu quand on clique un lien
+                onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
                   `text-xl font-rosario transition-colors ${isActive ? "text-orange" : "text-white"
                   } hover:text-orange`}
