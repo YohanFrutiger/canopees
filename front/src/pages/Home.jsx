@@ -5,50 +5,49 @@ import Carrousel from "../components/features/Carrousel";
 export default function Home() {
   return (
     <>
-      <HeroSlider />
+      <HeroSlider
+      />
 
-      <div className="mx-auto max-w-[1300px] px-10">
+      <p className=" text-center py-8 font-semibold text-lg text-gray">
+        Depuis 2020, <span className="text-violet font-semibold">Canopées</span> met sa passion et le respect de la nature au service de vos espaces verts. <span className="text-violet font-semibold">Conception, entretien, taille, élagage, abattage</span> : nous intervenons avec la même exigence chez les particuliers, les entreprises et les collectivités dans toute la régio Rhône-Alpes. <span className="text-violet font-semibold">Un jardin bien pensé vous ressemble.</span> C’est notre conviction, et c’est ce que nous réalisons chaque jour sur le terrain.
+      </p>
 
+      <hr className="border-t border-gray/50 w-14 mx-auto " />
 
-        
-          <p className="container text-center mx-auto py-8 font-medium">Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa iure, reprehenderit dolores eveniet consequatur recusandae totam quasi minima velit quas similique sapiente illo autem sit impedit dolor voluptate tenetur expedita omnis? Quibusdam adipisci laudantium blanditiis sequi libero alias cupiditate, perspiciatis ipsa ullam rerum quaerat asperiores dicta.
-          </p>
-        
-
-
-        
-          <h1 className="uppercase font-semibold text-center text-xl text-black tracking-wide">Notre savoir-faire au service de tous</h1>
-        
+      <h1 className="uppercase font-semibold text-center text-xl text-black tracking-wide pt-8">Notre savoir-faire au service de tous</h1>
 
 
-        <div className="gap-4 grid grid-cols-1 md:grid-cols-3 py-4">
-          <TargetCard
-            icon="🏡"
-            title="Particuliers"
-            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa iure, reprehenderit dolores eveniet consequatur recusandae totam quasi minima velit quas similique sapiente illo autem sit impedit dolor voluptate tenetur expedita omnis? Quibusdam adipisci laudantium blanditiis sequi libero alias cupiditate, perspiciatis ipsa ullam rerum quaerat asperiores dicta."
-            bgColor="bg-violet"
-          />
-          <TargetCard
-            icon="🏢"
-            title="Entreprise"
-            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa iure, reprehenderit dolores eveniet consequatur recusandae totam quasi minima velit quas similique sapiente illo autem sit impedit dolor voluptate tenetur expedita omnis? Quibusdam adipisci laudantium blanditiis sequi libero alias cupiditate, perspiciatis ipsa ullam rerum quaerat asperiores dicta."
-            bgColor="bg-blue"
-          />
-          <TargetCard
-            icon="🏛️"
-            title="Collectivités territoriales"
-            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa iure, reprehenderit dolores eveniet consequatur recusandae totam quasi minima velit quas similique sapiente illo autem sit impedit dolor voluptate tenetur expedita omnis? Quibusdam adipisci laudantium blanditiis sequi libero alias cupiditate, perspiciatis ipsa ullam rerum quaerat asperiores dicta."
-            bgColor="bg-orange"
-          />
-        </div>
-        
-          <h1 className="uppercase font-semibold text-center text-xl text-black tracking-wide pt-8 pb-4">Un œil sur nos dernières réalisations</h1>
-        
 
-        <Carrousel />
-
-
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-3 py-4">
+        <TargetCard
+          icon="🏡"
+          title="Particuliers"
+          text="Vous avez un jardin, une résidence secondaire, une grande propriété ou une simple haie à tailler ? Nous entretenons et sublimons votre espace de vie comme si c’était le nôtre : avec soin, discrétion et respect de vos arbres"
+          bgColor="bg-violet"
+        />
+        <TargetCard
+          icon="🏢"
+          title="Entreprise"
+          text="Parcs d’activité, bureaux, hôtels, restaurants, zones commerciales… Des espaces verts impeccables valorisent votre image et accueillent vos clients et collaborateurs dans un cadre agréable toute l’année."
+          bgColor="bg-blue"
+        />
+        <TargetCard
+          icon="🏛️"
+          title="Collectivités territoriales"
+          text="Mairies, écoles, cimetières, parcs publics, bords de route… Nous répondons aux marchés publics et intervenons avec rigueur, sécurité et traçabilité pour maintenir le patrimoine arboré de votre commune."
+          bgColor="bg-pink"
+        />
       </div>
+
+      <hr className="mt-8 border-t border-gray/50 w-14 mx-auto " />
+
+      <h1 className="uppercase font-semibold text-center text-xl text-black tracking-wide pt-8 pb-4">Un œil sur nos dernières réalisations</h1>
+
+
+      <Carrousel />
+
+
+
 
     </>
   )

@@ -7,12 +7,12 @@ export default function TargetCard({ icon, title, text, bgColor}) {
       </div>
 
       {/* Titre */}
-      <h3 className="text-xl underline font-rosario font-semibold  mb-4">
+      <h3 className="text-xl underline font-rosario  mb-4">
         {title}
       </h3>
 
       {/* Texte */}
-      <p className=" px-2 text-base font-light">
+      <p className=" px-2 ">
         {text}
       </p>
     </div>

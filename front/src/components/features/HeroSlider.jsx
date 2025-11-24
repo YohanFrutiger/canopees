@@ -67,14 +67,20 @@
 // }
 
 // Slider temporaire
-import heroImage from "../../assets/images/slide-1.jpg"; // mets ta photo ici
+import heroImage from "../../assets/images/slide-1.jpg"; 
 
-export default function HeroImage() {
+export default function HeroSlider() {
   return (
-    <div className="w-full h-[300px] md:h-[450px] border border-black">
-      
-      
-
+    <div className=" h-[300px] md:h-[450px] border border-black relative overflow-hidden -mx-6 ">
+      {/* <img src={heroImage}
+       alt=""
+       className="absolute w-full h-full object-cover object-center"
+       />   */}
     </div>
+
+
+
+
+
   );
 }
