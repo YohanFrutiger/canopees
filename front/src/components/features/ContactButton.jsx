@@ -2,10 +2,10 @@ export default function ContactButton({ btnContent }) {
 
 
   return (
-    <div className="mt-16 mx-auto text-center max-w-[350px]">
+    <div className="mt-8 text-center ">
      
 
-      <a href="/contact" className="bg-blue hover:bg-blue/90 text-white px-2 md:px-8 py-4 rounded-xl md:text-xl font-semibold shadow-lg transition ">
+      <a href="/contact" className=" mx-auto block w-48 text-center py-3 bg-blue hover:bg-blue/80 text-white rounded-lg font-semibold shadow-lg transition transform hover:scale-105">
       {btnContent}
       </a>
 

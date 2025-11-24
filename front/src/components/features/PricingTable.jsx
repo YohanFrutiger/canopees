@@ -70,8 +70,8 @@ export default function PricingTable() {
             key={index}
             onClick={() => setSelected(index)}
             className={`  px-4 pb-4 rounded-b-full text-lg font-rosario font-medium transition-all  w-[150px] ${selected === index
-              ? "bg-green text-white shadow-xl scale-105"
-              : "bg-white text-gray-700 hover:bg-green/20 shadow-md hover:shadow-lg"
+              ? "bg-violet text-white shadow-xl scale-105"
+              : "bg-white text-gray-700 hover:bg-violet/20 shadow-md hover:shadow-lg"
               }`}
           >
             {item.title}
@@ -84,7 +84,7 @@ export default function PricingTable() {
     
 
       {/* TABLEAU DES PRIX */}
-      <div className="rounded-2xl shadow-xl p-4 md:p-4 bg-gray/10 md:w-[600px] mx-auto">
+      <div className="rounded-2xl shadow-xl p-4 md:p-4 bg-violet/10 border-4 border-violet/90 md:w-[600px] mx-auto mb-16">
         {/* <h2 className="text-3xl md:text-4xl font-rosario text-gray py-8 text-center">
           {prestations[selected].title}
         </h2> */}

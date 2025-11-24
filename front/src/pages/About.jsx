@@ -6,9 +6,9 @@ export default function About() {
   return (
     <>
       <>
-        <div className="text-center text-gray">
+        <div className=" text-center">
 
-          <p className="pt-8 pb-8 text-lg font-semibold">Depuis 2020, Canopées met sa passion et le respect de la nature au service de vos espaces verts. Conception, entretien, taille, élagage, abattage : nous intervenons avec la même exigence chez les particuliers, les entreprises et les collectivités dans toute la régio Rhône-Alpes. Un jardin bien pensé vous ressemble.
+          <p className="text-gray pt-8 pb-8 text-lg font-semibold">Depuis 2020, Canopées met sa passion et le respect de la nature au service de vos espaces verts. Conception, entretien, taille, élagage, abattage : nous intervenons avec la même exigence chez les particuliers, les entreprises et les collectivités dans toute la régio Rhône-Alpes. Un jardin bien pensé vous ressemble.
         C’est notre conviction, et c’est ce que nous réalisons chaque jour sur le terrain.
           </p>
 
@@ -67,7 +67,7 @@ export default function About() {
             </div>
           </div>
 
-          <hr className="border-t border-gray/50 w-14 mx-auto mt-8 " />
+          <hr className="border-t border-gray/50 w-14 mx-auto mb-16 " />
 
           <ContactButton
             btnContent="Contactez-nous !"

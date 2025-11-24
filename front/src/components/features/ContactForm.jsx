@@ -23,10 +23,10 @@ export default function ContactForm() {
   
 
   return (
-    <div className="bg-white rounded-3xl shadow-2xl p-8 md:w-[600px] mx-auto bg-gray/10">
+    <div className="bg-white rounded-3xl shadow-2xl p-8 md:w-[600px] mx-auto bg-violet/10">
       <form onSubmit={handleSubmit} className="space-y-8">
 
-        <p className=" text-left text-sm text-gray-600 italic">
+        <p className=" text-left text-sm text-gray italic">
           *Tous les champs sont requis
         </p>
         <div className="text-left flex flex-col gap-10 ">
@@ -41,13 +41,13 @@ export default function ContactForm() {
               value={formData.nom}
               onChange={handleChange}
               required
-              className="w-full px-5 py-4 border border-gray/50 rounded-xl focus:outline-none focus:border-green focus:ring-4 focus:ring-green/20 transition"
+              className="w-full px-5 py-4 border border-violet/50 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition"
               placeholder="Dupont"
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 pb-2">
+            <label className="block text-lg font-medium text-violet-700 pb-2">
               Prénom
             </label>
             <input
@@ -56,13 +56,13 @@ export default function ContactForm() {
               value={formData.prenom}
               onChange={handleChange}
               required
-              className="w-full px-5 py-4 border border-gray/50 rounded-xl focus:outline-none focus:border-green focus:ring-4 focus:ring-green/20 transition"
+              className="w-full px-5 py-4 border border-violet/50 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition"
               placeholder="Jean"
             />
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 pb-2">
+            <label className="block text-lg font-medium text-violet-700 pb-2">
               Email
             </label>
             <input
@@ -71,7 +71,7 @@ export default function ContactForm() {
               value={formData.email}
               onChange={handleChange}
               required
-              className="w-full px-5 py-4 border border-gray/50 rounded-xl focus:outline-none focus:border-green focus:ring-4 focus:ring-green/20 transition"
+              className="w-full px-5 py-4 border border-violet/50 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition"
               placeholder="jean.dupont@gmail.com"
             />
           </div>
@@ -86,7 +86,7 @@ export default function ContactForm() {
               onChange={handleChange}
               required
               rows="6"
-              className="w-full px-5 py-4 border border-gray-300 rounded-xl focus:outline-none focus:border-green focus:ring-4 focus:ring-green/20 transition "
+              className="w-full px-5 py-4 border border-gray-300 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition "
               placeholder="Bonjour, je souhaiterais un devis pour..."
             />
           </div>
@@ -94,13 +94,19 @@ export default function ContactForm() {
 
         </div>
 
-        
+        {/* Message de succès */}
+        {/* {status === "success" && (
+          <div className="bg-green/10 border border-green text-green px-6 py-4 rounded-xl text-center font-semibold">
+            Merci ! Votre message a bien été envoyé. Nous vous répondons sous 24h
+          </div>
+
+        )} */}
 
         {status === "success" && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray/40 mx-auto">
             <div className="rounded-lg text-lg shadow-xl bg-white p-4 border-green border-4">
               
-              Votre message a bien été envoyé ! Nous vous répondrons sous 24h.
+              Votre message a bien été envoyé ! Nous vous répondrons sous 48h.
               <br />
               <button onClick={() => setStatus("")} className="text-lg underline font-semibold">
                 Fermer 
@@ -113,7 +119,7 @@ export default function ContactForm() {
         <div className="text-center">
           <button
             type="submit"
-            className="bg-blue hover:bg-blue/90 text-white px-2 md:px-8 py-4 rounded-xl md:text-xl font-semibold shadow-lg transition "
+            className=" mx-auto w-36 text-center py-3 bg-blue hover:bg-blue/80 text-white rounded-lg font-semibold "
           >
             Envoyer
           </button>
