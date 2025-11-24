@@ -3,7 +3,7 @@ import logo from "../../assets/logo.png";
 
 export default function Footer() {
   return (
-    <footer className="h-[120px] bg-green/90 text-white mt-auto">
+    <footer className="h-[120px] bg-green/90 text-white mt-[50px] ">
       <div className="h-full max-w-7xl lg:mx-auto flex items-center justify-between relative text-xs md:text-base">
 
         {/* COLONNE GAUCHE */}

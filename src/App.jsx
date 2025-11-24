@@ -14,7 +14,7 @@ function App() {
         <Header />
         
 
-        <main className="flex-grow pt-[40px] lg:pt-[50px]">
+        <main className="flex-grow pt-[40px] lg:pt-[50px] mx-auto max-w-6xl px-6 w-full">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/qui-sommes-nous" element={<About />} />
