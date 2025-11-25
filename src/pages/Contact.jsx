@@ -1,4 +1,3 @@
-// src/pages/Contact.jsx
 import ContactForm from "../components/features/ContactForm";
 import Map from "../assets/images/map.png"
 
@@ -8,7 +7,7 @@ export default function Contact() {
 
 
       <div className=" text-gray space-y-4 text-lg font-medium">
-        <p><span className=" text-violet font-semibold">Par téléphone, par mail ou directement en agence</span>, nous sommes à l'écoute de toutes vos envies !</p>
+        <p><span className=" text-violet text-xl font-semibold">Par téléphone, par mail ou directement en agence</span>, nous sommes à l'écoute de toutes vos envies !</p>
         <p ><span className="text-xs">📞</span> Tél. : 04 72 32 45 67</p>
         <p ><span className="text-xs">📧</span> Email : <a href="mailto:contact@canopees.fr" className="text-blue hover:underline">contact@canopees.fr</a></p>
         <p ><span className="text-xs">📍</span> Adresse : 25 rue Rossignol 07320 Saint-Agrève </p>

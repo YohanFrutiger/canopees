@@ -2,7 +2,11 @@
 import PricingTable from "../components/features/PricingTable";
 import ContactButton from "../components/features/ContactButton";
 
+
 export default function Tarifs() {
+  
+
+  
   return (
     <section className=" py-8 bg-gray-50 min-h-screen">
       <div className="text-center">
@@ -19,5 +23,22 @@ export default function Tarifs() {
         />
       </div>
     </section>
+
+    // <>
+    //   <div className="px-6 pb-6 mx-auto">
+    //     <a
+    //       href="#"
+    //       className="block w-48 text-center py-3 bg-blue hover:bg-blue/80 text-white rounded-lg font-semibold shadow-lg transition transform hover:scale-105"
+    //       onClick={(e) => handleClick(e)}
+    //     >
+    //       Voir nos réalisations
+    //     </a>
+    //   </div>
+
+
+
+      
+    // </>
+
   );
 }
