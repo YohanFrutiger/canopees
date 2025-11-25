@@ -8,9 +8,9 @@ export default function ContactForm() {
     message: ""
   });
 
-  const [status, setStatus] = useState(""); 
+  const [status, setStatus] = useState("");
 
- function handleChange (e) {
+  function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
@@ -20,7 +20,7 @@ export default function ContactForm() {
     setFormData({ nom: "", prenom: "", email: "", message: "" });
   };
 
-  
+
 
   return (
     <div className="bg-white rounded-3xl shadow-2xl p-8 md:w-[600px] mx-auto bg-violet/10">
@@ -102,7 +102,7 @@ export default function ContactForm() {
 
         )} */}
 
-        {status === "success" && (
+        {/* {status === "success" && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray/40 mx-auto">
             <div className="rounded-lg text-lg shadow-xl bg-white p-4 border-green border-4">
               
@@ -114,7 +114,35 @@ export default function ContactForm() {
             </div>
           </div>
 
+        )} */}
+
+        {status === "success" && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
+            onClick={() => setStatus("")} // ferme en cliquant dehors
+          >
+            <div
+              className="bg-white rounded-2xl shadow-2xl p-10 w-full md:max-w-md text-center border-4 border-violet animate-in fade-in zoom-in-95 duration-300"
+              onClick={(e) => e.stopPropagation()} // empêche la fermeture si on clique dedans
+            >
+
+              <h3 className="text-xl font-rosario font-bold mb-4">
+                Votre message a bien été envoyé !
+              </h3>
+              <p className="text-lg text-gray-700 mb-8">
+                Nous vous répondons sous 48h.
+              </p>
+              <button
+                onClick={() => setStatus("")}
+                className="bg-blue hover:bg-blue/90 text-white px-8 py-4 rounded-lg font-semibold text-lg transition"
+              >
+                Fermer
+              </button>
+            </div>
+          </div>
         )}
+
+
 
         <div className="text-center">
           <button
