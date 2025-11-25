@@ -4,16 +4,16 @@ import { useState } from "react";
 import { realisations } from "../../data/realisations";
 import Modal from "./Modal";
 
-export default function PrestationCard({ img, title, text, category }) {
+export default function PrestationCard({ img, title, text, tag }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
 
   return (
-    <div className="flex flex-col border-4 border-violet/90 bg-violet/10 rounded rounded-t-2xl shadow-lg md:max-w-[355px] overflow-hidden">
+    <div className="flex flex-col border-2 border-violet/90 bg-violet/10 rounded rounded-t-2xl shadow-lg md:max-w-[355px] overflow-hidden mb-4 text-center">
       {/* Titre */}
-      <h3 className="text-xl uppercase font-bold font-rosario py-4 text-center tracking-wide">
+      <h2 className="px-2">
         {title}
-      </h3>
+      </h2>
 
       {/* Image */}
       <div className="w-full h-60 overflow-hidden">
@@ -25,7 +25,7 @@ export default function PrestationCard({ img, title, text, category }) {
       </div>
 
       {/* Texte */}
-      <p className="text-center px-6 pt-4 pb-8 flex-1 text-gray-800">
+      <p className=" py-8 px-4 flex-1">
         {text}
       </p>
 
@@ -33,7 +33,7 @@ export default function PrestationCard({ img, title, text, category }) {
       <div className="px-6 pb-6 mx-auto">
         <button
           onClick={() => setIsModalOpen(true)}
-          className="block w-48 text-center py-3 bg-blue hover:bg-blue/80 text-white rounded-lg font-semibold shadow-lg transition transform hover:scale-105"
+          className="block w-48  border border-violet text-center py-3 bg-violet text-white rounded-lg font-semibold  transition transform hover:scale-105"
         >
           Voir nos réalisations
         </button>
@@ -44,7 +44,7 @@ export default function PrestationCard({ img, title, text, category }) {
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         title={title}
-        realisations={realisations[category]}
+        realisations={realisations[tag]}
       />
 
     </div>

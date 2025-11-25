@@ -1,7 +1,7 @@
 // src/components/features/Modal.jsx
 import Gallery from "./Gallery";
 
-export default function PrestationsModal({ isOpen, onClose, title, realisations }) {
+export default function Modal({ isOpen, onClose, title, realisations }) {
   if (!isOpen) return null;
   return (
     <div
@@ -25,10 +25,10 @@ export default function PrestationsModal({ isOpen, onClose, title, realisations 
 
         {/* En-tête violet */}
         <div className="bg-violet/90 text-white text-center py-4 rounded-t-3xl">
-          <h1 className="text-3xl md:text-3xl font-rosario font-bold px-16">
+          <h1 className="text-4xl md:text-5xl font-rosario font-bold px-16">
             {title}
           </h1>
-          <p className="text-xl mt-3 opacity-90">Découvrez nos réalisations !</p>
+          <p className="text-xl mt-3 text-white">Découvrez nos réalisations !</p>
         </div>
 
         <div className="overflow-y-auto bg-gray-50">

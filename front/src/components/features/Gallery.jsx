@@ -1,6 +1,6 @@
 // src/components/features/=Gallery.jsx
 
-export default function RealisationsGallery({ realisations }) {
+export default function Gallery({ realisations }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 p-8 gap-8">
       {realisations.map((item, i) => (

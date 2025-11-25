@@ -23,7 +23,7 @@ export default function ContactForm() {
 
 
   return (
-    <div className="bg-white rounded-3xl shadow-2xl p-8 md:w-[600px] mx-auto bg-violet/10">
+    <div className="rounded-3xl shadow-2xl p-8 md:w-[600px] mx-auto bg-violet/10 border border-violet/50">
       <form onSubmit={handleSubmit} className="space-y-8">
 
         <p className=" text-left text-sm text-gray italic">
@@ -32,7 +32,7 @@ export default function ContactForm() {
         <div className="text-left flex flex-col gap-10 ">
 
           <div>
-            <label className="block text-lg font-medium text-gray-700 pb-2">
+            <label className="block text-lg font-medium text-gray-900 pb-2">
               Nom
             </label>
             <input
@@ -47,7 +47,7 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-violet-700 pb-2">
+            <label className="block text-lg font-medium text-gray-900 pb-2">
               Prénom
             </label>
             <input
@@ -62,7 +62,7 @@ export default function ContactForm() {
           </div>
 
           <div>
-            <label className="block text-lg font-medium text-violet-700 pb-2">
+            <label className="block text-lg font-medium text-gray-900 pb-2">
               Email
             </label>
             <input
@@ -93,28 +93,6 @@ export default function ContactForm() {
 
 
         </div>
-
-        {/* Message de succès */}
-        {/* {status === "success" && (
-          <div className="bg-green/10 border border-green text-green px-6 py-4 rounded-xl text-center font-semibold">
-            Merci ! Votre message a bien été envoyé. Nous vous répondons sous 24h
-          </div>
-
-        )} */}
-
-        {/* {status === "success" && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray/40 mx-auto">
-            <div className="rounded-lg text-lg shadow-xl bg-white p-4 border-green border-4">
-              
-              Votre message a bien été envoyé ! Nous vous répondrons sous 48h.
-              <br />
-              <button onClick={() => setStatus("")} className="text-lg underline font-semibold">
-                Fermer 
-              </button>
-            </div>
-          </div>
-
-        )} */}
 
         {status === "success" && (
           <div

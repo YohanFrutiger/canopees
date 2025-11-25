@@ -1,4 +1,5 @@
 import HeroSlider from "../components/features/HeroSlider";
+import Line from "../components/layout/Line";
 import TargetCard from "../components/features/TargetCard";
 import Carrousel from "../components/features/Carrousel";
 
@@ -8,17 +9,17 @@ export default function Home() {
       <HeroSlider
       />
 
-      <p className=" text-center py-8 font-semibold text-lg text-gray">
+      <p className=" text-center font-semibold mt-8 ">
         Depuis 2020, <span className="text-violet font-semibold">Canopées</span> met sa passion et le respect de la nature au service de vos espaces verts. <span className="text-violet font-semibold">Conception, entretien, taille, élagage, abattage</span> : nous intervenons avec la même exigence chez les particuliers, les entreprises et les collectivités dans toute la régio Rhône-Alpes. <span className="text-violet font-semibold">Un jardin bien pensé vous ressemble.</span> C’est notre conviction, et c’est ce que nous réalisons chaque jour sur le terrain.
       </p>
 
-      <hr className="border-t border-gray/50 w-14 mx-auto " />
+      <Line />
 
-      <h1 className="uppercase font-semibold text-center text-xl text-black tracking-wide pt-8">Notre savoir-faire au service de tous</h1>
+      <h1 className="text-center ">Notre savoir-faire au service de tous</h1>
 
 
 
-      <div className="gap-4 grid grid-cols-1 md:grid-cols-3 py-4">
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-3 mb-12">
         <TargetCard
           icon="🏡"
           title="Particuliers"
@@ -33,15 +34,15 @@ export default function Home() {
         />
         <TargetCard
           icon="🏛️"
-          title="Collectivités territoriales"
+          title="Collectivités"
           text="Mairies, écoles, cimetières, parcs publics, bords de route… Nous répondons aux marchés publics et intervenons avec rigueur, sécurité et traçabilité pour maintenir le patrimoine arboré de votre commune."
           bgColor="bg-pink"
         />
       </div>
 
-      <hr className="mt-8 border-t border-gray/50 w-14 mx-auto " />
+      <Line />
 
-      <h1 className="uppercase font-semibold text-center text-xl text-black tracking-wide pt-8 pb-4">Un œil sur nos dernières réalisations</h1>
+      <h1 className="text-center">Un œil sur nos dernières réalisations</h1>
 
 
       <Carrousel />
