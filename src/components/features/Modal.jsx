@@ -24,15 +24,15 @@ export default function Modal({ isOpen, onClose, title, realisations }) {
         </button>
 
         {/* En-tête violet */}
-        <div className="bg-violet/90 text-white text-center py-4 rounded-t-3xl">
-          <h1 className="text-4xl md:text-5xl font-rosario font-bold px-16">
+        <div className="bg-violet/90 text-white text-center rounded-t-3xl">
+          <h1 className="text-4xl md:text-5xl font-rosario font-bold my-4 mb-2 ">
             {title}
           </h1>
-          <p className="text-xl mt-3 text-white">Découvrez nos réalisations !</p>
+          <p className="text-xl mb-4 text-white">Découvrez nos réalisations !</p>
         </div>
 
         <div className="overflow-y-auto bg-gray-50">
-          <div className="p-8 md:p-12">
+          <div className="p-2">
             <Gallery realisations={realisations} 
             />
           </div>

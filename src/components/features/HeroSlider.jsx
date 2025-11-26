@@ -1,5 +1,6 @@
 // Slider.jsx
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
+import ContactButton from './ContactButton';
 import Slide1 from "../../assets/images/slider/slide-1.jpg"
 import Slide2 from "../../assets/images/slider/slide-2.jpg"
 import Slide3 from "../../assets/images/slider/slide-3.jpg"
@@ -8,7 +9,7 @@ import Slide4 from "../../assets/images/slider/slide-4.jpg"
 const slides = [
   {
     id: 1,
-    image : Slide1
+    image: Slide1
   },
   {
     id: 2,
@@ -27,28 +28,26 @@ const slides = [
 function HeroSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentIndex((prev) => (prev + 1) % slides.length);
-  //   }, 5000);
-  //   return () => clearInterval(interval);
-  // }, []);
 
-function prevSlide() {
+  function prevSlide() {
     setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-function nextSlide() {
+  function nextSlide() {
     setCurrentIndex((prev) => (prev + 1) % slides.length);
   };
 
-function goToSlide(index) {
+  function goToSlide(index) {
     setCurrentIndex(index);
   };
 
+
+
+
+
   return (
-    <div className="absolute top-16 left-0 w-full h-[400px] overflow-hidden bg-black">
+    <div className="absolute top-16 left-0 w-full h-[400px] overflow-hidden bg-black"
+    >
       {/* Slides */}
       <div
         className="flex transition-transform duration-700 ease-in-out h-full"
@@ -74,31 +73,31 @@ function goToSlide(index) {
 
 
         {/* Bouton  */}
-        <a href= "/contact" className="bg-blue hover:bg-blue/90 text-white font-bold py-4 px-10 rounded-xl text-lg md:text-xl shadow-2xl transition transform hover:scale-105">
-          Votre devis en 48h !
-        </a>
+        <ContactButton
+          btnContent="Votre devis en 48h !"
+        />
       </div>
 
       {/* Flèche gauche -  */}
       <button
         onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full flex items-center justify-center transition z-10"
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full transition z-10"
         aria-label="Précédent"
       >
         <div className="relative bottom-1">
           ‹
-          </div>
+        </div>
       </button>
 
       {/* Flèche droite  */}
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full flex items-center justify-center transition z-10"
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full transition z-10"
         aria-label="Suivant"
       >
         <div className="relative bottom-1">
           ›
-          </div>
+        </div>
       </button>
 
       {/* Dots */}
@@ -108,8 +107,8 @@ function goToSlide(index) {
             key={index}
             onClick={() => goToSlide(index)}
             className={`transition-all duration-300 rounded-full ${index === currentIndex
-                ? 'bg-white w-10 h-3'
-                : 'bg-white/60 hover:bg-white/90 w-3 h-3'
+              ? 'bg-white w-10 h-3'
+              : 'bg-white/60 hover:bg-white/90 w-3 h-3'
               }`}
             aria-label={`Slide ${index + 1}`}
           />

@@ -17,7 +17,7 @@ export default function Contact() {
         <Line />
 
 
-        <p><strong>Où nous trouver ?</strong></p>
+        <p className="mb-4"><strong>Où nous trouver ?</strong></p>
 
         <div className="mx-auto md:w-[500px] p-4 shadow-2xl mb-12 border border-gray-500 rounded-xl">
           <img src={Map} alt="" />
@@ -26,12 +26,14 @@ export default function Contact() {
 
       <Line />
 
-      <p className="text-center mb-4">
-        <strong>
-          Besoin d’un devis ? Une question ?<br />
-          Remplissez le formulaire, nous vous répondons sous 48h.
-        </strong>
-      </p>
+     
+        <p className="text-center mb-4">
+          <strong>
+            Besoin d’un devis ? Une question ?<br />
+            Remplissez le formulaire, nous vous répondons sous 48h.
+          </strong>
+        </p>
+      
 
       <div className="max-w-4xl mx-auto ">
 
