@@ -20,7 +20,7 @@ export default function Header() {
         <div className="h-full max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo + bande verte */}
           <div className="flex items-center">
-            <div className="w-6 bg-green md:block" />
+            <div className="w-6 md:block" />
             <img
               src={logo}
               alt="Canopées - Entreprise de paysagisme"

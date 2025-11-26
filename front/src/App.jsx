@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/layout/Header";
 import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
@@ -7,16 +7,13 @@ import Prestations from "./pages/Prestations";
 import Prices from "./pages/Prices";
 import Contact from "./pages/Contact";
 
-
 function App() {
   return (
-    <Router>
+    <BrowserRouter basename="/canopees/">  
       <div className="min-h-screen flex flex-col">
         <Header />
-        
-
         <main className="flex-grow pt-[40px] lg:pt-[50px] mx-auto max-w-6xl px-6 w-full">
-          <Routes>
+          <Routes> 
             <Route path="/" element={<Home />} />
             <Route path="/qui-sommes-nous" element={<About />} />
             <Route path="/prestations" element={<Prestations />} />
@@ -26,7 +23,7 @@ function App() {
         </main>
         <Footer />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 
