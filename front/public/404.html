@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Single Page Apps for GitHub Pages</title>
+    <script>
+      const path = location.pathname + location.search + location.hash;
+      if (path !== '/' && !path.startsWith('/canopees/')) {
+        location.replace('/canopees/' + path.replace(/^\//, ''));
+      } else {
+        location.replace('/canopees/index.html');
+      }
+    </script>
+  </head>
+  <body>
+  </body>
+</html>
