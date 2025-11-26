@@ -11,9 +11,9 @@ export default function PrestationCard({ img, title, text, tag }) {
   return (
     <div className="flex flex-col border-2 border-violet/90 bg-violet/10 rounded rounded-t-2xl shadow-lg md:max-w-[355px] overflow-hidden mb-4 text-center">
       {/* Titre */}
-      <h2 className="px-2">
+      <h3 className="px-4 pb-4">
         {title}
-      </h2>
+      </h3>
 
       {/* Image */}
       <div className="w-full h-60 overflow-hidden">

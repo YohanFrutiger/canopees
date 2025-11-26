@@ -12,8 +12,8 @@ import Line from "../components/layout/Line";
 export default function Prestations() {
   return (
     <>
-      <p className="text-center mt-8"><span className="text-violet">Canopées</span> prend soin de vos jardins et espaces verts toute l’année : de la <span className="text-violet">conception complète</span> d’un nouvel extérieur à l’<span className="text-violet">entretien régulier</span>, en passant par la <span className="text-violet">taille</span>, l’<span className="text-violet">élagage</span> et la <span className="text-violet">gestion des déchets verts</span>. Notre objectif est simple : vous offrir un jardin beau, sain et agréable à vivre, sans que vous ayez à vous en occuper. Un travail soigné et respectueux de la nature, un devis gratuit et rapide. Votre extérieur mérite le meilleur.
-        <span className="text-violet"> Découvrez nos prestations dès à présent !</span>
+      <p className="text-center mt-8"><span className="text-violet font-semibold">Canopées</span> prend soin de vos jardins et espaces verts toute l’année : de la <span className="text-violet font-semibold">conception complète</span> d’un nouvel extérieur à l’<span className="text-violet font-semibold">entretien régulier</span>, en passant par la <span className="text-violet font-semibold">taille</span>, l’<span className="text-violet font-semibold">élagage</span> et la <span className="text-violet font-semibold">gestion des déchets verts</span>. Notre objectif est simple : vous offrir un jardin beau, sain et agréable à vivre, sans que vous ayez à vous en occuper. Un travail soigné et respectueux de la nature, un devis gratuit et rapide. Votre extérieur mérite le meilleur.
+        <span className="text-violet font-semibold"> Découvrez nos prestations dès à présent !</span>
       </p>
       <Line />
 

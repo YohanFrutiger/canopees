@@ -16,27 +16,27 @@ export default function Header() {
 
   return (
     <>
-      <header className="h-[40px] lg:h-[50px] bg-green/90 text-white shadow-lg fixed top-0 left-0 right-0 z-50">
+      <header className="h-16 bg-green/90 text-white shadow-lg fixed top-0 left-0 right-0 z-50">
         <div className="h-full max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo + bande verte */}
           <div className="flex items-center">
             <div className="w-6 bg-green md:block" />
             <img
               src={logo}
-              alt="Canopées"
-              className="bg-white h-[40px] lg:h-[50px] px-5 w-auto max-w-[150px] lg:max-w-[200px] object-contain"
+              alt="Canopées - Entreprise de paysagisme"
+              className="bg-white h-16 px-5 w-auto max-w-[120px] lg:max-w-[200px] object-contain"
             />
           </div>
 
           {/* Navigation desktop */}
 
-          <nav className="hidden md:flex items-center justify-center flex-1 md:gap-8 lg:gap-10 ">
+          <nav className="hidden md:flex items-center justify-center flex-1 md:gap-4 lg:gap-10 ">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  ` font-rosario lg:text-lg font-medium transition-colors hover:text-orange ${isActive ? "text-orange" : "text-white"}`
+                  ` font-rosario text-xl font-medium transition-colors hover:text-orange ${isActive ? "text-orange" : "text-white"}`
                 }
               >
                 {item.label}
@@ -47,9 +47,12 @@ export default function Header() {
 
           {/* BURGER BUTTON */}
           <button
+            type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-4xl focus:outline-none mr-6"
-            aria-label="Menu"
+            aria-expanded={isOpen}
+            aria-controls="mobile-menu"
+            aria-label="Ouvrir le menu de navigation"
+            className="md:hidden text-4xl p-2 m-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-green-700 rounded"
           >
             {isOpen ? "" : "☰"}
           </button>
@@ -73,24 +76,24 @@ export default function Header() {
         `}
       >
         {/* X button */}
-        <div className="flex justify-end mr-6">
+        <div className="flex justify-end mt-2 mr-4">
           <button
             onClick={() => setIsOpen(false)}
             className="text-5xl text-white hover:text-orange "
           >
-            ×
+            ✕
           </button>
         </div>
 
         {/* Menu */}
-        <ul className="flex flex-col items-end gap-5 mt-6 mr-5">
+        <ul className="flex flex-col items-start gap-5 mt-2 p-4 pr-4 bg-gray-900">
           {navItems.map((item) => (
             <li key={item.to}>
               <NavLink
                 to={item.to}
                 onClick={() => setIsOpen(false)}
                 className={({ isActive }) =>
-                  `text-xl font-rosario transition-colors ${isActive ? "text-orange" : "text-white"
+                  `text-xl font-semibold font-rosario transition-colors ${isActive ? "text-orange" : "text-white"
                   } hover:text-orange`}
               >
                 {item.label}

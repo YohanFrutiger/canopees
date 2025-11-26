@@ -1,86 +1,121 @@
-// import { Swiper, SwiperSlide } from "swiper/react";
-// import { Navigation, Pagination, Autoplay } from "swiper/modules";
-// import "swiper/css";
-// import "swiper/css/navigation";
-// import "swiper/css/pagination";
-// import slide1 from "../../assets/images/slide-1.jpg";
-// import slide2 from "../../assets/images/slide-2.jpg";
-// import slide3 from "../../assets/images/slide-3.jpg";
-// import slide4 from "../../assets/images/slide-4.jpg";
+// Slider.jsx
+import { useState, useEffect } from 'react';
 
-// export default function HeroSlider() {
-//   const slides = [
-//     { img: slide1},
-//     { img: slide2},
-//     { img: slide3},
-//     { img: slide4},
-//   ];
+const slides = [
+  {
+    id: 1,
+    title: "Montagnes majestueuses",
+    image: "https://picsum.photos/600/400?random=6",
+  },
+  {
+    id: 2,
+    title: "Océan infini",
+    image: "https://picsum.photos/600/400?random=5",
+  },
+  {
+    id: 3,
+    title: "Forêt enchantée",
+    image: "https://picsum.photos/600/400?random=4",
+  },
+  {
+    id: 4,
+    title: "Ville la nuit",
+    image: "https://picsum.photos/600/400?random=3",
+  },
+];
 
-//   return (
-//     <section className="relative h-screen w-full">
-//       <Swiper
-//         modules={[Navigation, Pagination, Autoplay]}
-//         spaceBetween={0}
-//         slidesPerView={1}
-//         loop={true}
-//         // autoplay={{ delay: 5000, disableOnInteraction: false }}
-//         navigation={{
-//           prevEl: ".swiper-button-prev",
-//           nextEl: ".swiper-button-next",
-//         }}
-//         pagination={{ clickable: true }}
-//         className="h-[500px]"
-//       >
-//         {slides.map((slide, index) => (
-//           <SwiperSlide key={index}>
-//             <div className="relative h-[500px] w-full">
-//               <img
-//                 src={slide.img}
-//                 alt={`Slide ${index + 1}`}
-//                 className="w-full h-[500px] object-cover"
-//               />
+function HeroSlider() {
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-//               {/* Overlay sombre + texte centré */}
-//               {/* <div className="absolute inset-0 bg-black/50 flex items-center justify-center text-center">
-//                 <div className="max-w-4xl px-6">
-//                   <h1 className="text-4xl md:text-6xl lg:text-7xl font-rosario text-white font-bold leading-tight">
-//                     {slide.title}
-//                   </h1>
-//                   <p className="mt-6 text-xl md:text-3xl font-outfit text-white/90">
-//                     {slide.subtitle}
-//                   </p>
-//                   <button className="mt-10 bg-orange text-white px-10 py-4 rounded-lg text-lg font-semibold hover:bg-orange/90 transition">
-//                     Demander un devis
-//                   </button>
-//                 </div>
-//               </div> */}
-//             </div>
-//           </SwiperSlide>
-//         ))}
-//       </Swiper>
+  
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setCurrentIndex((prev) => (prev + 1) % slides.length);
+  //   }, 5000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
-//       {/* Flèches personnalisées */}
-//       <div className="swiper-button-prev !text-white !w-12 !h-12 after:!text-4xl" />
-//       <div className="swiper-button-next !text-white !w-12 !h-12 after:!text-4xl" />
-//     </section>
-//   );
-// }
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
+  };
 
-// Slider temporaire
-import heroImage from "../../assets/images/slide-1.jpg"; 
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % slides.length);
+  };
 
-export default function HeroSlider() {
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
   return (
-    <div className=" h-[300px] md:h-[450px] border border-black relative overflow-hidden -mx-6 ">
-      {/* <img src={heroImage}
-       alt=""
-       className="absolute w-full h-full object-cover object-center"
-       />   */}
+    <div className="absolute top-16 left-0 w-full h-[400px] md:h-[500px] overflow-hidden bg-black">
+      {/* Slides */}
+      <div
+        className="flex transition-transform duration-700 ease-in-out h-full"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {slides.map((slide) => (
+          <div key={slide.id} className="min-w-full h-full flex-shrink-0 relative">
+            <img
+              src={slide.image}
+              alt={slide.title}
+              className="w-full h-full object-cover"
+            />
+
+          </div>
+
+        ))}
+
+        {/* Overlay sombre + Contenu centré */}
+
+      </div>
+
+      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center z-10">
+
+
+        {/* Bouton  */}
+        <a href= "/contact" className="bg-blue hover:bg-blue/90 text-white font-bold py-4 px-10 rounded-xl text-lg md:text-xl shadow-2xl transition transform hover:scale-105">
+          Votre devis en 48h !
+        </a>
+      </div>
+
+      {/* Flèche gauche -  */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full flex items-center justify-center transition z-10"
+        aria-label="Précédent"
+      >
+        ‹
+      </button>
+
+      {/* Flèche droite  */}
+      <button
+        onClick={nextSlide}
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full flex items-center justify-center transition z-10"
+        aria-label="Suivant"
+      >
+        ›
+      </button>
+
+      {/* Dots */}
+      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-3 z-10">
+        {slides.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => goToSlide(index)}
+            className={`transition-all duration-300 rounded-full ${index === currentIndex
+                ? 'bg-white w-10 h-3'
+                : 'bg-white/60 hover:bg-white/90 w-3 h-3'
+              }`}
+            aria-label={`Slide ${index + 1}`}
+          />
+        ))}
+      </div>
     </div>
-
-
-
-
-
   );
 }
+
+export default HeroSlider;
+
+
+

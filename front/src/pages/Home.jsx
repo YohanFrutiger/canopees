@@ -6,20 +6,21 @@ import Carrousel from "../components/features/Carrousel";
 export default function Home() {
   return (
     <>
-      <HeroSlider
-      />
+      
+    <HeroSlider/>
 
-      <p className=" text-center font-semibold mt-8 ">
+      <p className=" text-center font-semibold mt-[536px] ">
         Depuis 2020, <span className="text-violet font-semibold">Canopées</span> met sa passion et le respect de la nature au service de vos espaces verts. <span className="text-violet font-semibold">Conception, entretien, taille, élagage, abattage</span> : nous intervenons avec la même exigence chez les particuliers, les entreprises et les collectivités dans toute la régio Rhône-Alpes. <span className="text-violet font-semibold">Un jardin bien pensé vous ressemble.</span> C’est notre conviction, et c’est ce que nous réalisons chaque jour sur le terrain.
       </p>
 
+
       <Line />
 
-      <h1 className="text-center ">Notre savoir-faire au service de tous</h1>
+      <h2 className="text-center ">Notre savoir-faire au service de tous</h2>
 
 
 
-      <div className="gap-4 grid grid-cols-1 md:grid-cols-3 mb-12">
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-3  mb-12">
         <TargetCard
           icon="🏡"
           title="Particuliers"
@@ -42,7 +43,7 @@ export default function Home() {
 
       <Line />
 
-      <h1 className="text-center">Un œil sur nos dernières réalisations</h1>
+      <h2 className="text-center">Un œil sur nos dernières réalisations</h2>
 
 
       <Carrousel />

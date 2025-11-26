@@ -15,7 +15,7 @@ export default function About() {
 
           <Line />
 
-          <h1 >Nos valeurs et nos engagements</h1>
+          <h2 >Nos valeurs et nos engagements</h2>
 
 
           <p >Nous plaçons <span className="text-violet font-semibold">le respect de l’arbre et de la nature</span> au cœur de chaque intervention : taille raisonnée, zéro produit chimique, recyclage systématique des déchets verts. <span className="text-violet font-semibold">Sécurité absolue</span> grâce à nos cordistes certifiés et à un matériel rigoureusement contrôlé, <span className="text-violet font-semibold">transparence totale</span> avec un interlocuteur unique et des <span className="text-violet font-semibold">devis gratuits sous 48 h</span>, réactivité même en urgence après tempête. <span className="text-violet font-semibold">Particuliers, entreprises ou collectivités</span>, nous travaillons avec la même exigence : faire vivre vos arbres plus longtemps et vos espaces verts plus beaux, tout simplement.
@@ -23,7 +23,7 @@ export default function About() {
 
           <Line/>
 
-          <h1>une équipe de professionnels passionnés à votre écoute</h1>
+          <h2>une équipe de professionnels passionnés à votre écoute</h2>
 
           <div className=" bg-gray-50">
             <div className="max-w-5xl mx-auto px-6 text-lg italic">

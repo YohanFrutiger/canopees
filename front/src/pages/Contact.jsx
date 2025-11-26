@@ -19,7 +19,7 @@ export default function Contact() {
 
         <p><strong>Où nous trouver ?</strong></p>
 
-        <div className="mx-auto md:w-[500px] p-4 shadow-2xl mb-12">
+        <div className="mx-auto md:w-[500px] p-4 shadow-2xl mb-12 border border-gray-500 rounded-xl">
           <img src={Map} alt="" />
         </div>
       </div>
