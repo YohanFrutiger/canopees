@@ -4,20 +4,20 @@ import logo from "../../assets/logo.png";
 export default function Footer() {
   return (
     <footer className="h-[120px] bg-green/90 text-white mt-8 ">
-      <div className="h-full max-w-7xl lg:mx-auto flex items-center justify-between relative text-xs md:text-base">
+      <div className="h-full max-w-7xl mx-auto flex items-center justify-between relative ">
 
         {/* COLONNE GAUCHE */}
-        <div className="flex flex-col gap-1 lg:gap-3 ml-5">
+        <div className="flex flex-col gap-1 lg:gap-3 ml-2 md:ml-5 ">
           
-          <p className="">
+          <p className="text-base">
             Canopées © 2025
 
           </p>
-          <p className="">
+          <p className="text-base">
             25 rue Rossignol 07320 Saint-Agrève
 
           </p>
-          <p className="">
+          <p className="text-base">
             04 72 32 45 67
           </p>
           
@@ -26,10 +26,10 @@ export default function Footer() {
 
 
         {/* COLONNE DROITE  */}
-        <div className="flex flex-col items-end text-right gap-1 lg:gap-3 mr-5">
+        <div className="flex flex-col items-end text-right gap-1 lg:gap-3 mr-2 md:mr-5 ">
           <a
             href="mailto:contact@canopees.fr"
-            className="hover:text-orange transition"
+            className="hover:text-orange transition "
           >
             contact@canopees.fr
           </a>

@@ -1,6 +1,6 @@
-import photo1 from "../../assets/images/real-1.jpg";
-import photo2 from "../../assets/images/real-2.jpg";
-import photo3 from "../../assets/images/real-3.jpg"
+// import photo1 from "../../assets/images/real-1.jpg";
+// import photo2 from "../../assets/images/real-2.jpg";
+// import photo3 from "../../assets/images/real-3.jpg"
 
 export default function Carrousel() {
   return (

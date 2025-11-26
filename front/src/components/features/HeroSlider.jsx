@@ -1,26 +1,26 @@
 // Slider.jsx
 import { useState, useEffect } from 'react';
+import Slide1 from "../../assets/images/slider/slide-1.jpg"
+import Slide2 from "../../assets/images/slider/slide-2.jpg"
+import Slide3 from "../../assets/images/slider/slide-3.jpg"
+import Slide4 from "../../assets/images/slider/slide-4.jpg"
 
 const slides = [
   {
     id: 1,
-    title: "Montagnes majestueuses",
-    image: "https://picsum.photos/600/400?random=6",
+    image : Slide1
   },
   {
     id: 2,
-    title: "Océan infini",
-    image: "https://picsum.photos/600/400?random=5",
+    image: Slide2
   },
   {
     id: 3,
-    title: "Forêt enchantée",
-    image: "https://picsum.photos/600/400?random=4",
+    image: Slide3
   },
   {
     id: 4,
-    title: "Ville la nuit",
-    image: "https://picsum.photos/600/400?random=3",
+    image: Slide4
   },
 ];
 
@@ -35,20 +35,20 @@ function HeroSlider() {
   //   return () => clearInterval(interval);
   // }, []);
 
-  const prevSlide = () => {
+function prevSlide() {
     setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
   };
 
-  const nextSlide = () => {
+function nextSlide() {
     setCurrentIndex((prev) => (prev + 1) % slides.length);
   };
 
-  const goToSlide = (index) => {
+function goToSlide(index) {
     setCurrentIndex(index);
   };
 
   return (
-    <div className="absolute top-16 left-0 w-full h-[400px] md:h-[500px] overflow-hidden bg-black">
+    <div className="absolute top-16 left-0 w-full h-[400px] overflow-hidden bg-black">
       {/* Slides */}
       <div
         className="flex transition-transform duration-700 ease-in-out h-full"
@@ -66,7 +66,7 @@ function HeroSlider() {
 
         ))}
 
-        {/* Overlay sombre + Contenu centré */}
+        {/* Overlay*/}
 
       </div>
 
@@ -85,7 +85,9 @@ function HeroSlider() {
         className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full flex items-center justify-center transition z-10"
         aria-label="Précédent"
       >
-        ‹
+        <div className="relative bottom-1">
+          ‹
+          </div>
       </button>
 
       {/* Flèche droite  */}
@@ -94,7 +96,9 @@ function HeroSlider() {
         className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full flex items-center justify-center transition z-10"
         aria-label="Suivant"
       >
-        ›
+        <div className="relative bottom-1">
+          ›
+          </div>
       </button>
 
       {/* Dots */}
