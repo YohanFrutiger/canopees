@@ -9,7 +9,7 @@ import Contact from "./pages/Contact";
 
 function App() {
   return (
-    <BrowserRouter basename="/canopees/">  
+    <BrowserRouter basename="/canopees">  
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow pt-[40px] lg:pt-[50px] mx-auto max-w-6xl px-6 w-full">
