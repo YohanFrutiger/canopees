@@ -6,10 +6,10 @@ import Carrousel from "../components/features/Carrousel";
 export default function Home() {
   return (
     <>
-      
-    <HeroSlider/>
 
-      <p className=" text-center font-semibold mt-[536px] ">
+      <HeroSlider />
+
+      <p className=" text-center font-semibold mt-[436px] ">
         Depuis 2020, <span className="text-violet font-semibold">Canopées</span> met sa passion et le respect de la nature au service de vos espaces verts. <span className="text-violet font-semibold">Conception, entretien, taille, élagage, abattage</span> : nous intervenons avec la même exigence chez les particuliers, les entreprises et les collectivités dans toute la régio Rhône-Alpes. <span className="text-violet font-semibold">Un jardin bien pensé vous ressemble.</span> C’est notre conviction, et c’est ce que nous réalisons chaque jour sur le terrain.
       </p>
 

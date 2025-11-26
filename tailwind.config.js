@@ -14,7 +14,6 @@ module.exports = {
         pink: "#da4d66",
         red: "#b23b53",
         white: "#f5f5f5",
-        // gray: "#333333"
       },
       fontFamily: {
         outfit: ["Outfit", "sans-serif"],
