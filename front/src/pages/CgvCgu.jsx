@@ -61,7 +61,7 @@ export default function CgvCgu() {
             <p>Droit français. Tribunaux de Bourg-en-Bresse exclusivement compétents.</p>
 
             <h2>14. Contact</h2>
-            <p>Canopées – 12 rue des Pins Verts, 01600 Trévoux – Tél : 04 74 00 12 34 – contact@canopees.fr</p>
+            <p>Canopées – 25 rue Rossignel, 07320 Saint-Agrève – Tél : 04 74 00 12 34 – contact@canopees.fr</p>
 
             <p>En passant commande ou en utilisant ce site, vous acceptez sans réserve les présentes Conditions Générales de Vente et d’Utilisation.</p>
 
