@@ -7,7 +7,7 @@ export default function MentionsLegales() {
       <p>Dernière mise à jour : 27 novembre 2025</p>
 
       <h2>1. Éditeur du site</h2>
-      <p>Le site www.canopees.fr est édité par Canopées, entreprise individuelle, SIRET : 912 345 678 00019, siège social : 12 rue des Pins Verts, 01600 Trévoux. Téléphone : 04 74 00 12 34. Email : contact@canopees.fr</p>
+      <p>Le site www.canopees.fr est édité par Canopées, entreprise individuelle, SIRET : 912 345 678 00019, siège social : 25 rue Rossignel 07320 Saint-Agrève. Téléphone : 04 74 00 12 34. Email : contact@canopees.fr</p>
 
       <h2>2. Directeur de la publication</h2>
       <p>Mathieu Durand – Gérant de Canopées</p>
@@ -28,7 +28,7 @@ export default function MentionsLegales() {
       <p>Le présent site et son contenu sont soumis au droit français. Tout litige relatif à son utilisation relève de la compétence exclusive des tribunaux français.</p>
 
       <h2>8. Contact</h2>
-      <p>Pour toute question relative aux présentes mentions légales : Canopées – 12 rue des Pins Verts, 01600 Trévoux – Email : contact@canopees.fr</p>
+      <p>Pour toute question relative aux présentes mentions légales : Canopées – 25 rue Rossignel, 07320 Sain-Agrève – Email : contact@canopees.fr</p>
 
    </div>
   )
