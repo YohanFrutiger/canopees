@@ -25,8 +25,7 @@ export default function Prestations() {
       </div>
 
       <p className="text-center">Besoin d'un devis ? Une question ?  </p>
-      <div className="">
-
+      <div className="text-center">
         <Link to="/contact" className="text-centermx-auto text-blue font-semibold hover:text-blue/80 transition transform hover:scale-105">
           Cliquez ici!
         </Link>
