@@ -21,13 +21,11 @@ export default function Header() {
           {/* Logo + bande verte */}
           <div className="flex items-center">
             <div className="w-6 md:block" />
-            <a href="/" aria-label="Canopées – Retour à l’accueil">
             <img
               src={logo}
               alt="Canopées - Entreprise de paysagisme"
               className="bg-white h-16 px-5 w-auto max-w-[120px] lg:max-w-[200px] object-contain"
             />
-            </a>
           </div>
 
           {/* Navigation desktop */}
