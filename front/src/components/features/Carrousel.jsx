@@ -6,7 +6,6 @@ import photo4 from "../../assets/images/realisations/conception-1.jpg"
 import photo5 from "../../assets/images/realisations/taille-2.jpg"
 import photo6 from "../../assets/images/realisations/conception-5.jpg"
 
-
 const images = [
   photo1,
   photo2,
@@ -27,7 +26,7 @@ export default function Carrousel() {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   }
 
-function getVisibleIndices() {
+  function getVisibleIndices() {
     const prev = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
     const next = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
     return [prev, currentIndex, next];
@@ -36,7 +35,7 @@ function getVisibleIndices() {
   const visible = getVisibleIndices();
 
   return (
-  
+
     <div className="w-full h-96 md:h-[400px] flex items-center justify-center overflow-hidden">
       <div className="relative w-full max-w-6xl mx-auto px-4">
 
@@ -71,7 +70,7 @@ function getVisibleIndices() {
               <div className={pos === 1 ? 'w-72 h-72 md:w-80 md:h-80' : 'w-48 h-48 md:w-56 md:h-56'}>
                 <img
                   src={images[index]}
-                  alt={`Image ${index + 1}`}
+                  alt={""}
                   className="w-full h-full object-cover rounded-3xl border-8 border-white/20 shadow-2xl"
                 />
               </div>
@@ -84,8 +83,8 @@ function getVisibleIndices() {
                       key={i}
                       onClick={() => setCurrentIndex(i)}
                       className={`rounded-full transition-all ${i === currentIndex
-                          ? 'bg-white w-10 h-2.5'
-                          : 'bg-white/70 w-2.5 h-2.5'
+                        ? 'bg-white w-10 h-2.5'
+                        : 'bg-white/70 w-2.5 h-2.5'
                         }`}
                     />
                   ))}
@@ -94,8 +93,6 @@ function getVisibleIndices() {
             </div>
           ))}
         </div>
-
-
       </div>
     </div>
   );

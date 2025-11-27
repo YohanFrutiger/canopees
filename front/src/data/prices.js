@@ -17,8 +17,8 @@ export const pricingData = [
     details: [
       { service: "Tonte (pelouse < 1000 m²)", prix: "0,40 € / m²" },
       { service: "Tonte (pelouse > 1000 m²)", prix: "0,30 € / m²" },
-      { service: "Débroussaillage léger", prix: "35 € / heure" },
-      { service: "Débroussaillage intensif", prix: "55 € / heure" },
+      { service: "Débroussaillage léger", prix: "35 € / h" },
+      { service: "Débroussaillage intensif", prix: "55 € / h" },
     ],
     info: "Contrats annuels possibles (-15 %)"
   },
@@ -27,7 +27,7 @@ export const pricingData = [
     details: [
       { service: "Taille manuelle de haies", prix: "35 € / ml" },
       { service: "Taille mécanique (haies < 3m)", prix: "25 € / ml" },
-      { service: "Taille d’arbustes et topiaires", prix: "45 € / heure" },
+      { service: "Taille d’arbustes et topiaires", prix: "45 € / h" },
       { service: "Évacuation des déchets verts", prix: "15 € / m³" },
       { service: "Taille de rosiers et vivaces", prix: "30 € / heure" },
     ],

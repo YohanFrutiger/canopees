@@ -20,13 +20,11 @@ export default function ContactForm() {
     setFormData({ nom: "", prenom: "", email: "", message: "" });
   };
 
-
-
   return (
     <div className="rounded-3xl shadow-2xl p-8 md:w-[600px] mx-auto bg-violet/10 border border-violet/50">
       <form onSubmit={handleSubmit} className="space-y-8">
 
-        <p className=" text-left text-sm text-gray italic">
+        <p className=" text-left text-sm font-light">
           *Tous les champs sont requis
         </p>
         <div className="text-left flex flex-col gap-10 ">
@@ -86,12 +84,10 @@ export default function ContactForm() {
               onChange={handleChange}
               required
               rows="6"
-              className="w-full px-5 py-4 border border-gray-300 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition "
+              className="w-full px-5 py-4 border border-violet/50 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition "
               placeholder="Bonjour, je souhaiterais un devis pour..."
             />
           </div>
-
-
         </div>
 
         {status === "success" && (
@@ -103,8 +99,7 @@ export default function ContactForm() {
               className="bg-white rounded-2xl shadow-2xl p-10 w-full md:max-w-md text-center border-4 border-violet animate-in fade-in zoom-in-95 duration-300"
               onClick={(e) => e.stopPropagation()} // empêche la fermeture si on clique dedans
             >
-
-              <h3 className="text-xl font-rosario font-bold mb-4">
+              <h3 className="text-xl font-rosario font-semibold mb-4">
                 Votre message a bien été envoyé !
               </h3>
               <p className="text-lg text-gray-700 mb-8">

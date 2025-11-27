@@ -21,15 +21,16 @@ export default function Header() {
           {/* Logo + bande verte */}
           <div className="flex items-center">
             <div className="w-6 md:block" />
+            <a href="/" aria-label="Canopées – Retour à l’accueil">
             <img
               src={logo}
               alt="Canopées - Entreprise de paysagisme"
               className="bg-white h-16 px-5 w-auto max-w-[120px] lg:max-w-[200px] object-contain"
             />
+            </a>
           </div>
 
           {/* Navigation desktop */}
-
           <nav className="hidden md:flex items-center justify-center flex-1 md:gap-4 lg:gap-10 ">
             {navItems.map((item) => (
               <NavLink
@@ -71,7 +72,7 @@ export default function Header() {
       {/* Burger layer */}
       <nav
         className={`
-          fixed top-0 right-0 h-[350px] w-60 bg-grey/90 transform transition-transform duration-300 z-50 
+          fixed top-0 right-0 h-[350px] w-60 bg-gray-900 transform transition-transform duration-300 z-50 
           ${isOpen ? "translate-x-0" : "translate-x-full"}
         `}
       >

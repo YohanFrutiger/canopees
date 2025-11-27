@@ -18,7 +18,7 @@ export default function Modal({ isOpen, onClose, title, realisations }) {
         <button
           onClick={onClose}
           className="absolute top-6 right-6 z-50 text-white bg-black/30 backdrop-blur-sm w-12 h-12 rounded-full flex items-center justify-center text-4xl hover:bg-black/50 hover:scale-110 transition-all duration-200"
-          aria-label="Fermer"
+          aria-label="Fermer la fenêtre"
         >
           ×
         </button>
@@ -33,11 +33,10 @@ export default function Modal({ isOpen, onClose, title, realisations }) {
 
         <div className="overflow-y-auto bg-gray-50">
           <div className="p-2">
-            <Gallery realisations={realisations} 
+            <Gallery realisations={realisations}
             />
           </div>
         </div>
-        
       </div>
     </div>
   );

@@ -10,21 +10,15 @@ export default function Gallery({ realisations }) {
       {realisations.map((item, index) => (
 
         <div className="overflow-hidden ">
-
           <img
-          key={index}
+            key={index}
             src={item.image}
-            alt={item.legende}
-            className="w-full h-80 object-cover rounded-xl border-b-4 border-white"
+            alt={item.alt}
+            className="w-full h-80 object-cover rounded-xl"
           />
-
-          <p className=" text-black text-center font-semibold h-full p-2  ">{item.legende}</p>
-
+          <p className=" text-center font-semibold h-full p-2  ">{item.legende}</p>
         </div>
-
       ))}
-
     </div>
-
   );
 }

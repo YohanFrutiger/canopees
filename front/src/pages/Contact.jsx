@@ -5,9 +5,7 @@ import Line from "../components/layout/Line";
 export default function Contact() {
   return (
     <>
-
-
-      <div className="mt-8 text-center ">
+      <div className="mt-16 text-center ">
         <p><strong>Par téléphone, par mail ou directement en agence, nous sommes à l'écoute de toutes vos envies !</strong></p>
         <Line />
         <p ><span className="text-xs">📞</span> Tél. : 04 72 32 45 67</p>
@@ -15,7 +13,6 @@ export default function Contact() {
         <p ><span className="text-xs">📍</span> Adresse : 25 rue Rossignol 07320 Saint-Agrève </p>
 
         <Line />
-
 
         <p className="mb-4"><strong>Où nous trouver ?</strong></p>
 
@@ -26,22 +23,16 @@ export default function Contact() {
 
       <Line />
 
-     
-        <p className="text-center mb-4">
-          <strong>
-            Besoin d’un devis ? Une question ?<br />
-            Remplissez le formulaire, nous vous répondons sous 48h.
-          </strong>
-        </p>
-      
+
+      <p className="text-center mb-4">
+        <strong>
+          Besoin d’un devis ? Une question ?<br />
+          Remplissez le formulaire, nous vous répondons sous 48h.
+        </strong>
+      </p>
 
       <div className="max-w-4xl mx-auto ">
-
-
-
         <ContactForm />
-
-
       </div>
     </>
   );

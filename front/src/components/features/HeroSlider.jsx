@@ -9,25 +9,29 @@ import Slide4 from "../../assets/images/slider/slide-4.jpg"
 const slides = [
   {
     id: 1,
-    image: Slide1
+    image: Slide1,
+    alt: "Elagage d'un arbre en hauteur"
   },
   {
     id: 2,
-    image: Slide2
+    image: Slide2,
+    alt: "Jardin avec un gros tilleul"
   },
   {
     id: 3,
-    image: Slide3
+    image: Slide3,
+    alt: "Elagage sécurisé d'un cerisier"
+
   },
   {
     id: 4,
-    image: Slide4
+    image: Slide4,
+    alt: "Gros plan sur des gants de jardiniers posés sur une table en bois"
   },
 ];
 
 function HeroSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
-
 
   function prevSlide() {
     setCurrentIndex((prev) => (prev === 0 ? slides.length - 1 : prev - 1));
@@ -41,10 +45,6 @@ function HeroSlider() {
     setCurrentIndex(index);
   };
 
-
-
-
-
   return (
     <div className="absolute top-16 left-0 w-full h-[400px] overflow-hidden bg-black"
     >
@@ -57,20 +57,15 @@ function HeroSlider() {
           <div key={slide.id} className="min-w-full h-full flex-shrink-0 relative">
             <img
               src={slide.image}
-              alt={slide.title}
+              alt={slide.alt}
               className="w-full h-full object-cover"
             />
-
           </div>
-
         ))}
 
         {/* Overlay*/}
-
       </div>
-
       <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center z-10">
-
 
         {/* Bouton  */}
         <ContactButton

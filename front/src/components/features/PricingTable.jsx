@@ -13,11 +13,10 @@ export default function PricingTable() {
           <button
             key={index}
             onClick={() => setSelected(index)}
-            className={`px-4 py-4 rounded-3xl text-lg md:text-xl font-rosario font-semibold uppercase transition-all w-48 shadow-lg ${
-              selected === index
+            className={`px-4 py-4 rounded-3xl text-xl font-rosario font-semibold uppercase transition-all w-48 shadow-lg ${selected === index
                 ? "bg-violet text-white scale-105 shadow-2xl"
                 : "bg-violet/20 text-gray-900 hover:bg-violet/30"
-            }`}
+              }`}
           >
             {item.title}
           </button>
@@ -40,8 +39,8 @@ export default function PricingTable() {
           <tbody>
             {pricingData[selected].details.map((line, i) => (
               <tr key={i} className="border-b border-violet/30">
-                <td className="py-5 text-gray-900 md:text-lg">{line.service}</td>
-                <td className="py-5 text-right font-bold text-blue md:text-lg">
+                <td className="py-5 text-gray-900 ">{line.service}</td>
+                <td className="py-5 text-right font-bold text-blue">
                   {line.prix}
                 </td>
               </tr>
@@ -49,7 +48,7 @@ export default function PricingTable() {
           </tbody>
         </table>
 
-        <p className="mt-8 text-center text-sm md:text-base text-gray-600 italic font-medium">
+        <p className="mt-8 text-center text-sm text-gray-600 font-light ">
           {pricingData[selected].info}
         </p>
       </div>
