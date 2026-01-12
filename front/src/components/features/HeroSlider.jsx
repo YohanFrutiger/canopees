@@ -1,10 +1,10 @@
 // Slider.jsx
 import { useState } from 'react';
 import ContactButton from './ContactButton';
-import Slide1 from "../../assets/images/slider/slide-1.jpg"
-import Slide2 from "../../assets/images/slider/slide-2.jpg"
-import Slide3 from "../../assets/images/slider/slide-3.jpg"
-import Slide4 from "../../assets/images/slider/slide-4.jpg"
+import Slide1 from "../../assets/images/slider/slide-1.webp"
+import Slide2 from "../../assets/images/slider/slide-2.webp"
+import Slide3 from "../../assets/images/slider/slide-3.webp"
+import Slide4 from "../../assets/images/slider/slide-4.webp"
 
 const slides = [
   {

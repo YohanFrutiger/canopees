@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import photo1 from "../../assets/images/realisations/conception-4.jpg"
-import photo2 from "../../assets/images/realisations/elagage-4.jpg"
-import photo3 from "../../assets/images/realisations/taille-1.jpg"
-import photo4 from "../../assets/images/realisations/conception-1.jpg"
-import photo5 from "../../assets/images/realisations/taille-2.jpg"
-import photo6 from "../../assets/images/realisations/conception-5.jpg"
+import photo1 from "../../assets/images/realisations/conception-4.webp"
+import photo2 from "../../assets/images/realisations/elagage-4.webp"
+import photo3 from "../../assets/images/realisations/taille-1.webp"
+import photo4 from "../../assets/images/realisations/conception-1.webp"
+import photo5 from "../../assets/images/realisations/taille-2.webp"
+import photo6 from "../../assets/images/realisations/conception-5.webp"
 
 const images = [
   photo1,

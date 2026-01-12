@@ -1,9 +1,9 @@
 // src/data/prestations.js
-import imgConception from "../assets/images/prestations/conception.jpg";
-import imgEntretien from "../assets/images/prestations/entretien.jpg";
-import imgTaille from "../assets/images/prestations/taille.jpg";
-import imgElagage from "../assets/images/prestations/elagage.jpg";
-import imgRecyclage from "../assets/images/prestations/recyclage.jpg";
+import imgConception from "../assets/images/prestations/conception.webp";
+import imgEntretien from "../assets/images/prestations/entretien.webp";
+import imgTaille from "../assets/images/prestations/taille.webp";
+import imgElagage from "../assets/images/prestations/elagage.webp";
+import imgRecyclage from "../assets/images/prestations/recyclage.webp";
 
 export const prestations = [
   {
