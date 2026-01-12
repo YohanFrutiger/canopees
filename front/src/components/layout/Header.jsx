@@ -21,11 +21,13 @@ export default function Header() {
           {/* Logo + bande verte */}
           <div className="flex items-center">
             <div className="w-6 md:block" />
-            <img
-              src={logo}
-              alt="Canopées - Entreprise de paysagisme"
-              className="bg-white h-16 px-5 w-auto max-w-[120px] lg:max-w-[200px] object-contain"
-            />
+              <NavLink to="/">
+                <img
+                  src={logo}
+                  alt="Canopées - Entreprise de paysagisme"
+                  className="bg-white h-16 px-5 w-auto max-w-[120px] lg:max-w-[200px] object-contain"
+                />
+              </NavLink>
           </div>
 
           {/* Navigation desktop */}
