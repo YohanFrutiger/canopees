@@ -1,6 +1,5 @@
-// src/components/features/=Gallery.jsx
-// import photo from "../../assets/images/realisations/conception-1.jpg"
-
+// src/components/features/Gallery.jsx
+// Composant Gallery (images des différentes réalisations)
 
 export default function Gallery({ realisations }) {
   console.log(realisations);

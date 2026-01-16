@@ -1,4 +1,6 @@
-// Slider.jsx
+// src/components/features/Slider.jsx
+// Hero Slider de la page d'accueil
+
 import { useState } from 'react';
 import ContactButton from './ContactButton';
 import Slide1 from "../../assets/images/slider/slide-1.webp"
@@ -6,6 +8,7 @@ import Slide2 from "../../assets/images/slider/slide-2.webp"
 import Slide3 from "../../assets/images/slider/slide-3.webp"
 import Slide4 from "../../assets/images/slider/slide-4.webp"
 
+// Tableaux d'images pour le slider
 const slides = [
   {
     id: 1,
@@ -26,10 +29,11 @@ const slides = [
   {
     id: 4,
     image: Slide4,
-    alt: "Gros plan sur des gants de jardiniers posés sur une table en bois"
+    alt: "Gros plan sur des gants de jardinier posés sur une table en bois"
   },
 ];
 
+// Gestion de l'affichage des slides
 function HeroSlider() {
   const [currentIndex, setCurrentIndex] = useState(0);
 

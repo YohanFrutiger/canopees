@@ -1,4 +1,6 @@
-// Prestations.jsx
+// src/components/featuresPrestations.jsx
+// catre "Prestation" pour la page Prestations
+
 import { Link } from 'react-router-dom'
 import PrestationCard from "../components/features/PrestationCard";
 import { prestations } from "../../src/data/prestations";

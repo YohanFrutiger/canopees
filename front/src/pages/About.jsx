@@ -1,3 +1,5 @@
+// Page "Qui sommes-nous?"
+
 import bobPhoto from "../assets/images/bob.jpg";
 import tomPhoto from "../assets/images/tom.jpg"
 import ContactButton from "../components/features/ContactButton";

@@ -1,3 +1,5 @@
+// Page "Mentions légales" (accessible via lien dans le footer)
+
 import React from 'react'
 
 export default function MentionsLegales() {

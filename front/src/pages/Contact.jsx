@@ -1,3 +1,5 @@
+// Page "Contact&Devis"
+
 import ContactForm from "../components/features/ContactForm";
 import Map from "../assets/images/map.png"
 import Line from "../components/layout/Line";

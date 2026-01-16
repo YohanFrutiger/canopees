@@ -1,4 +1,9 @@
+// src/components/features/ContactButton.jsx
+// Composant boutton avec redirection vers la page Contact
+
 import { Link } from 'react-router-dom'
+
+// Composant ContactButton
 export default function ContactButton({ btnContent }) {
   return (
     <div className="mt-16 mb-8 text-center max-w-72 mx-auto ">

@@ -1,4 +1,6 @@
 // src/components/features/PricingTable.jsx
+// Composant : Tableau des tarifs de la page Tarifs
+
 import { useState } from "react";
 import { pricingData } from "../../data/prices";
 

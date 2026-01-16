@@ -1,4 +1,6 @@
 // src/components/features/Modal.jsx
+// Fenêtre modale pour l'affichage du composant Gallery
+
 import Gallery from "./Gallery";
 
 export default function Modal({ isOpen, onClose, title, realisations }) {

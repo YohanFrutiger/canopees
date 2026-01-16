@@ -1,3 +1,5 @@
+// Page GVU/CGU (accessible via lien dans le footer)
+
 import React from 'react'
 
 export default function CgvCgu() {

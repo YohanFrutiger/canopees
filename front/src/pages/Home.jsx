@@ -1,3 +1,5 @@
+// Page d'accueil du site
+
 import HeroSlider from "../components/features/HeroSlider";
 import Line from "../components/layout/Line";
 import TargetCard from "../components/features/TargetCard";
@@ -42,10 +44,7 @@ export default function Home() {
       <h2 className="text-center">Un œil sur nos dernières réalisations</h2>
 
       <Carrousel />
-
-
-
-
+      
     </>
   )
 }

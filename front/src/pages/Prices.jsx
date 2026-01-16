@@ -1,4 +1,5 @@
-// src/pages/Tarifs.jsx
+// Page Tarifs
+
 import PricingTable from "../components/features/PricingTable";
 import ContactButton from "../components/features/ContactButton";
 import Line from "../components/layout/Line";

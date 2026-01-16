@@ -1,3 +1,6 @@
+// src/components/features/Carrousel.jsx
+// Carroule d'image (utilisé sur la page d'accueil)
+
 import { useState } from 'react';
 import photo1 from "../../assets/images/realisations/conception-4.webp"
 import photo2 from "../../assets/images/realisations/elagage-4.webp"
@@ -6,6 +9,7 @@ import photo4 from "../../assets/images/realisations/conception-1.webp"
 import photo5 from "../../assets/images/realisations/taille-2.webp"
 import photo6 from "../../assets/images/realisations/conception-5.webp"
 
+// Tableau d'images
 const images = [
   photo1,
   photo2,
@@ -15,20 +19,35 @@ const images = [
   photo6,
 ];
 
+// Composant Carrousel
 export default function Carrousel() {
+  // État pour l'index de l'image actuellement au centre
   const [currentIndex, setCurrentIndex] = useState(0);
 
+  // Passe à l'image précédente (revient à la fin si on est au début)
   function prevSlide() {
     setCurrentIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   }
 
+  // Passe à l'image suivante (revient au début si on est à la fin)
   function nextSlide() {
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   }
 
+  /**
+   * Retourne les 3 indices d'images à afficher :
+   * - image précédente
+   * - image actuelle (centrale)
+   * - image suivante
+   * Gère le défilement circulaire (boucle infinie)
+   */
   function getVisibleIndices() {
+    // Calcul de l'index précédent (si on est à 0 → dernière image)
     const prev = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
+
+    // Calcul de l'index suivant (si on est à la fin → première image)
     const next = currentIndex === images.length - 1 ? 0 : currentIndex + 1;
+
     return [prev, currentIndex, next];
   }
 

@@ -1,3 +1,6 @@
+// src/components/features/TargertCard.jsx
+// Composant : Carte pour le public cible en page d'accueil
+
 export default function TargetCard({ icon, title, text, bgColor }) {
   return (
     <div className={`flex flex-col items-center  text-center text-white py-8 ${bgColor} rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300`}>
