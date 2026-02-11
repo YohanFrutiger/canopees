@@ -24,8 +24,15 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $user = $this->getUser();
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        $editUrl = $adminUrlGenerator
+            ->setController(UserCrudController::class)
+            ->setAction('edit')
+            ->setEntityId($user->getId())
+            ->generateUrl();
         return $this->render('admin/dashboard.html.twig', [
             'user' => $user,
+            'editUrl' => $editUrl,
         ]);
     }
 
