@@ -6,44 +6,62 @@ use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints\PasswordStrength;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\UniqueConstraint(name: 'UNIQ_IDENTIFIER_EMAIL', fields: ['email'])]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    //User id
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    // User firstname
+    #[Assert\NotBlank(message:'Le prénom est obligatoire')]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Le prénom doit avoir au moins 2 caractères',
+        maxMessage: 'Le prénom ne doit pas dépasser 50 caractères',
+    )]
+    #[ORM\Column(length: 255)]
+    private ?string $firstname = null;
+
+    // User lastname
+    #[Assert\NotBlank(message:'Le nom est obligatoire')]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Le nom doit avoir au moins 2 caractères',
+        maxMessage: 'Le nom ne doit pas dépasser 50 caractères',
+    )]
+    #[ORM\Column(length: 255)]
+    private ?string $lastname = null;
+
+    // User email
+    #[Assert\Email(message: 'L\'adresse email est invalide')]
+    #[Assert\NotBlank(message:'L\'adresse email est obligatoire')]
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
+    // User role
+    #[Assert\NotBlank(message:'Veuillez choisir le rôle de l\'utilisateur')]
     #[ORM\Column(type: 'json')]
     private array $roles = [];
-
-    
-    // A décommenter si jamais
-    // /**
-    //  * @var list<string> The user roles
-    //  */
-    // #[ORM\Column]
-    // private array $roles = [];
 
     /**
      * @var string The hashed password
      */
+    #[Assert\NotBlank(message:'Le mot de passe est obligatoire')]
+    // #[Assert\PasswordStrength(
+    //     minScore: PasswordStrength::STRENGTH_VERY_STRONG, // Very strong password required
+    //     message: 'Le mot de passe n\'est pas assez fort' 
+    // )]
     #[ORM\Column]
-    private ?string $password = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $firstname = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $lastname = null;
-
-    #[ORM\Column]
-    private array $role = [];
+    private ?string $password = null;    
 
     public function getId(): ?int
     {
@@ -150,15 +168,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    // public function getRole(): array
-    // {
-    //     return $this->role;
-    // }
-
-    // public function setRole(array $role): static
-    // {
-    //     $this->role = $role;
-
-    //     return $this;
-    // }
 }
