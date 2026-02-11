@@ -23,31 +23,10 @@ class DashboardController extends AbstractDashboardController
 {
     public function index(): Response
     {
-        // return parent::index();
-
-        $routeBuilder = $this->container->get(AdminUrlGenerator::class);
-        $url = $routeBuilder->setController(CategoryCrudController::class)->generateUrl();
-        return $this->redirect($url);
-
-        // Option 1. You can make your dashboard redirect to some common page of your backend
-        //
-        // 1.1) If you have enabled the "pretty URLs" feature:
-        // return $this->redirectToRoute('admin_user_index');
-        //
-        // 1.2) Same example but using the "ugly URLs" that were used in previous EasyAdmin versions:
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // return $this->redirect($adminUrlGenerator->setController(OneOfYourCrudController::class)->generateUrl());
-
-        // Option 2. You can make your dashboard redirect to different pages depending on the user
-        //
-        // if ('jane' === $this->getUser()->getUsername()) {
-        //     return $this->redirectToRoute('...');
-        // }
-
-        // Option 3. You can render some custom template to display a proper dashboard with widgets, etc.
-        // (tip: it's easier if your template extends from @EasyAdmin/page/content.html.twig)
-        //
-        // return $this->render('some/path/my-dashboard.html.twig');
+        $user = $this->getUser();
+        return $this->render('admin/dashboard.html.twig', [
+            'user' => $user,
+        ]);
     }
 
     public function configureDashboard(): Dashboard
@@ -58,17 +37,13 @@ class DashboardController extends AbstractDashboardController
 
     public function configureMenuItems(): iterable
     {
+        yield MenuItem::linkToRoute('Mon profil', 'fas fa-user', 'admin');
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
         }
         // Lien vers "Mon profil" pour tous les utilisateurs
-        $user = $this->getUser();
-        if ($user instanceof \App\Entity\User && $user->getId()) {
-            yield MenuItem::linkToCrud('Mon profil', 'fas fa-user', User::class)
-                ->setAction('edit')
-                ->setEntityId($user->getId());
-        }
+        
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Prestations', 'fas fa-list', Service::class);
         yield MenuItem::linkToCrud('Réalisations', 'fas fa-list', Realization::class);
