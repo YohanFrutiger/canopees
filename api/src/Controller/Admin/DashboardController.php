@@ -59,7 +59,16 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
+        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+            yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
+        }
+        // Lien vers "Mon profil" pour tous les utilisateurs
+        $user = $this->getUser();
+        if ($user instanceof \App\Entity\User && $user->getId()) {
+            yield MenuItem::linkToCrud('Mon profil', 'fas fa-user', User::class)
+                ->setAction('edit')
+                ->setEntityId($user->getId());
+        }
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Prestations', 'fas fa-list', Service::class);
         yield MenuItem::linkToCrud('Réalisations', 'fas fa-list', Realization::class);

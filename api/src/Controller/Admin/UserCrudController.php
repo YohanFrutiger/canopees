@@ -40,7 +40,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('firstname'),
             TextField::new('lastname'),
             TextField::new('email'),
-            ChoiceField::new('roles')  // Utilise 'role' (virtuel, singulier) pour single choice
+            ChoiceField::new('roles')
                 ->setChoices([
                     'Admin' => 'ROLE_ADMIN',
                     'Super Admin' => 'ROLE_SUPER_ADMIN',
@@ -49,6 +49,7 @@ class UserCrudController extends AbstractCrudController
                 ->renderExpanded(false)
                 ->setRequired(true),
         ];
+
 
         if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
             $fields[] = TextField::new('password')
