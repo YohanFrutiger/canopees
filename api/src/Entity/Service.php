@@ -6,6 +6,7 @@ use App\Repository\ServiceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
+#[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
 class Service
 {
     #[ORM\Id]
@@ -16,6 +17,10 @@ class Service
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(name: 'category_id', nullable: false)]
+    private ?Category $category = null;
+
     #[ORM\Column(length: 50)]
     private ?string $price = null;
 
@@ -24,10 +29,7 @@ class Service
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Category $category = null;
+   
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -121,5 +123,10 @@ class Service
         $this->user = $user;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title ?? 'Service sans titre'; // Retourne le title, ou un fallback si null
     }
 }

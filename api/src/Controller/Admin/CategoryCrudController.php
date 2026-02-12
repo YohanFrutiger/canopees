@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use Symfony\Component\Security\Core\Security;
 
 class CategoryCrudController extends AbstractCrudController
@@ -79,7 +80,11 @@ class CategoryCrudController extends AbstractCrudController
             IdField::new('id')->onlyOnIndex(),
             TextField::new('title'),
             TextEditorField::new('description'),
-            TextField::new('image'),
+            ImageField::new('image', 'Image')
+                ->setBasePath('uploads/')
+                ->setUploadDir('public/uploads')
+                ->setUploadedFileNamePattern('[randomhash].[extension]')
+                ->setRequired(false),
             TextField::new('tag'),
             TextEditorField::new('info'),
             DateTimeField::new('createdAt')->onlyOnIndex(),

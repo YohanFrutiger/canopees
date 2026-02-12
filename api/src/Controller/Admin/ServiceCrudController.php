@@ -8,9 +8,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
-use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 
 
 class ServiceCrudController extends AbstractCrudController
@@ -69,6 +69,10 @@ class ServiceCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('title'),
+            AssociationField::new('category', 'Catégorie') // 'category' est la propriété, 'Catégorie' est le label
+                ->setRequired(true) // Obligatoire si needed
+                ->autocomplete(), // Active l'autocomplétion pour un select searchable si beaucoup de catégories
+                // ->setFormTypeOptions(['choice_label' => 'title']), // Affiche le 'title' de Category dans le select (ajuste si champ différent)
             TextField::new('price'),
             DateTimeField::new('createdAt')->onlyOnIndex(),
             DateTimeField::new('updatedAt')->onlyOnIndex(),

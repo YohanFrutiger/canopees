@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
-#[ORM\HasLifecycleCallbacks] // Active les callbacks
+#[ORM\HasLifecycleCallbacks] // Active les callbackspour createdAt et updatedAt
 class Category
 {
     #[ORM\Id]
@@ -131,9 +131,7 @@ class Category
         $this->updatedAt = $updatedAt;
 
         return $this;
-    }
-
-  
+    }  
 
     public function getUser(): ?User
     {
@@ -157,5 +155,10 @@ class Category
         $this->info = $info;
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->title ?? 'Catégorie sans titre'; // Retourne le title, ou un fallback si null
     }
 }

@@ -6,6 +6,7 @@ use App\Repository\SliderImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: SliderImageRepository::class)]
+#[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
 class SliderImage
 {
     #[ORM\Id]
@@ -28,6 +29,9 @@ class SliderImage
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $altDescription = null;
 
     public function getId(): ?int
     {
@@ -56,6 +60,19 @@ class SliderImage
         $this->active = $active;
 
         return $this;
+    }
+
+    #[ORM\PrePersist] // Callback exécuté avant la persistance
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable(); // Date et heure actuelles
+    }
+
+      // Nouveau callback pour PreUpdate (updatedAt)
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable(); // Date et heure actuelles
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable
@@ -90,6 +107,18 @@ class SliderImage
     public function setUser(?User $user): static
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getAltDescription(): ?string
+    {
+        return $this->altDescription;
+    }
+
+    public function setAltDescription(string $altDescription): static
+    {
+        $this->altDescription = $altDescription;
 
         return $this;
     }

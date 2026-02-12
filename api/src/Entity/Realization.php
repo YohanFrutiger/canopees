@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: RealizationRepository::class)]
+#[ORM\HasLifecycleCallbacks] // Active les callbackspour createdAt et updatedAt
 class Realization
 {
     #[ORM\Id]
@@ -16,6 +17,10 @@ class Realization
 
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
+
+    #[ORM\ManyToOne]
+    #[ORM\JoinColumn(name: 'category_id', nullable: false)]
+    private ?Category $category = null;
 
     #[ORM\Column(length: 255)]
     private ?string $image = null;
@@ -28,10 +33,6 @@ class Realization
 
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Service $service = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
@@ -78,6 +79,19 @@ class Realization
         return $this;
     }
 
+      #[ORM\PrePersist] // Callback exécuté avant la persistance
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable(); // Date et heure actuelles
+    }
+
+      // Nouveau callback pour PreUpdate (updatedAt)
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable(); // Date et heure actuelles
+    }
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -102,14 +116,14 @@ class Realization
         return $this;
     }
 
-    public function getService(): ?Service
+    public function getCategory(): ?Category
     {
-        return $this->service;
+        return $this->category;
     }
 
-    public function setService(?Service $service): static
+    public function setCategory(?Category $category): static
     {
-        $this->service = $service;
+        $this->category = $category;
 
         return $this;
     }
