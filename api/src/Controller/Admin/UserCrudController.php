@@ -20,6 +20,9 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\RedirectResponse;
+use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -134,21 +137,24 @@ class UserCrudController extends AbstractCrudController
         return $actions;
     }
 
-    public function edit(AdminContext $context)
+    public function edit(AdminContext $context): Response|KeyValueStore
     {
         $user = $this->getUser();
         $entityInstance = $context->getEntity()->getInstance();
+
         if (!$this->isGranted('ROLE_SUPER_ADMIN') && $entityInstance && $entityInstance->getId() !== $user->getId()) {
             throw $this->createAccessDeniedException('Vous ne pouvez éditer que votre propre profil.');
         }
-        // Après modification, si l'utilisateur n'est pas SUPER_ADMIN, forcer la redirection vers le dashboard immédiatement après le POST
-        if (!$this->isGranted('ROLE_SUPER_ADMIN') && $context->getRequest()->isMethod('POST')) {
-            $url = $this->container->get(AdminUrlGenerator::class)
-                ->setController(\App\Controller\Admin\DashboardController::class)
-                ->generateUrl();
-            return new \Symfony\Component\HttpFoundation\RedirectResponse($url);
+
+        // Appel à parent pour traiter le formulaire (GET: affiche form, POST: valide et sauve si OK)
+        $response = parent::edit($context);
+
+        // Si non super admin et que c'est une redirection (sauvegarde réussie), override vers dashboard
+        if (!$this->isGranted('ROLE_SUPER_ADMIN') && $response instanceof RedirectResponse) {
+            return $this->redirectToRoute('admin');
         }
-        return parent::edit($context);
+
+        return $response;
     }
 
 

@@ -101,6 +101,13 @@ class Category
     {
         $this->createdAt = new \DateTimeImmutable(); // Date et heure actuelles
     }
+
+      // Nouveau callback pour PreUpdate (updatedAt)
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable(); // Date et heure actuelles
+    }
     
     public function getCreatedAt(): ?\DateTimeImmutable
     {
@@ -126,12 +133,7 @@ class Category
         return $this;
     }
 
-    // Nouveau callback pour PreUpdate (updatedAt)
-    #[ORM\PreUpdate]
-    public function setUpdatedAtValue(): void
-    {
-        $this->updatedAt = new \DateTimeImmutable(); // Date et heure actuelles
-    }
+  
 
     public function getUser(): ?User
     {

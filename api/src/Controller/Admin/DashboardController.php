@@ -27,15 +27,15 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $user = $this->getUser();
-        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        // $editUrl = $adminUrlGenerator
-        //     ->setController(UserCrudController::class)
-        //     ->setAction('edit')
-        //     ->setEntityId($user->getId())
-        //     ->generateUrl();
+        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        $editUrl = $adminUrlGenerator
+            ->setController(UserCrudController::class)
+            ->setAction('edit')
+            ->setEntityId($user->getId())
+            ->generateUrl();
         return $this->render('admin/my_profile.html.twig', [
             'user' => $user,
-            // 'editUrl' => $editUrl,
+            'editUrl' => $editUrl,
         ]);
     }
 
@@ -48,6 +48,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToRoute('Mon profil', 'fas fa-user', 'admin');
+        // yield MenuItem::linkToCrud('Modifier mon profil', 'fas fa-home', User::class)->setAction('edit')->setEntityId($this->getUser()->getId());
         // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);

@@ -62,6 +62,19 @@ class Service
         return $this;
     }
 
+     #[ORM\PrePersist] // Callback exécuté avant la persistance
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable(); // Date et heure actuelles
+    }
+
+      // Nouveau callback pour PreUpdate (updatedAt)
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable(); // Date et heure actuelles
+    }
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
