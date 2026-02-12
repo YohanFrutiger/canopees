@@ -14,6 +14,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
+
+use Symfony\Component\Security\Core\User\UserInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 use Symfony\Component\HttpFoundation\Response;
@@ -24,22 +27,22 @@ class DashboardController extends AbstractDashboardController
     public function index(): Response
     {
         $user = $this->getUser();
-        $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
-        $editUrl = $adminUrlGenerator
-            ->setController(UserCrudController::class)
-            ->setAction('edit')
-            ->setEntityId($user->getId())
-            ->generateUrl();
-        return $this->render('admin/dashboard.html.twig', [
+        // $adminUrlGenerator = $this->container->get(AdminUrlGenerator::class);
+        // $editUrl = $adminUrlGenerator
+        //     ->setController(UserCrudController::class)
+        //     ->setAction('edit')
+        //     ->setEntityId($user->getId())
+        //     ->generateUrl();
+        return $this->render('admin/my_profile.html.twig', [
             'user' => $user,
-            'editUrl' => $editUrl,
+            // 'editUrl' => $editUrl,
         ]);
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('Backend');
+            ->setTitle('Tableau de bord');
     }
 
     public function configureMenuItems(): iterable
@@ -59,4 +62,12 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Contenu du site ', 'fas fa-list', ContentSection::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
+  
+
+
+
+
+   
 }
+ 
+

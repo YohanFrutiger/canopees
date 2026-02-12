@@ -3,8 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+
 use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -13,6 +14,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
+
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -40,7 +44,7 @@ class UserCrudController extends AbstractCrudController
             TextField::new('firstname'),
             TextField::new('lastname'),
             TextField::new('email'),
-            ChoiceField::new('roles')
+            ChoiceField::new('roles')->onlyOnIndex()
                 ->setChoices([
                     'Admin' => 'ROLE_ADMIN',
                     'Super Admin' => 'ROLE_SUPER_ADMIN',
@@ -61,7 +65,7 @@ class UserCrudController extends AbstractCrudController
                     'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 ])
                 ->setRequired($pageName === Crud::PAGE_NEW)
-                ->onlyOnForms();
+                ->onlyOnIndex();
         }
 
         return $fields;
@@ -106,34 +110,46 @@ class UserCrudController extends AbstractCrudController
             ]);
     }
 
-    // public function configureActions(Actions $actions): Actions
-    // {
-    //     $user = $this->getUser();
+    public function configureActions(Actions $actions): Actions
+    {
+        $user = $this->getUser();
 
-    //     if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
-    //         // Admins simples : disable create/delete/list
-    //         $actions->disable(Action::NEW, Action::DELETE, Action::INDEX);
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            // Désactiver la liste, la création et la suppression pour les non SUPER_ADMIN
+            $actions->disable(Action::INDEX, Action::NEW, Action::DELETE);
 
-    //         // Sur page edit seulement, allow save et check si c'est leur profil
-    //         if ($this->getContext()->getCrud()->getCurrentPage() === Crud::PAGE_EDIT) {
-    //             $actions->add(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN);
+            // Sur la page d'édition, autoriser uniquement l'édition de son propre profil
+            if ($this->getContext() && $this->getContext()->getCrud()->getCurrentPage() === Crud::PAGE_EDIT) {
+                $entityInstance = $this->getContext()->getEntity()->getInstance();
+                if ($entityInstance && $entityInstance->getId() !== $user->getId()) {
+                    // Rediriger vers le dashboard si tentative d'accès à un autre profil
+                    $url = $this->container->get(AdminUrlGenerator::class)
+                        ->setController(\App\Controller\Admin\DashboardController::class)
+                        ->generateUrl();
+                    return $this->redirect($url);
+                }
+            }
+        }
 
-    //             // Check si l'entité éditée est bien leur profil
-    //             $entityInstance = $this->getContext()->getEntity()->getInstance();
-    //             if ($entityInstance && $entityInstance->getId() !== $user->getId()) {
-    //                 // Redirection vers leur propre profil
-    //                 $url = $this->adminUrlGenerator  // Utilise $this->adminUrlGenerator (injecté dans AbstractCrudController)
-    //                     ->setController(self::class)
-    //                     ->setAction(Action::EDIT)
-    //                     ->setEntityId($user->getId())
-    //                     ->generateUrl();
-    //                 throw new \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException('Accès restreint à votre profil seulement.');
-    //             }
-    //         }
-    //     }
+        return $actions;
+    }
 
-    //     return $actions;
-    // }
+    public function edit(AdminContext $context)
+    {
+        $user = $this->getUser();
+        $entityInstance = $context->getEntity()->getInstance();
+        if (!$this->isGranted('ROLE_SUPER_ADMIN') && $entityInstance && $entityInstance->getId() !== $user->getId()) {
+            throw $this->createAccessDeniedException('Vous ne pouvez éditer que votre propre profil.');
+        }
+        // Après modification, si l'utilisateur n'est pas SUPER_ADMIN, forcer la redirection vers le dashboard immédiatement après le POST
+        if (!$this->isGranted('ROLE_SUPER_ADMIN') && $context->getRequest()->isMethod('POST')) {
+            $url = $this->container->get(AdminUrlGenerator::class)
+                ->setController(\App\Controller\Admin\DashboardController::class)
+                ->generateUrl();
+            return new \Symfony\Component\HttpFoundation\RedirectResponse($url);
+        }
+        return parent::edit($context);
+    }
 
 
 

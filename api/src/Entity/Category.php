@@ -3,10 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
+#[ORM\HasLifecycleCallbacks] // Active les callbacks
 class Category
 {
     #[ORM\Id]
@@ -23,6 +27,9 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    #[ORM\Column(type: Types::TEXT, nullable: true)]
+    private ?string $info = null;
+
     #[ORM\Column(length: 50)]
     private ?string $tag = null;
 
@@ -34,10 +41,7 @@ class Category
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $user = null;
-
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $info = null;
+    private ?User $user = null;    
 
     public function getId(): ?int
     {
@@ -92,6 +96,12 @@ class Category
         return $this;
     }
 
+    #[ORM\PrePersist] // Callback exécuté avant la persistance
+    public function setCreatedAtValue(): void
+    {
+        $this->createdAt = new \DateTimeImmutable(); // Date et heure actuelles
+    }
+    
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
@@ -114,6 +124,13 @@ class Category
         $this->updatedAt = $updatedAt;
 
         return $this;
+    }
+
+    // Nouveau callback pour PreUpdate (updatedAt)
+    #[ORM\PreUpdate]
+    public function setUpdatedAtValue(): void
+    {
+        $this->updatedAt = new \DateTimeImmutable(); // Date et heure actuelles
     }
 
     public function getUser(): ?User
