@@ -6,8 +6,11 @@ use App\Repository\ContentSectionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use ApiPlatform\Metadata\ApiResource;
+
 #[ORM\Entity(repositoryClass: ContentSectionRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
+#[ApiResource()]
 class ContentSection
 {
     #[ORM\Id]

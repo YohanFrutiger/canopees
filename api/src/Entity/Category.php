@@ -9,8 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
+use ApiPlatform\Metadata\ApiResource;
+
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbackspour createdAt et updatedAt
+#[ApiResource()]
 class Category
 {
     #[ORM\Id]

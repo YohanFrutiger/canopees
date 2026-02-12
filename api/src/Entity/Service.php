@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\ServiceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use ApiPlatform\Metadata\ApiResource;
+
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
+#[ApiResource()]
 class Service
 {
     #[ORM\Id]

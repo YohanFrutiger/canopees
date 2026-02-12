@@ -6,8 +6,11 @@ use App\Repository\RealizationRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use ApiPlatform\Metadata\ApiResource;
+
 #[ORM\Entity(repositoryClass: RealizationRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbackspour createdAt et updatedAt
+#[ApiResource()]
 class Realization
 {
     #[ORM\Id]

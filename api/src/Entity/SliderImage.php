@@ -5,8 +5,11 @@ namespace App\Entity;
 use App\Repository\SliderImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use ApiPlatform\Metadata\ApiResource;
+
 #[ORM\Entity(repositoryClass: SliderImageRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
+#[ApiResource()]
 class SliderImage
 {
     #[ORM\Id]
