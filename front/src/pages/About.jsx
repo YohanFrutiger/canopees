@@ -159,6 +159,7 @@ export default function About() {
       <Line />
       {OurValuesAboutSection_content}
       <Line />
+      <h2>Une équipe de professionnels passionnés à votre écoute</h2>
       {teamMembers_content}
       <Line />  {/* Séparateur si needed */}
       <ContactButton btnContent="Contactez-nous !" />  {/* Bouton contact comme dans spec */}
