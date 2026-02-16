@@ -1,24 +1,63 @@
 // Page "Contact&Devis"
 
+import { useContentSections } from '../hooks/useContentSections';
 import ContactForm from "../components/features/ContactForm";
 import Map from "../assets/images/map.png"
 import Line from "../components/layout/Line";
 
 export default function Contact() {
+
+  const content = useContentSections();
+  const contactPageIntroSection = content.getSectionByKey('contact-intro'); 
+  const contactPageInfoSection = content.getSectionByKey('contact-info');
+
+  // Texte d'introduction de la page "Contact&Devis"
+  let contactIntroContent;
+  if (content.loading) {
+    // contactIntroContent = <p>Chargement...</p>;
+  } else if (content.error) {
+    contactIntroContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+  } else if (contactPageIntroSection) {
+    contactIntroContent = (
+      <section className="text-center mt-16">
+        <p className="prose mx-auto" dangerouslySetInnerHTML={{ __html: contactPageIntroSection.content }} />
+      </section>
+    );
+  } else {
+    contactIntroContent = <p>Aucune section "contact-intro" trouvée.</p>;
+  }
+
+  // Coordonnées pour la page Contact&Devis
+  let contactInfoContent;
+  if (content.loading) {
+    // contactInfoContent = <p>Chargement...</p>;
+  } else if (content.error) {
+    contactInfoContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+  } else if (contactPageInfoSection) {
+    contactInfoContent = (
+      <section className="text-center">
+        <p className="prose mx-auto" dangerouslySetInnerHTML={{ __html: contactPageInfoSection.content }} />
+      </section>
+    );
+  } else {
+    contactInfoContent = <p>Aucune section "contact-info" trouvée.</p>;
+  }
+
+
+
   return (
     <>
-      <div className="mt-16 text-center ">
-        <p><strong>Par téléphone, par mail ou directement en agence, nous sommes à l'écoute de toutes vos envies !</strong></p>
+      
+      <div className="text-center">
+
+        {contactIntroContent}        
         <Line />
-        <p ><span className="text-xs">📞</span> Tél. : 04 72 32 45 67</p>
-        <p ><span className="text-xs">📧</span> Email : <a href="mailto:contact@canopees.fr" className="text-blue hover:underline">contact@canopees.fr</a></p>
-        <p ><span className="text-xs">📍</span> Adresse : 25 rue Rossignol 07320 Saint-Agrève </p>
+        {contactInfoContent}
+        {/* <Line />
 
-        <Line />
+        <p className="mb-4"><strong>Où nous trouver ?</strong></p> */}
 
-        <p className="mb-4"><strong>Où nous trouver ?</strong></p>
-
-        <div className="mx-auto md:w-[500px] p-4 shadow-2xl mb-12 border border-gray-500 rounded-xl">
+        <div className="mx-auto md:w-[500px] p-4 shadow-2xl mt-4 mb-12 border border-gray-500 rounded-xl">
           <img src={Map} alt="" />
         </div>
       </div>

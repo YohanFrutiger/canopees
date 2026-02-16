@@ -1,22 +1,58 @@
 // Page d'accueil du site
-
+import { useContentSections } from '../hooks/useContentSections';
 import HeroSlider from "../components/features/HeroSlider";
 import Line from "../components/layout/Line";
 import TargetCard from "../components/features/TargetCard";
 import Carrousel from "../components/features/Carrousel";
 
 export default function Home() {
+
+  const content = useContentSections();
+
+  // Filtre les sections spécifiques (rapide, en mémoire)
+  const homePageIntroSection = content.getSectionByKey('home-presentation');
+  const targetCardSection = content.getSectionByKey('target-card');
+
+  // Texte d'introduction de la page d'accueil
+  let homeIntroContent;
+  if (content.loading) {
+    // homeIntroContent = <p>Chargement...</p>;
+  } else if (content.error) {
+    homeIntroContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+  } else if (homePageIntroSection) {
+    homeIntroContent = (
+      <section className="text-center mt-[464px]">
+        <p className="prose mx-auto" dangerouslySetInnerHTML={{ __html: homePageIntroSection.content }} />
+      </section>
+    );
+  } else {
+    homeIntroContent = <p>Aucune section "home-presentation" trouvée.</p>;
+  }
+  
+  // Titre de la section TargetCard (classes préservées, h2 sans class spécifique comme original)
+  let targetCardTitle;
+  if (content.loading) {
+    // homeIntroContent = <p>Chargement...</p>;
+  } else if (content.error) {
+    targetCardTitle = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+  } else if (targetCardSection) {
+     targetCardTitle = (
+      <h2 className="mx-auto">{targetCardSection.title}</h2>
+    );
+  } else {
+    targetCardTitle = <p>Aucune section "target-card" trouvée.</p>;
+  }
   return (
     <>
       <HeroSlider />
 
-      <p className=" text-center  mt-[464px] ">
-        Depuis 2020, <span className="text-violet font-semibold">Canopées</span> met sa passion et le respect de la nature au service de vos espaces verts. <span className="text-violet font-semibold">Conception, entretien, taille, élagage, abattage</span> : nous intervenons avec la même exigence chez les particuliers, les entreprises et les collectivités dans toute la régio Rhône-Alpes. <span className="text-violet font-semibold">Un jardin bien pensé vous ressemble.</span> C’est notre conviction, et c’est ce que nous réalisons chaque jour sur le terrain.
-      </p>
+
+      {homeIntroContent}
+
 
       <Line />
 
-      <h2 className="text-center ">Notre savoir-faire au service de tous</h2>
+      {targetCardTitle}
 
       <div className="gap-4 grid grid-cols-1 md:grid-cols-3  mb-12">
         <TargetCard

@@ -10,7 +10,8 @@ export default function About() {
 
   // Filtre les sections spécifiques (rapide, en mémoire)
   const introSection = content.getSectionByKey('about-us-introducing');
-  const valuesSection = content.getSectionByKey('about-us-our-values');
+  const ourValuesSection = content.getSectionByKey('about-us-our-values');
+  const teamSectionTitle = content.getSectionByKey('team-section-title');
 
   // Contenu intro (classes préservées)
   let introContent;
@@ -34,16 +35,30 @@ export default function About() {
     // valuesContent = <p>Chargement...</p>;
   } else if (content.error) {
     valuesContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
-  } else if (valuesSection) {
+  } else if (ourValuesSection) {
     valuesContent = (
       <section>
-        <h2>{valuesSection.title}</h2>
-        <p className="prose mx-auto" dangerouslySetInnerHTML={{ __html: valuesSection.content }} />
+        <h2>{ourValuesSection.title}</h2>
+        <p className="prose mx-auto" dangerouslySetInnerHTML={{ __html: ourValuesSection.content }} />
       </section>
     );
   } else {
     valuesContent = <p>Aucune section "about-us-our-values" trouvée.</p>;
   }
+
+  // Contenu team title (classes préservées, h2 sans class spécifique comme original)
+  let teamTitleContent;
+  if (content.loading) {
+    // teamTitleContent = <p>Chargement...</p>;
+  } else if (content.error) {
+    teamTitleContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+  } else if (teamSectionTitle) {
+    teamTitleContent = (
+      <h2 className="mt-16">{teamSectionTitle.title}</h2>
+    );
+  } else {
+    teamTitleContent = <p>Aucune section "team-section-title" trouvée.</p>;
+  } 
 
   // Contenu team (toutes classes préservées exactement)
   let teamContent;
@@ -78,7 +93,7 @@ export default function About() {
       <Line />
       {valuesContent}
       <Line />
-      <h2>Une équipe de professionnels passionnés à votre écoute</h2>
+      {teamTitleContent}
       {teamContent}
       <Line />
       <ContactButton btnContent="Contactez-nous !" />

@@ -1,14 +1,32 @@
 // Page Tarifs
-
+import { useContentSections } from '../hooks/useContentSections';
 import PricingTable from "../components/features/PricingTable";
 import ContactButton from "../components/features/ContactButton";
 import Line from "../components/layout/Line";
 
 export default function Tarifs() {
+  const content = useContentSections();
+  const pricesPageIntroSection = content.getSectionByKey('prices-intro');
+
+  let pricesIntroContent;
+  if (content.loading) {
+    // pricesIntroContent = <p>Chargement...</p>;
+  } else if (content.error) {
+    pricesIntroContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+  } else if (pricesPageIntroSection) {
+    pricesIntroContent = (
+      <section className="text-center mt-16">
+        <p className="prose mx-auto" dangerouslySetInnerHTML={{ __html: pricesPageIntroSection.content }} />
+      </section>
+    );
+  } else {
+    pricesIntroContent = <p>Aucune section "prices-intro" trouvée.</p>;
+  }
+
   return (
-    <div className="text-center pb-8 pt-16 bg-gray-50 min-h-screen">
-      <p >Chez Canopées, nous mettons un point d’honneur à pratiquer une transparence totale sur nos tarifs : votre devis gratuit, établi après visite sur place ou analyse de vos éléments, est détaillé poste par poste, avec un prix fixe et définitif qui ne variera que si vous décidez vous-même d’ajouter ou modifier des prestations. Aucun frais caché, aucune mauvaise surprise. Parce que pour nous, créer votre jardin doit rester un plaisir sans ombre, du premier contact jusqu’à la dernière facture.
-      </p>
+    <div className="text-center pb-8 bg-gray-50 min-h-screen">
+      {pricesIntroContent}
+      
       <Line />
       <PricingTable />
       <ContactButton
