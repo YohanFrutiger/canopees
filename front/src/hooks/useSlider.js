@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-export const usePrices = () => {
+export const useSlider = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null });
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/services')
+    fetch('http://127.0.0.1:8000/api/slider_images')
       .then(res => {
-        if (!res.ok) throw new Error('Erreur lors du chargement des prestations');
+        if (!res.ok) throw new Error('Erreur lors du chargement des images du slider');
         return res.json();
       })
       .then(data => setState({ loading: false, error: null, data }))
