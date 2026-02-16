@@ -73,9 +73,13 @@ class CategoryCrudController extends AbstractCrudController
         parent::updateEntity($entityManager, $entityInstance);
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
+        //$this->denyAccessUnlessGranted('ROLE_ADMIN'); // Assure que seuls les admins accèdent à ce CRUD
+        $user = $this->getUser();
+        // $person = $user->getFirstname() . ' ' . $user->getLastname();
+        var_dump($user); 
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('title'),
@@ -89,8 +93,7 @@ class CategoryCrudController extends AbstractCrudController
             TextEditorField::new('info'),
             DateTimeField::new('createdAt')->onlyOnIndex(),
             DateTimeField::new('updatedAt')->onlyOnIndex(),
-            IdField::new('user.id', 'User ID')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
+            IdField::new('user.lastname', 'Dernier utilisateur')->onlyOnIndex(),  // Changement pour afficher le prénom de l'utilisateur
         ];
     }
-    
 }

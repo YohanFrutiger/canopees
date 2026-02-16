@@ -42,34 +42,44 @@ class UserCrudController extends AbstractCrudController
 
     public function configureFields(string $pageName): iterable
     {
+        $user = $this->getUser();
         $fields = [
             IdField::new('id')->hideOnForm(),
             TextField::new('firstname'),
             TextField::new('lastname'),
             TextField::new('email'),
-            ChoiceField::new('roles')->onlyOnIndex()
-                ->setChoices([
-                    'Admin' => 'ROLE_ADMIN',
-                    'Super Admin' => 'ROLE_SUPER_ADMIN',
-                ])
-                ->allowMultipleChoices(true)
-                ->renderExpanded(false)
-                ->setRequired(true),
         ];
 
-
-        if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
-            $fields[] = TextField::new('password')
-                ->setFormType(RepeatedType::class)
-                ->setFormTypeOptions([
-                    'type' => \Symfony\Component\Form\Extension\Core\Type\PasswordType::class,
-                    'first_options' => ['label' => 'Mot de passe'],
-                    'second_options' => ['label' => 'Confirmation du mot de passe'],
-                    'invalid_message' => 'Les mots de passe ne correspondent pas.',
-                ])
-                ->setRequired($pageName === Crud::PAGE_NEW)
-                ->onlyOnIndex();
+        if ($this->isGranted('ROLE_SUPER_ADMIN')) {
+            $fields = [
+                IdField::new('id')->hideOnForm(),
+                TextField::new('firstname'),
+                TextField::new('lastname'),
+                TextField::new('email'),
+                ChoiceField::new('roles')
+                    ->setChoices([
+                        'Admin' => 'ROLE_ADMIN',
+                        'Super Admin' => 'ROLE_SUPER_ADMIN',
+                    ])
+                    ->allowMultipleChoices(true)
+                    ->renderExpanded(false)
+                    ->setRequired(true),
+            ];
         }
+
+
+        // if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
+        //     $fields[] = TextField::new('password')
+        //         ->setFormType(RepeatedType::class)
+        //         ->setFormTypeOptions([
+        //             'type' => \Symfony\Component\Form\Extension\Core\Type\PasswordType::class,
+        //             'first_options' => ['label' => 'Mot de passe'],
+        //             'second_options' => ['label' => 'Confirmation du mot de passe'],
+        //             'invalid_message' => 'Les mots de passe ne correspondent pas.',
+        //         ])
+        //         ->setRequired($pageName === Crud::PAGE_NEW);
+        //         // ->onlyOnIndex();
+        // }
 
         return $fields;
     }
