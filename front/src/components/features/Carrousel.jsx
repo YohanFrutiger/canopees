@@ -1,28 +1,28 @@
 // src/components/features/Carrousel.jsx
-// Carroule d'image (utilisé sur la page d'accueil)
+// Carrousel d'images des dernières réalisations de l'entreprise (utilisé sur la page d'accueil)
 
 import { useState } from 'react';
-import photo1 from "../../assets/images/realisations/conception-4.webp"
-import photo2 from "../../assets/images/realisations/elagage-4.webp"
-import photo3 from "../../assets/images/realisations/taille-1.webp"
-import photo4 from "../../assets/images/realisations/conception-1.webp"
-import photo5 from "../../assets/images/realisations/taille-2.webp"
-import photo6 from "../../assets/images/realisations/conception-5.webp"
-
-// Tableau d'images
-const images = [
-  photo1,
-  photo2,
-  photo3,
-  photo4,
-  photo5,
-  photo6,
-];
+import { useRealizations } from '../../hooks/useRealizations'; // Ajuste le chemin vers ton hook
 
 // Composant Carrousel
 export default function Carrousel() {
   // État pour l'index de l'image actuellement au centre
   const [currentIndex, setCurrentIndex] = useState(0);
+
+// Utilise le hook pour fetch les données
+const { loading, error, data } = useRealizations();
+
+// Prépare les images dynamiques
+let images = [];
+if (data && data.member) { // Changé en data.member (clé réelle dans ton JSON)
+  const realizations = data.member;
+  // Trie par realizedAt descendant (plus récente en premier)
+  const sorted = realizations.sort((a, b) => new Date(b.realizedAt) - new Date(a.realizedAt));
+  // Limite aux 6 plus récentes (ou moins si <6)
+  const limited = sorted.slice(0, 6);
+  // Extrait les URLs d'images (ajuste le préfixe selon ta config VichUploader)
+  images = limited.map(item => `http://127.0.0.1:8000/uploads/${item.image}`); // ← Ajuste '/uploads/realizations/' si nécessaire (ex: '/media/' ou '/images/')
+}
 
   // Passe à l'image précédente (revient à la fin si on est au début)
   function prevSlide() {
@@ -53,8 +53,16 @@ export default function Carrousel() {
 
   const visible = getVisibleIndices();
 
-  return (
+  // Gestion du loading et error
+if (loading) {
+  return <div className="w-full h-96 md:h-[400px] flex items-center justify-center">Chargement des réalisations...</div>;
+}
 
+if (error || images.length === 0) {
+  return <div className="w-full h-96 md:h-[400px] flex items-center justify-center">Erreur lors du chargement ou aucune réalisation disponible.</div>;
+}
+
+  return (
     <div className="w-full h-96 md:h-[400px] flex items-center justify-center overflow-hidden">
       <div className="relative w-full max-w-6xl mx-auto px-4">
 
@@ -89,12 +97,12 @@ export default function Carrousel() {
               <div className={pos === 1 ? 'w-72 h-72 md:w-80 md:h-80' : 'w-48 h-48 md:w-56 md:h-56'}>
                 <img
                   src={images[index]}
-                  alt={""}
+                  alt={`Réalisation ${index + 1}`}
                   className="w-full h-full object-cover rounded-3xl border-8 border-white/20 shadow-2xl"
                 />
               </div>
 
-              {/* Dots*/}
+              {/* Dots */}
               {pos === 1 && (
                 <div className="absolute inset-x-0 bottom-4 md:bottom-6 flex justify-center gap-3">
                   {images.map((_, i) => (
