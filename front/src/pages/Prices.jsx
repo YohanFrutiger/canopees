@@ -3,6 +3,7 @@ import { useContentSections } from '../hooks/useContentSections';
 import PricingTable from "../components/features/PricingTable";
 import ContactButton from "../components/features/ContactButton";
 import Line from "../components/layout/Line";
+import parse from "html-react-parser";
 
 export default function Tarifs() {
   const content = useContentSections();
@@ -16,7 +17,7 @@ export default function Tarifs() {
   } else if (pricesPageIntroSection) {
     pricesIntroContent = (
       <section className="text-center mt-16">
-        <p className="prose mx-auto" dangerouslySetInnerHTML={{ __html: pricesPageIntroSection.content }} />
+        <p className="prose mx-auto">{parse(pricesPageIntroSection.content)}</p>
       </section>
     );
   } else {

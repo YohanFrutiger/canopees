@@ -4,6 +4,7 @@
 import { useState } from "react";
 import { realisations } from "../../data/realisations";
 import Modal from "./Modal";
+import parse from "html-react-parser";
 
 export default function PrestationCard({ img, title, text, tag, alt }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +27,7 @@ export default function PrestationCard({ img, title, text, tag, alt }) {
 
       {/* Texte */}
       <p className=" py-8 px-4 flex-1">
-        {text}
+        {parse(text)}
       </p>
 
       {/* Bouton qui ouvre la modale */}

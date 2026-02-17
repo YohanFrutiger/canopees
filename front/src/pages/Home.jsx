@@ -4,6 +4,7 @@ import HeroSlider from "../components/features/HeroSlider";
 import Line from "../components/layout/Line";
 import TargetCard from "../components/features/TargetCard";
 import Carrousel from "../components/features/Carrousel";
+import parse from "html-react-parser";
 
 export default function Home() {
 
@@ -22,7 +23,7 @@ export default function Home() {
   } else if (homePageIntroSection) {
     homeIntroContent = (
       <section className="text-center mt-[464px]">
-        <p className="prose mx-auto" dangerouslySetInnerHTML={{ __html: homePageIntroSection.content }} />
+        <p className="prose mx-auto">{parse(homePageIntroSection.content)}</p>
       </section>
     );
   } else {

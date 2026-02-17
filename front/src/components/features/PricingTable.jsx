@@ -2,6 +2,7 @@
 // Composant : Tableau des tarifs de la page Tarifs
 
 import { useState } from "react";
+import parse from "html-react-parser";
 import { usePrestations } from "../../hooks/usePrestations";  // Categories (prestations)
 import { useServices } from "../../hooks/useServices";  // Services filtrés par catégorie
 
@@ -79,7 +80,7 @@ export default function PricingTable() {
         </tbody>
       </table>
       <p className="mt-8 text-center text-sm text-gray-600 font-light">
-        {selectedCategory.info}  // Info de la catégorie
+        {selectedCategory.info ? parse(selectedCategory.info) : "Aucune information disponible pour cette catégorie."}
       </p>
     </div>
   );

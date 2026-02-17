@@ -6,8 +6,9 @@ import { useContentSections } from '../hooks/useContentSections';
 import { usePrestations } from '../hooks/usePrestations'; 
 import PrestationCard from "../components/features/PrestationCard";
 import Line from "../components/layout/Line";
+import parse from "html-react-parser";
 
-export default function Prestations() {
+export default function Categories() {
   const content = useContentSections();
   const prestations = usePrestations();
   const prestationsPageIntroSection = content.getSectionByKey('prestations-intro');
@@ -21,7 +22,7 @@ export default function Prestations() {
   } else if (prestationsPageIntroSection) {
     PrestationsIntroContent = (
       <section className="text-center mt-16">
-        <p className="prose mx-auto" dangerouslySetInnerHTML={{ __html: prestationsPageIntroSection.content }} />
+        <p className="prose mx-auto">{parse(prestationsPageIntroSection.content)}</p>
       </section>
     );
   } else {
