@@ -1,154 +1,199 @@
-// src/components/features/ContactForm.jsx
-// Formulaire de contact avec validation côté client minimale
-
 import { useState } from "react";
 
+const API_URL = "http://127.0.0.1:8000/api/contact_messages";
 
 export default function ContactForm() {
-  // État qui contient toutes les valeurs saisies dans le formulaire
   const [formData, setFormData] = useState({
     nom: "",
     prenom: "",
     email: "",
-    message: ""
+    message: "",
   });
 
-  // État qui gère l'affichage du message de succès
-  const [status, setStatus] = useState(""); // "" ou "success"
+  const [errors, setErrors] = useState({});
+  const [status, setStatus] = useState("idle");
+  const [errorMsg, setErrorMsg] = useState("");
 
-  // Met à jour l'état quand l'utilisateur tape dans un champ
   function handleChange(e) {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // supprime erreur quand on tape
+    setErrors((prev) => ({ ...prev, [name]: "" }));
   }
 
-  // Gère l'envoi du formulaire
-  function handleSubmit(e) {
-    e.preventDefault(); // Empêche le rechargement de la page
-    setStatus("success");
+  // 🔎 VALIDATION FRONT
+  function validate() {
+    const newErrors = {};
 
-    // Réinitialise le formulaire après "envoi"
-    setFormData({
-      nom: "",
-      prenom: "",
-      email: "",
-      message: ""
-    });
+    // nom
+    if (!formData.nom.trim()) {
+      newErrors.nom = "Le nom est requis";
+    } else if (formData.nom.length < 2) {
+      newErrors.nom = "Minimum 2 caractères";
+    } else if (!/^[a-zA-ZÀ-ÿ\s-]+$/.test(formData.nom)) {
+      newErrors.nom = "Le nom ne doit contenir que des lettres";
+    }
+
+    // prenom
+    if (!formData.prenom.trim()) {
+      newErrors.prenom = "Le prénom est requis";
+    } else if (formData.prenom.length < 2) {
+      newErrors.prenom = "Minimum 2 caractères";
+    } else if (!/^[a-zA-ZÀ-ÿ\s-]+$/.test(formData.prenom)) {
+      newErrors.prenom = "Le prénom ne doit contenir que des lettres";
+    }
+
+    // email
+    if (!formData.email.trim()) {
+      newErrors.email = "Email requis";
+    } else if (
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)
+    ) {
+      newErrors.email = "Email invalide";
+    }
+
+    // message
+    if (!formData.message.trim()) {
+      newErrors.message = "Message requis";
+    } else if (formData.message.length < 10) {
+      newErrors.message = "Minimum 10 caractères";
+    } else if (formData.message.length > 1000) {
+      newErrors.message = "Maximum 1000 caractères";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  }
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    if (!validate()) return;
+
+    setStatus("loading");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/ld+json",
+          Accept: "application/ld+json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) {
+        const errData = await res.json();
+        throw new Error(errData["hydra:description"] || `Erreur ${res.status}`);
+      }
+
+      setStatus("success");
+      setFormData({ nom: "", prenom: "", email: "", message: "" });
+      setErrors({});
+    } catch (err) {
+      setStatus("error");
+      setErrorMsg(err.message);
+    }
   }
 
   return (
     <div className="rounded-3xl shadow-2xl p-8 md:w-[600px] mx-auto bg-violet/10 border border-violet/50">
-      <form onSubmit={handleSubmit} className="space-y-8">
-        {/* Petite indication pour l'utilisateur */}
-        <p className="text-left text-sm font-light">
-          *Tous les champs sont requis
-        </p>
+      <form onSubmit={handleSubmit} className="space-y-8" noValidate>
+        <p className="text-left text-sm font-light">*Tous les champs sont requis</p>
 
         <div className="text-left flex flex-col gap-10">
-          {/* Champ Nom */}
+          
+          {/* NOM */}
           <div>
-            <label className="block text-lg font-medium text-gray-900 pb-2">
-              Nom
-            </label>
+            <label className="block text-lg font-medium pb-2">Nom</label>
             <input
               type="text"
               name="nom"
               value={formData.nom}
               onChange={handleChange}
-              required
-              className="w-full px-5 py-4 border border-violet/50 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition"
+              className="w-full px-5 py-4 border border-violet/50 rounded-xl"
               placeholder="Dupont"
             />
+            {errors.nom && <p className="text-red-500 mt-2">{errors.nom}</p>}
           </div>
 
-          {/* Champ Prénom */}
+          {/* PRENOM */}
           <div>
-            <label className="block text-lg font-medium text-gray-900 pb-2">
-              Prénom
-            </label>
+            <label className="block text-lg font-medium pb-2">Prénom</label>
             <input
               type="text"
               name="prenom"
               value={formData.prenom}
               onChange={handleChange}
-              required
-              className="w-full px-5 py-4 border border-violet/50 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition"
+              className="w-full px-5 py-4 border border-violet/50 rounded-xl"
               placeholder="Jean"
             />
+            {errors.prenom && <p className="text-red-500 mt-2">{errors.prenom}</p>}
           </div>
 
-          {/* Champ Email */}
+          {/* EMAIL */}
           <div>
-            <label className="block text-lg font-medium text-gray-900 pb-2">
-              Email
-            </label>
+            <label className="block text-lg font-medium pb-2">Email</label>
             <input
               type="email"
               name="email"
               value={formData.email}
               onChange={handleChange}
-              required
-              className="w-full px-5 py-4 border border-violet/50 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition"
+              className="w-full px-5 py-4 border border-violet/50 rounded-xl"
               placeholder="jean.dupont@gmail.com"
             />
+            {errors.email && <p className="text-red-500 mt-2">{errors.email}</p>}
           </div>
 
-          {/* Zone de texte pour le message */}
+          {/* MESSAGE */}
           <div>
-            <label className="block text-lg font-medium text-gray-700 pb-2">
-              Votre message
-            </label>
+            <label className="block text-lg font-medium pb-2">Votre message</label>
             <textarea
               name="message"
               value={formData.message}
               onChange={handleChange}
-              required
               rows="6"
-              className="w-full px-5 py-4 border border-violet/50 rounded-xl focus:outline-none focus:border-violet focus:ring-4 focus:ring-violet/20 transition"
-              placeholder="Bonjour, je souhaiterais un devis pour..."
+              className="w-full px-5 py-4 border border-violet/50 rounded-xl"
+              placeholder="Votre message..."
             />
+            {errors.message && <p className="text-red-500 mt-2">{errors.message}</p>}
           </div>
         </div>
 
-        {/* Popup de confirmation de succès */}
-        {status === "success" && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
-            onClick={() => setStatus("")} // Ferme en cliquant à l'extérieur
-          >
-            <div
-              className="bg-white rounded-2xl shadow-2xl p-10 w-full md:max-w-md text-center border-4 border-violet animate-in fade-in zoom-in-95 duration-300"
-              onClick={(e) => e.stopPropagation()} // Empêche la fermeture quand on clique dans la popup
-            >
-              <h3 className="text-xl font-rosario font-semibold mb-4">
-                Votre message a bien été envoyé !
-              </h3>
-              <p className="text-lg text-gray-700 mb-8">
-                Nous vous répondons sous 48h.
-              </p>
-              <button
-                onClick={() => setStatus("")}
-                className="bg-blue hover:bg-blue/90 text-white px-8 py-4 rounded-lg font-semibold text-lg transition"
-              >
-                Fermer
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Bouton d'envoi */}
+        {/* BOUTON */}
         <div className="text-center">
           <button
             type="submit"
-            className="mx-auto w-36 text-center py-3 bg-blue hover:bg-blue/80 text-white rounded-lg font-semibold"
+            disabled={status === "loading"}
+            className="mx-auto w-36 py-3 bg-blue text-white rounded-lg font-semibold"
           >
-            Envoyer
+            {status === "loading" ? "Envoi..." : "Envoyer"}
           </button>
         </div>
+
+        {status === "error" && (
+          <p className="text-red-600 text-center font-medium">{errorMsg}</p>
+        )}
       </form>
+
+      {/* SUCCESS POPUP */}
+      {status === "success" && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60">
+          <div className="bg-white rounded-2xl p-10 text-center">
+            <h3 className="text-xl font-semibold mb-4">
+              Votre message a bien été envoyé !
+            </h3>
+            <button
+              onClick={() => setStatus("idle")}
+              className="bg-blue text-white px-6 py-3 rounded-lg"
+            >
+              Fermer
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
