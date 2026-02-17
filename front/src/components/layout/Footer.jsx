@@ -26,10 +26,10 @@ export default function Footer() {
             contact@canopees.fr
           </a>
           <div className="flex flex-col gap-1 lg:gap-3">
-            <NavLink to="/mentions-legales" className="hover:text-orange transition">
+            <NavLink to="/legal-notices" className="hover:text-orange transition">
               Mentions légales
             </NavLink>
-            <NavLink to="/cgv-cgu" className="hover:text-orange transition">
+            <NavLink to="/terms-and-conditions" className="hover:text-orange transition">
               CGV / CGU
             </NavLink>
           </div>

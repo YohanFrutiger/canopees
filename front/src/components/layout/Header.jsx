@@ -8,9 +8,9 @@ export default function Header() {
 
   const navItems = [
     { to: "/", label: "Accueil" },
-    { to: "/qui-sommes-nous", label: "Qui sommes-nous ?" },
-    { to: "/prestations", label: "Nos prestations" },
-    { to: "/tarifs", label: "Tarifs" },
+    { to: "/about", label: "Qui sommes-nous ?" },
+    { to: "/categories", label: "Nos prestations" },
+    { to: "/prices", label: "Tarifs" },
     { to: "/contact", label: "Contact & Devis" },
   ];
 
