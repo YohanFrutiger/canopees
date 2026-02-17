@@ -9,6 +9,7 @@ use App\Entity\Realization;
 use App\Entity\SliderImage;
 use App\Entity\TeamMember;
 use App\Entity\ContentSection;
+use App\Entity\ContactMessage;
 
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -61,6 +62,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Slider', 'fas fa-list', SliderImage::class);
         yield MenuItem::linkToCrud('Équipe', 'fas fa-list', TeamMember::class);
         yield MenuItem::linkToCrud('Contenu du site ', 'fas fa-list', ContentSection::class);
+        yield MenuItem::linkToCrud('Messages de contact', 'fas fa-envelope', ContactMessage::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
   
