@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export const usePrestations = () => {
+export const useCategories = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null });
 
   useEffect(() => {

@@ -87,7 +87,7 @@ if (error || images.length === 0) {
         </button>
 
         {/* Carrousel */}
-        <div className="flex items-center justify-center gap-6 md:gap-12 h-full">
+        <div className="flex items-center justify-center gap-6 md:gap-12 h-full ">
           {visible.map((index, pos) => (
             <div
               key={index}

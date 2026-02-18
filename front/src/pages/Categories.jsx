@@ -3,15 +3,15 @@
 
 import { Link } from 'react-router-dom';
 import { useContentSections } from '../hooks/useContentSections';
-import { usePrestations } from '../hooks/usePrestations'; 
+import { useCategories } from '../hooks/useCategories'; 
 import PrestationCard from "../components/features/PrestationCard";
 import Line from "../components/layout/Line";
 import parse from "html-react-parser";
 
 export default function Categories() {
   const content = useContentSections();
-  const prestations = usePrestations();
-  const prestationsPageIntroSection = content.getSectionByKey('prestations-intro');
+  const categories = useCategories();
+  const categoriesPageIntroSection = content.getSectionByKey('prestations-intro');
 
   // Texte d'introduction de la page "Prestations"
   let PrestationsIntroContent; 
@@ -19,10 +19,10 @@ export default function Categories() {
     PrestationsIntroContent = <p>Chargement...</p>;  // Décommenté pour cohérence UX
   } else if (content.error) {
     PrestationsIntroContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
-  } else if (prestationsPageIntroSection) {
+  } else if (categoriesPageIntroSection) {
     PrestationsIntroContent = (
       <section className="text-center mt-16">
-        <p className="prose mx-auto">{parse(prestationsPageIntroSection.content)}</p>
+        <p className="prose mx-auto">{parse(categoriesPageIntroSection.content)}</p>
       </section>
     );
   } else {
@@ -31,21 +31,22 @@ export default function Categories() {
 
   // Contenu des prestations (gestion loading/error pour éviter crash)
   let PrestationsContent;
-  if (prestations.loading) {
-    PrestationsContent = <p className="text-center">Chargement des prestations...</p>;
-  } else if (prestations.error) {
-    PrestationsContent = <p className="text-center text-red-500">Erreur : Une erreur est survenue lors de la récupération des prestations.</p>;
-  } else if (prestations.data?.member?.length > 0) {
+  if (categories.loading) {
+    PrestationsContent = <p className="text-center">Chargement des catégories...</p>;
+  } else if (categories.error) {
+    PrestationsContent = <p className="text-center text-red-500">Erreur : Une erreur est survenue lors de la récupération des catégories.</p>;
+  } else if (categories.data?.member?.length > 0) {
     PrestationsContent = (
       <div className="gap-4 flex flex-wrap justify-center py-4">
-        {prestations.data.member.map((presta) => (           
+        {categories.data.member.map((cat, index) => (           
             <PrestationCard
-              key={presta.id}
-              title={presta.title}
-              img={`http://127.0.0.1:8000/uploads/${presta.image}`}  // Ajoute base URL pour images (ajuste si VichUploader)
-              text={presta.description}  // Assume champs de ton Entity\Category ; ajuste si différent (ex: info au lieu de description)
-              tag={presta.tag}
-              alt={presta.title}  // Utilise title comme alt par défaut si pas de champ alt
+              key={cat.id}
+              catId={cat.id}
+              title={cat.title}
+              img={`http://127.0.0.1:8000/uploads/${cat.image}`}  // Ajoute base URL pour images (ajuste si VichUploader)
+              text={cat.description}  // Assume champs de ton Entity\Category ; ajuste si différent (ex: info au lieu de description)
+              tag={cat.tag}
+              alt={cat.title}  // Utilise title comme alt par défaut si pas de champ alt
             />
          
         ))}

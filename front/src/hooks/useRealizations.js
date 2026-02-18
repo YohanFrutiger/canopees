@@ -13,5 +13,11 @@ export const useRealizations = () => {
       .catch(err => setState({ loading: false, error: err, data: null }));
   }, []);
 
-  return state;
+    // Méthode pour filtrer services par catégorie (assume category est l'ID ou IRI ; ajuste si objet)
+const getRealizationsByCategory = (categoryId) => {
+  return state.data?.member?.filter(item => item.category === `/api/categories/${categoryId}`) || [];  // Match IRI string
+};
+
+  return { ...state, getRealizationsByCategory };
+
 };
