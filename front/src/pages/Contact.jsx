@@ -65,12 +65,12 @@ export default function Contact() {
       <Line />
 
 
-      <p className="text-center mb-4">
+      {/* <p className="text-center mb-4">
         <strong>
           Besoin d’un devis ? Une question ?<br />
           Remplissez le formulaire, nous vous répondons sous 48h.
         </strong>
-      </p>
+      </p> */}
 
       <div className="max-w-4xl mx-auto ">
         <ContactForm />

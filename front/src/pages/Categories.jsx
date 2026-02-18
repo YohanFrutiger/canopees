@@ -42,7 +42,7 @@ export default function Categories() {
             <PrestationCard
               key={cat.id}
               catId={cat.id}
-              title={cat.title}
+              catTitle={cat.title}
               img={`http://127.0.0.1:8000/uploads/${cat.image}`}  // Ajoute base URL pour images (ajuste si VichUploader)
               text={cat.description}  // Assume champs de ton Entity\Category ; ajuste si différent (ex: info au lieu de description)
               tag={cat.tag}

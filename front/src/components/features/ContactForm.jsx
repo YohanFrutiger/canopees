@@ -99,9 +99,12 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="rounded-3xl shadow-2xl p-8 md:w-[600px] mx-auto bg-violet/10 border border-violet/50">
-      <form onSubmit={handleSubmit} className="space-y-8" noValidate>
-        <p className="text-left text-sm font-light">*Tous les champs sont requis</p>
+    <div className="p-8 md:w-[600px] mx-auto">
+      <form onSubmit={handleSubmit} className="bg-gray-50 p-8 rounded-xl shadow-2xl space-y-8" noValidate>
+        <p className="text-center">Besoin d'un devis ? Une question ?</p>
+        <p className="text-center mb-4">Remplissez le formulaire, nous vous répondons sous 48h.</p>
+        {/* <p className="text-left text-sm font-light  mb-4">*Tous les champs sont requis</p> */}
+        
 
         <div className="text-left flex flex-col gap-10">
           
@@ -113,10 +116,10 @@ export default function ContactForm() {
               name="nom"
               value={formData.nom}
               onChange={handleChange}
-              className="w-full px-5 py-4 border border-violet/50 rounded-xl"
+              className="w-full px-5 py-4 border-2 rounded-md"
               placeholder="Dupont"
             />
-            {errors.nom && <p className="text-red-500 mt-2">{errors.nom}</p>}
+            {errors.nom && <p className=" text-base mt-1 text-red italic">{errors.nom}</p>}
           </div>
 
           {/* PRENOM */}
@@ -127,10 +130,10 @@ export default function ContactForm() {
               name="prenom"
               value={formData.prenom}
               onChange={handleChange}
-              className="w-full px-5 py-4 border border-violet/50 rounded-xl"
+              className="w-full px-5 py-4 border-2 rounded-md"
               placeholder="Jean"
             />
-            {errors.prenom && <p className="text-red-500 mt-2">{errors.prenom}</p>}
+            {errors.prenom && <p className=" text-base mt-2 text-red italic">{errors.prenom}</p>}
           </div>
 
           {/* EMAIL */}
@@ -141,10 +144,10 @@ export default function ContactForm() {
               name="email"
               value={formData.email}
               onChange={handleChange}
-              className="w-full px-5 py-4 border border-violet/50 rounded-xl"
+              className="w-full px-5 py-4 border-2 rounded-md"
               placeholder="jean.dupont@gmail.com"
             />
-            {errors.email && <p className="text-red-500 mt-2">{errors.email}</p>}
+            {errors.email && <p className=" text-base mt-2 text-red italic">{errors.email}</p>}
           </div>
 
           {/* MESSAGE */}
@@ -155,10 +158,10 @@ export default function ContactForm() {
               value={formData.message}
               onChange={handleChange}
               rows="6"
-              className="w-full px-5 py-4 border border-violet/50 rounded-xl"
+              className="w-full px-5 py-4 border-2 border-gray rounded-md"
               placeholder="Votre message..."
             />
-            {errors.message && <p className="text-red-500 mt-2">{errors.message}</p>}
+            {errors.message && <p className=" text-base mt-2 text-red italic">{errors.message}</p>}
           </div>
         </div>
 
