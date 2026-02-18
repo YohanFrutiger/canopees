@@ -24,6 +24,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use EasyCorp\Bundle\EasyAdminBundle\Config\KeyValueStore;
 
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Attribute\Route;
+use App\Form\ChangePasswordType;
+
+
 class UserCrudController extends AbstractCrudController
 {
     private UserPasswordHasherInterface $passwordHasher;
@@ -123,29 +128,45 @@ class UserCrudController extends AbstractCrudController
             ]);
     }
 
-    public function configureActions(Actions $actions): Actions
-    {
-        $user = $this->getUser();
+public function configureActions(Actions $actions): Actions
+{
+    $user = $this->getUser();
 
-        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
-            // Désactiver la liste, la création et la suppression pour les non SUPER_ADMIN
-            $actions->disable(Action::INDEX, Action::NEW, Action::DELETE);
-
-            // Sur la page d'édition, autoriser uniquement l'édition de son propre profil
-            if ($this->getContext() && $this->getContext()->getCrud()->getCurrentPage() === Crud::PAGE_EDIT) {
-                $entityInstance = $this->getContext()->getEntity()->getInstance();
-                if ($entityInstance && $entityInstance->getId() !== $user->getId()) {
-                    // Rediriger vers le dashboard si tentative d'accès à un autre profil
-                    $url = $this->container->get(AdminUrlGenerator::class)
-                        ->setController(\App\Controller\Admin\DashboardController::class)
-                        ->generateUrl();
-                    return $this->redirect($url);
-                }
+    // 🔐 Bouton modifier mot de passe (uniquement sur son propre profil)
+    $changePassword = Action::new('changePassword', 'Modifier mot de passe')
+        ->linkToRoute('admin_change_password')
+        ->setCssClass('btn btn-warning')
+        ->displayIf(function ($entity) use ($user) {
+            if (!$entity || !$user) {
+                return false;
             }
-        }
 
-        return $actions;
+            // visible uniquement si l'utilisateur édite SON profil
+            return $entity->getId() === $user->getId();
+        });
+
+    $actions->add(Crud::PAGE_EDIT, $changePassword);
+
+    // 🔒 Restrictions pour non super admin
+    if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+
+        // pas accès liste, création, suppression
+        $actions->disable(Action::INDEX, Action::NEW, Action::DELETE);
+
+        // empêche édition autre profil (sécurité UI)
+        $actions->update(
+            Crud::PAGE_EDIT,
+            Action::SAVE_AND_RETURN,
+            fn (Action $action) => $action->displayIf(function ($entity) use ($user) {
+                return $entity && $entity->getId() === $user->getId();
+            })
+        );
     }
+
+    return $actions;
+}
+
+
 
     public function edit(AdminContext $context): Response|KeyValueStore
     {
@@ -167,6 +188,39 @@ class UserCrudController extends AbstractCrudController
         return $response;
     }
 
+    #[Route('/admin/change-password', name: 'admin_change_password')]
+    public function changePassword(
+        Request $request,
+        EntityManagerInterface $em
+    ): Response {
+        $user = $this->getUser();
+
+        $form = $this->createForm(ChangePasswordType::class);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $currentPassword = $form->get('currentPassword')->getData();
+            $newPassword = $form->get('newPassword')->getData();
+
+            // Vérifier ancien mot de passe
+            if (!$this->passwordHasher->isPasswordValid($user, $currentPassword)) {
+                $this->addFlash('danger', 'Mot de passe actuel incorrect.');
+            } else {
+                $hashed = $this->passwordHasher->hashPassword($user, $newPassword);
+                $user->setPassword($hashed);
+                $em->flush();
+
+                $this->addFlash('success', 'Mot de passe modifié avec succès.');
+
+                return $this->redirectToRoute('admin');
+            }
+        }
+
+        return $this->render('admin/change_password.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
 
 
     // Pour erreurs par champ : override createEditFormBuilder ou similar, mais simple ici avec event

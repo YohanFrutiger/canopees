@@ -79,10 +79,10 @@ class CategoryCrudController extends AbstractCrudController
         //$this->denyAccessUnlessGranted('ROLE_ADMIN'); // Assure que seuls les admins accèdent à ce CRUD
         $user = $this->getUser();
         // $person = $user->getFirstname() . ' ' . $user->getLastname();
-        var_dump($user); 
+ 
         return [
             IdField::new('id')->onlyOnIndex(),
-            TextField::new('title'),
+            TextField::new('title','Titre'),
             TextEditorField::new('description'),
             ImageField::new('image', 'Image')
                 ->setBasePath('uploads/')
@@ -91,8 +91,8 @@ class CategoryCrudController extends AbstractCrudController
                 ->setRequired(false),
             TextField::new('tag'),
             TextEditorField::new('info'),
-            DateTimeField::new('createdAt')->onlyOnIndex(),
-            DateTimeField::new('updatedAt')->onlyOnIndex(),
+            DateTimeField::new('createdAt','Crée le')->onlyOnIndex(),
+            DateTimeField::new('updatedAt','Mis à jour le')->onlyOnIndex(),
             IdField::new('user.lastname', 'Dernier utilisateur')->onlyOnIndex(),  // Changement pour afficher le prénom de l'utilisateur
         ];
     }
