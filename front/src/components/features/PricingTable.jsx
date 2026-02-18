@@ -27,13 +27,13 @@ export default function PricingTable() {
 
   // Onglets dynamiques
   const categoriesTabs = (
-    <div className="flex flex-wrap justify-center gap-6 mb-12">
+    <div className="flex flex-col justify-start gap-8 mt-2 ">
       {categories.data.member.map((cat, index) => (
         <button
           key={cat.id}
           onClick={() => setSelected(index)}
-          className={`px-4 py-4 rounded-3xl text-xl font-rosario font-semibold uppercase transition-all w-48 shadow-lg ${
-            selected === index ? "bg-violet text-white scale-105 shadow-2xl" : "bg-violet/20 text-gray-900 hover:bg-violet/30"
+          className={`p-2  text-xl   transition-all w-full  ${
+            selected === index ? "underline " : " text-gray-600 hover:scale-105 "
           }`}
         >
           {cat.title}
@@ -48,11 +48,11 @@ export default function PricingTable() {
 
   // Tableau des tarifs (si services pour cette catégorie, sinon message)
   const pricingTable = (
-    <div className="rounded-2xl shadow-2xl p-4 md:p-8 bg-violet/10 border-2 border-violet/90 max-w-2xl mx-auto">
+    <div className="rounded-sm shadow-2xl p-4 md:p-8 border-2 max-w-2xl w-[6500px]">
       <table className="w-full text-left">
         <thead>
           <tr className="border-b-2 border-violet/30">
-            <th className="py-6 text-2xl font-rosario font-bold text-violet">
+            <th className="py-6 text-2xl  font-bold text-violet">
               {selectedCategory.title}
             </th>
             <th className="py-6 text-2xl font-semibold text-blue text-right">
@@ -86,7 +86,7 @@ export default function PricingTable() {
   );
 
   return (
-    <div className="mx-auto py-4 px-4">
+    <div className="flex justify-center mt-12 lg:gap-24 lmd:gap-32 gap-4 ">
       {categoriesTabs}
       {pricingTable}
     </div>

@@ -8,7 +8,7 @@ import Line from "../components/layout/Line";
 export default function Contact() {
 
   const content = useContentSections();
-  const contactPageIntroSection = content.getSectionByKey('contact-intro'); 
+  const contactPageIntroSection = content.getSectionByKey('contact-intro');
   const contactPageInfoSection = content.getSectionByKey('contact-info');
 
   // Texte d'introduction de la page "Contact&Devis"
@@ -47,22 +47,39 @@ export default function Contact() {
 
   return (
     <>
-      
+
       <div className="text-center">
 
-        {contactIntroContent}        
-        <Line />
-        {contactInfoContent}
-        {/* <Line />
-
-        <p className="mb-4"><strong>Où nous trouver ?</strong></p> */}
-
-        <div className="mx-auto md:w-[500px] p-4 shadow-2xl mt-4 mb-12 border border-gray-500 rounded-xl">
-          <img src={Map} alt="" />
+        <div className='mt-8'>
+          {contactIntroContent}
         </div>
+
+        <div className='mt-8'>
+        {contactInfoContent}
+        </div>
+
+       
+
+        <div className="mx-auto">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5641.522447333289!2d4.393774974763695!3d45.00947056366621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f58241422cd037%3A0x9afaf11bcf9d9067!2sSaint-Agr%C3%A8ve!5e0!3m2!1sfr!2sfr!4v1771412853703!5m2!1sfr!2sfr"
+            width="550"
+            height="450"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            className="mx-auto rounded-lg mt-8 border-2 border-gray-200 shadow-2xl"
+            >
+            
+          </iframe>
+        </div>
+
+        {/* <div className="mx-auto md:w-[500px] p-4 shadow-2xl mt-4 mb-12 border border-gray-500 rounded-xl">
+          <img src={Map} alt="" />
+        </div> */}
       </div>
 
-      <Line />
+      {/* <Line /> */}
 
 
       {/* <p className="text-center mb-4">
@@ -72,7 +89,7 @@ export default function Contact() {
         </strong>
       </p> */}
 
-      <div className="max-w-4xl mx-auto ">
+      <div className="max-w-4xl mx-auto mt-8">
         <ContactForm />
       </div>
     </>

@@ -69,7 +69,7 @@ export default function Home() {
       {homeIntroContent}
 
 
-      <Line />
+      {/* <Line /> */}
 
       {targetCardTitle}
 
@@ -94,7 +94,7 @@ export default function Home() {
         />
       </div>
 
-      <Line />
+      {/* <Line /> */}
 
       {carrouselTitle}
       <Carrousel />

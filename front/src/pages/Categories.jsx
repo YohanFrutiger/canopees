@@ -41,12 +41,12 @@ export default function Categories() {
         {categories.data.member.map((cat, index) => (           
             <PrestationCard
               key={cat.id}
-              catId={cat.id}
-              catTitle={cat.title}
-              img={`http://127.0.0.1:8000/uploads/${cat.image}`}  // Ajoute base URL pour images (ajuste si VichUploader)
-              text={cat.description}  // Assume champs de ton Entity\Category ; ajuste si différent (ex: info au lieu de description)
-              tag={cat.tag}
-              alt={cat.title}  // Utilise title comme alt par défaut si pas de champ alt
+              cat={cat}
+              // catTitle={cat.title}
+              // img={`http://127.0.0.1:8000/uploads/${cat.image}`}  // Ajoute base URL pour images (ajuste si VichUploader)
+              // text={cat.description}  // Assume champs de ton Entity\Category ; ajuste si différent (ex: info au lieu de description)
+              // tag={cat.tag}
+              // alt={cat.title}  // Utilise title comme alt par défaut si pas de champ alt
             />
          
         ))}
@@ -59,8 +59,10 @@ export default function Categories() {
   return (
     <>
       {PrestationsIntroContent}  
-      <Line />
-      {PrestationsContent}  {/* Affichage conditionnel des cards */}
+      {/* <Line /> */}
+      <div className="mt-4">
+        {PrestationsContent}
+        </div>  {/* Affichage conditionnel des cards */}
       <p className="text-center">Besoin d'un devis ? Une question ?</p>
       <div className="text-center">
         <Link to="/contact" className="text-center mx-auto text-blue font-semibold hover:text-blue/80 transition transform hover:scale-120">

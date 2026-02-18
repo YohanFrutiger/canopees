@@ -10,12 +10,12 @@ export default function TargetAudienceCard({ icon, title, text, bgColor }) {
       </div>
 
       {/* Titre */}
-      <h3 className=" border border-white px-4 mb-8 rounded-lg ">
+      <h3 className="  px-4 mb-8 rounded-lg ">
         {title}
       </h3>
 
       {/* Texte */}
-      <p className="mx-4">
+      <p className="mx-4 leading-snug">
         {text}
       </p>
     </div>

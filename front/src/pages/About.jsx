@@ -91,12 +91,12 @@ export default function About() {
   return (
     <div className="text-center">
       {introContent}
-      <Line />
+      {/* <Line /> */}
       {ourValuesContent}
-      <Line />
+      {/* <Line /> */}
       {teamTitleContent}
       {teamSectionContent}
-      <Line />
+      {/* <Line /> */}
       <ContactButton btnContent="Contactez-nous !" />
     </div>
   );

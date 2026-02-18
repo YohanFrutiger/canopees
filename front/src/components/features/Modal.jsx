@@ -4,10 +4,10 @@
 import { useRealizations } from "../../hooks/useRealizations";  // Toutes les réalisations 
 import parse from "html-react-parser";
 
-export default function Modal({ isOpen, onClose, catTitle, catId }) {
+export default function Modal({ isOpen, onClose, cat }) {
   if (!isOpen) return null;
   const realizations = useRealizations();  // Toutes les réalisations 
-  const filteredRealizations = realizations.getRealizationsByCategory(catId);  // Filtre par ID
+  const filteredRealizations = realizations.getRealizationsByCategory(cat.id);  // Filtre par ID
 
   let modalGallery; // Galerie dans la modale
   if (realizations.loading) {
@@ -19,19 +19,20 @@ export default function Modal({ isOpen, onClose, catTitle, catId }) {
   } else {
     {/* Galerie de photos des réalisations pour la catégorie  */ }
     modalGallery = (
-      <div className="grid grid-cols-1 md:grid-cols-2 p-8 gap-8">
+      <div className="grid grid-cols-1 md:grid-cols-2 p-4 gap-8">
         {filteredRealizations.map((real, index) => (
 
-          <div className="overflow-hidden ">
+          <div className="">
+            <p className="p-2 font-light ">
+              {parse(real.description)}
+            </p>
             <img
               key={real.id}
               src={`http://127.0.0.1:8000/uploads/${real.image}`}
               alt={real.alt}
               className="w-full h-80 object-cover rounded-xl"
             />
-            <p className="h-full p-2  ">
-              {parse(real.description)}
-            </p>
+            
 
           </div>
         ))}
@@ -53,18 +54,19 @@ export default function Modal({ isOpen, onClose, catTitle, catId }) {
         {/* BOUTON X  */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 z-50 text-white bg-black/30 backdrop-blur-sm w-12 h-12 rounded-full flex items-center justify-center text-4xl hover:bg-black/50 hover:scale-110 transition-all duration-200"
+          className="absolute top-4 right-6 z-50 text-white bg-black/30 backdrop-blur-sm w-12 h-12 rounded-full flex items-center justify-center text-4xl hover:bg-black/50 hover:scale-110 transition-all duration-200"
           aria-label="Fermer la fenêtre"
         >
           ×
         </button>
 
         {/* En-tête violet */}
-        <div className="bg-violet/90 text-white text-center rounded-t-3xl">
-          <h1 className="text-4xl md:text-4xl font-rosario font-bold my-4 mb-2 ">
-            {catTitle}
-          </h1>
-          <p className="text-xl mb-4 text-white">Découvrez nos réalisations !</p>
+        <div className="bg-green/10 text-left rounded-t-3xl">
+          {/* <h1 className="text-4xl md:text-4xl font-rosario font-bold my-4 mb-2 ">
+            {cat.title}
+          </h1> */}
+          <p className="pl-8 pr-24 py-4  leading-tight ">{parse(cat.description)}</p>
+          {/* <p className="text-xl mb-4 text-white">Découvrez nos réalisations !</p> */}
         </div>
 
         <div className="overflow-y-auto bg-gray-50">
