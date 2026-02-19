@@ -19,7 +19,7 @@ use ApiPlatform\Metadata\Delete;
 #[ORM\Entity(repositoryClass: TeamMemberRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
 #[ApiResource(
-    normalizationContext: ['groups' => ['category:read']],
+    normalizationContext: ['groups' => ['team_member:read']],
     operations: [
         new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
         new Get(security: null),            // Public : voir une categorie
@@ -34,7 +34,7 @@ class TeamMember
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('category:read')]
+    #[Groups('team_member:read')]
     private ?int $id = null;
 
     // lastname
@@ -46,7 +46,7 @@ class TeamMember
         maxMessage: 'Le nom ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(length: 255)]
-    #[Groups('category:read')]
+    #[Groups('team_member:read')]
     private ?string $lastname = null;
 
     // firstname
@@ -57,7 +57,7 @@ class TeamMember
         minMessage: 'Le prénom doit avoir au moins {{ limit }} caractères',
         maxMessage: 'Le prénom ne doit pas dépasser {{ limit }} caractères',
     )]
-    #[Groups('category:read')]
+    #[Groups('team_member:read')]
     #[ORM\Column(length: 255)]
     
     private ?string $firstname = null;
@@ -71,13 +71,13 @@ class TeamMember
         maxMessage: 'La biographie ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups('category:read')]
+    #[Groups('team_member:read')]
     private ?string $biography = null;
 
     // image
     #[Assert\NotBlank(message: 'L\'image est obligatoire')]
     #[ORM\Column(length: 255)]
-    #[Groups('category:read')]
+    #[Groups('team_member:read')]
     private ?string $image = null;
 
     // Timestamp (creation)

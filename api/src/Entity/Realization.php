@@ -20,7 +20,7 @@ use ApiPlatform\Metadata\Delete;
 #[ORM\Entity(repositoryClass: RealizationRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbackspour createdAt et updatedAt
 #[ApiResource(
-    normalizationContext: ['groups' => ['category:read']],
+    normalizationContext: ['groups' => ['realization:read']],
     operations: [
         new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
         new Get(security: null),            // Public : voir une categorie
@@ -35,7 +35,7 @@ class Realization
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('category:read')]
+    #[Groups('realization:read')]
     private ?int $id = null;
 
     // description
@@ -47,18 +47,18 @@ class Realization
         maxMessage: 'La description ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups('category:read')]
+    #[Groups('realization:read')]
     private ?string $description = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(name: 'category_id', nullable: false)]
-    #[Groups('category:read')]
+    #[Groups('realization:read')]
     private ?Category $category = null;
 
     // image
     #[Assert\NotBlank(message: 'L\'image est obligatoire')]    
     #[ORM\Column(length: 255)]
-    #[Groups('category:read')]
+    #[Groups('realization:read')]
     private ?string $image = null;
 
     // Timestamp (realization)

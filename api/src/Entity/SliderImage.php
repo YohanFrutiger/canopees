@@ -18,7 +18,7 @@ use ApiPlatform\Metadata\Delete;
 #[ORM\Entity(repositoryClass: SliderImageRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
 #[ApiResource(
-    normalizationContext: ['groups' => ['category:read']],
+    normalizationContext: ['groups' => ['slider_image:read']],
     operations: [
         new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
         new Get(security: null),            // Public : voir une categorie
@@ -33,18 +33,18 @@ class SliderImage
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups('category:read')]
+    #[Groups('slider_image:read')]
     private ?int $id = null;
 
     // image
     #[Assert\NotBlank(message: 'L\'image est obligatoire')]
     #[ORM\Column(length: 255)]
-    #[Groups('category:read')]
+    #[Groups('slider_image:read')]
     private ?string $image = null;
 
     // active or not
     #[ORM\Column]
-    #[Groups('category:read')]
+    #[Groups('slider_image:read')]
     private ?bool $active = null;
 
     // alternative description for image
