@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use Symfony\Component\Security\Core\Security;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class CategoryCrudController extends AbstractCrudController
 {
@@ -28,6 +29,17 @@ class CategoryCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Category::class;
+        
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('index', 'Liste des catégories') // Remplace par ton titre personnalisé
+            ->setPageTitle('edit', 'Modifier une catégorie'); // Remplace par ton titre personnalisé
+
+            
+
     }
 
     public function configureActions(Actions $actions): Actions
@@ -35,8 +47,20 @@ class CategoryCrudController extends AbstractCrudController
         if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             $actions->disable(Action::NEW, Action::DELETE);  // Pas create/delete, seulement edit
         }
-        return $actions;
+        return $actions
+            // Pour le bouton "Add Category" sur la page liste (INDEX)
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action->setLabel('Ajouter une catégorie'); // Ton label personnalisé
+            })
+            // Pour les liens "Edit" sur la page edit
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+            })
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+            });
     }
+
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
