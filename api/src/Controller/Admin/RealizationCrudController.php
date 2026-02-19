@@ -99,7 +99,7 @@ class RealizationCrudController extends AbstractCrudController
                 ->setRequired(false),
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
-            IdField::new('user.id', 'User ID')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
+            IdField::new('user.id', 'Drnier utilisateur')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
         ];
     }
 

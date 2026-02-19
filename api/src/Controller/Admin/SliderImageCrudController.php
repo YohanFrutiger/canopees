@@ -5,17 +5,46 @@ namespace App\Controller\Admin;
 use App\Entity\SliderImage;
 use Doctrine\ORM\EntityManagerInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class SliderImageCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
         return SliderImage::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('index', 'Images du slider') // Remplace par ton titre personnalisé
+            ->setPageTitle('edit', 'Modifier une image du slider'); // Remplace par ton titre personnalisé
+    }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            $actions->disable(Action::DELETE);  // Pas create/delete, seulement edit
+        }
+        return $actions
+            // Pour le bouton "Add Category" sur la page liste (INDEX)
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action->setLabel('Ajouter une image'); // Ton label personnalisé
+            })
+            // Pour les liens "Edit" sur la page edit
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+            })
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+            });
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
@@ -61,11 +90,11 @@ class SliderImageCrudController extends AbstractCrudController
                 ->setUploadDir('public/uploads')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),          
-            TextField::new('altDescription'),           
-            BooleanField::new('active')->renderAsSwitch(false), // Affiche comme un toggle simple
-            DateTimeField::new('createdAt')->onlyOnIndex(),
-            DateTimeField::new('updatedAt')->onlyOnIndex(),
-            IdField::new('user.id', 'User ID')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
+            TextField::new('altDescription','Descrption alternative'),           
+            BooleanField::new('active','activé')->renderAsSwitch(false), // Affiche comme un toggle simple
+            DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
+            DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
+            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
         ];
     }
 }

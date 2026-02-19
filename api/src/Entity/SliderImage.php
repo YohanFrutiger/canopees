@@ -7,27 +7,45 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
 #[ORM\Entity(repositoryClass: SliderImageRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
-#[ApiResource()]
+#[ApiResource(
+    operations: [
+        new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
+        new Get(security: null),            // Public : voir une categorie
+        new Post(security: "is_granted('ROLE_SUPER_ADMIN')"),  
+        new Put(security: "is_granted('ROLE_SUPER_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_SUPER_ADMIN')"),
+    ]
+)]
 class SliderImage
 {
+     // id
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    // image
     #[Assert\NotBlank(message: 'L\'image est obligatoire')]
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    // active or not
     #[ORM\Column]
     private ?bool $active = null;
 
+    // Timestamp (creation)
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    // Timestamp (update)
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
@@ -35,6 +53,7 @@ class SliderImage
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
+    // alternative description for image
     #[ORM\Column(length: 255)]
     private ?string $altDescription = null;
 
@@ -48,7 +67,7 @@ class SliderImage
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
 
