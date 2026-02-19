@@ -18,18 +18,9 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class CategoryCrudController extends AbstractCrudController
 {
-
-    // private $security;
-
-    // public function __construct(Security $security)
-    // {
-    //     $this->security = $security;
-    // }
-
     public static function getEntityFqcn(): string
     {
         return Category::class;
-        
     }
 
     public function configureCrud(Crud $crud): Crud
@@ -37,9 +28,6 @@ class CategoryCrudController extends AbstractCrudController
         return $crud
             ->setPageTitle('index', 'Liste des catégories') // Remplace par ton titre personnalisé
             ->setPageTitle('edit', 'Modifier une catégorie'); // Remplace par ton titre personnalisé
-
-            
-
     }
 
     public function configureActions(Actions $actions): Actions
@@ -103,20 +91,20 @@ class CategoryCrudController extends AbstractCrudController
         //$this->denyAccessUnlessGranted('ROLE_ADMIN'); // Assure que seuls les admins accèdent à ce CRUD
         $user = $this->getUser();
         // $person = $user->getFirstname() . ' ' . $user->getLastname();
- 
+
         return [
             IdField::new('id')->onlyOnIndex(),
-            TextField::new('title','Titre'),
+            TextField::new('title', 'Titre'),
             TextEditorField::new('description'),
             ImageField::new('image', 'Image')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
-                ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),
+            // ->setUploadedFileNamePattern('[randomhash].[extension]'),
             TextField::new('tag'),
             TextEditorField::new('info'),
-            DateTimeField::new('createdAt','Crée le')->onlyOnIndex(),
-            DateTimeField::new('updatedAt','Mis à jour le')->onlyOnIndex(),
+            DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
+            DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
             IdField::new('user.lastname', 'Dernier utilisateur')->onlyOnIndex(),  // Changement pour afficher le prénom de l'utilisateur
         ];
     }

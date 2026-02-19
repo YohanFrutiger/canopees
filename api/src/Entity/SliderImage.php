@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\SliderImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 use ApiPlatform\Metadata\ApiResource;
 
@@ -17,6 +18,7 @@ class SliderImage
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank(message: 'L\'image est obligatoire')]
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
