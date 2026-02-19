@@ -18,5 +18,5 @@ const getServicesByCategory = (categoryId) => {
   return state.data?.member?.filter(item => item.category === `/api/categories/${categoryId}`) || [];  // Match IRI string
 };
 
-  return { ...state, getServicesByCategory };
+  return { ...state, getServicesByCategory }; 
 };

@@ -14,6 +14,68 @@ export default function Home() {
   const homeIntroSection = contentSections.getSectionByKey('home-presentation');
   const targetCardSection = contentSections.getSectionByKey('target-card');
   const carrouselSection = contentSections.getSectionByKey('carrousel');
+  const targetAudienceCard_individual = contentSections.getSectionByKey('target-individual');
+  const targetAudienceCard_society = contentSections.getSectionByKey('target-society');
+  const targetAudienceCard_community = contentSections.getSectionByKey('target-community');
+
+  // Contenu des cartes pour les publics cibles
+  // Particulier
+  let targetAudienceCard_individualContent;
+  let targetAudienceCard_individualTitle;
+  if (contentSections.loading) {
+    // targetAudienceCard_individualContent = <p>Chargement...</p>;
+    // targetAudienceCard_individualTitle = <p>Chargement...</p>;
+  } else if (contentSections.error) {
+    targetAudienceCard_individualContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+    targetAudienceCard_individualTitle= <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+  } else if (targetAudienceCard_individual) {
+    targetAudienceCard_individualContent = (
+      <p>{parse(targetAudienceCard_individual.content)}</p>
+    );
+    targetAudienceCard_individualTitle = (
+      <h3>{parse(targetAudienceCard_individual.title)}</h3>
+    );
+  } else {
+    targetAudienceCard_individualContent = <p>Aucune section "home-presentation" trouvée.</p>;
+  }
+  // Entreprise
+  let targetAudienceCard_societyContent;
+  let targetAudienceCard_societyTitle;
+  if (contentSections.loading) {
+    // targetAudienceCard_societyContent = <p>Chargement...</p>;
+    // targetAudienceCard_societyTitle = <p>Chargement...</p>;
+  } else if (contentSections.error) {
+    targetAudienceCard_societyContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+    targetAudienceCard_societyTitle= <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+  } else if (targetAudienceCard_society) {
+    targetAudienceCard_societyContent = (
+      <p>{parse(targetAudienceCard_society.content)}</p>
+    );
+    targetAudienceCard_societyTitle = (
+      <h3>{parse(targetAudienceCard_society.title)}</h3>
+    );
+  } else {
+    targetAudienceCard_societyContent = <p>Aucune section "home-presentation" trouvée.</p>;
+  }
+  // Collectivités
+  let targetAudienceCard_communityContent;
+  let targetAudienceCard_communityTitle;
+  if (contentSections.loading) {
+    // targetAudienceCard_communityContent = <p>Chargement...</p>;
+    // targetAudienceCard_communityTitle = <p>Chargement...</p>;
+  } else if (contentSections.error) {
+    targetAudienceCard_communityContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+    targetAudienceCard_communityTitle= <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+  } else if (targetAudienceCard_community) {
+    targetAudienceCard_communityContent = (
+      <p>{parse(targetAudienceCard_community.content)}</p>
+    );
+    targetAudienceCard_communityTitle = (
+      <h3>{parse(targetAudienceCard_community.title)}</h3>
+    );
+  } else {
+    targetAudienceCard_communityContent = <p>Aucune section "home-presentation" trouvée.</p>;
+  }
 
   // Texte d'introduction de la page d'accueil
   let homeIntroContent;
@@ -32,17 +94,17 @@ export default function Home() {
   }
 
   // Titre de la section TargetCard (classes préservées, h2 sans class spécifique comme original)
-  let targetCardTitle;
+  let targetCardSectionTitle;
   if (contentSections.loading) {
     // homeIntroContent = <p>Chargement...</p>;
   } else if (contentSections.error) {
-    targetCardTitle = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
+    targetCardSectionTitle = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
   } else if (targetCardSection) {
-    targetCardTitle = (
+    targetCardSectionTitle = (
       <h2 className="mx-auto">{parse(targetCardSection.title)}</h2>
     );
   } else {
-    targetCardTitle = <p>Aucune section "target-card" trouvée.</p>;
+    targetCardSectionTitle = <p>Aucune section "target-card" trouvée.</p>;
   }
 
 
@@ -71,26 +133,23 @@ export default function Home() {
 
       {/* <Line /> */}
 
-      {targetCardTitle}
+      {targetCardSectionTitle}
 
       <div className="gap-4 grid grid-cols-1 md:grid-cols-3  mb-12">
         <TargetAudienceCard
           icon="🏡"
-          title="Particuliers"
-          text="Vous avez un jardin, une résidence secondaire, une grande propriété ou une simple haie à tailler ? Nous entretenons et sublimons votre espace de vie comme si c’était le nôtre : avec soin, discrétion et respect de vos arbres."
-          bgColor="bg-violet"
+          title= {targetAudienceCard_individualTitle}
+          text= {targetAudienceCard_individualContent}
         />
         <TargetAudienceCard
           icon="🏢"
-          title="Entreprise"
-          text="Parcs d’activité, bureaux, hôtels, restaurants, zones commerciales… Des espaces verts impeccables valorisent votre image et accueillent vos clients et collaborateurs dans un cadre agréable toute l’année."
-          bgColor="bg-blue"
+          title= {targetAudienceCard_societyTitle}
+          text= {targetAudienceCard_societyContent}
         />
         <TargetAudienceCard
           icon="🏛️"
-          title="Collectivités"
-          text="Mairies, écoles, cimetières, parcs publics, bords de route… Nous répondons aux marchés publics et intervenons avec rigueur, sécurité et traçabilité pour maintenir le patrimoine arboré de votre commune."
-          bgColor="bg-pink"
+          title= {targetAudienceCard_communityTitle}
+          text= {targetAudienceCard_communityContent}
         />
       </div>
 
