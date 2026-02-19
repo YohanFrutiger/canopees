@@ -6,6 +6,7 @@ use App\Repository\ServiceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
@@ -17,6 +18,7 @@ use ApiPlatform\Metadata\Delete;
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
 #[ApiResource(
+    normalizationContext: ['groups' => ['category:read']],
     operations: [
         new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
         new Get(security: null),            // Public : voir une categorie
@@ -27,9 +29,11 @@ use ApiPlatform\Metadata\Delete;
 )]
 class Service
 {
+    // id
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('category:read')]
     private ?int $id = null;
 
     // title
@@ -41,10 +45,12 @@ class Service
         maxMessage: 'Le titre ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(length: 255)]
+    #[Groups('category:read')]
     private ?string $title = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(name: 'category_id', nullable: false)]
+    #[Groups('category:read')]
     private ?Category $category = null;
 
     // price
@@ -56,6 +62,7 @@ class Service
         maxMessage: 'Le prix ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(length: 50)]
+    #[Groups('category:read')]
     private ?string $price = null;
 
     // Timestamp (creation)

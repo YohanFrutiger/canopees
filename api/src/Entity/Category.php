@@ -8,6 +8,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
@@ -16,9 +17,11 @@ use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\Metadata\Delete;
 
+
 #[ORM\Entity(repositoryClass: CategoryRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbackspour createdAt et updatedAt
 #[ApiResource(
+    normalizationContext: ['groups' => ['category:read']],
     operations: [
         new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
         new Get(security: null),            // Public : voir une categorie
@@ -33,6 +36,7 @@ class Category
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('category:read')]
     private ?int $id = null;
 
     // title
@@ -44,6 +48,7 @@ class Category
         maxMessage: 'Le titre ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(length: 255)]
+    #[Groups('category:read')]
     private ?string $title = null;
 
     // description
@@ -55,15 +60,18 @@ class Category
         maxMessage: 'La description ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups('category:read')]
     private ?string $description = null;
 
     // image
     #[Assert\NotBlank(message: 'L\'image est obligatoire')]
     #[ORM\Column(length: 255)]
+    #[Groups('category:read')]
     private ?string $image = null;
 
     // info
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups('category:read')]
     private ?string $info = null;
 
     // tag
@@ -75,6 +83,7 @@ class Category
         maxMessage: 'Le tag ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(length: 50)]
+    #[Groups('category:read')]
     private ?string $tag = null;
 
     // Timestamp (creation)

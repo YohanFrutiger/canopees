@@ -25,7 +25,7 @@ use Symfony\Component\Serializer\Attribute\Groups;
             denormalizationContext: ['groups' => ['contact_message:write']]
         ),
         new Put(security: "is_granted('ROLE_ADMIN')"),
-        new Delete(security: "is_granted('ROLE_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_SUPER_ADMIN')"),
     ]
 )]
 class ContactMessage

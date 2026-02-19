@@ -4,7 +4,9 @@ namespace App\Entity;
 
 use App\Repository\SliderImageRepository;
 use Doctrine\ORM\Mapping as ORM;
+
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
@@ -16,6 +18,7 @@ use ApiPlatform\Metadata\Delete;
 #[ORM\Entity(repositoryClass: SliderImageRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
 #[ApiResource(
+    normalizationContext: ['groups' => ['category:read']],
     operations: [
         new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
         new Get(security: null),            // Public : voir une categorie
@@ -30,16 +33,24 @@ class SliderImage
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('category:read')]
     private ?int $id = null;
 
     // image
     #[Assert\NotBlank(message: 'L\'image est obligatoire')]
     #[ORM\Column(length: 255)]
+    #[Groups('category:read')]
     private ?string $image = null;
 
     // active or not
     #[ORM\Column]
+    #[Groups('category:read')]
     private ?bool $active = null;
+
+    // alternative description for image
+    #[ORM\Column(length: 255)]
+    #[Groups('category:read')]
+    private ?string $altDescription = null;
 
     // Timestamp (creation)
     #[ORM\Column]
@@ -53,9 +64,7 @@ class SliderImage
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
-    // alternative description for image
-    #[ORM\Column(length: 255)]
-    private ?string $altDescription = null;
+    
 
     public function getId(): ?int
     {

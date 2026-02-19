@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
@@ -18,6 +19,7 @@ use ApiPlatform\Metadata\Delete;
 #[ORM\Entity(repositoryClass: ContentSectionRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
 #[ApiResource(
+    normalizationContext: ['groups' => ['category:read']],
     operations: [
         new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
         new Get(security: null),            // Public : voir une categorie
@@ -32,6 +34,7 @@ class ContentSection
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('category:read')]
     private ?int $id = null;
 
     // section key
@@ -43,6 +46,7 @@ class ContentSection
         maxMessage: 'section-key ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(length: 50)]
+    #[Groups('category:read')]
     private ?string $section_key = null;
 
     // title
@@ -54,6 +58,7 @@ class ContentSection
         maxMessage: 'Le titre ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(length: 255)]
+    #[Groups('category:read')]
     private ?string $title = null;
 
     // content
@@ -65,6 +70,7 @@ class ContentSection
         maxMessage: 'Le contenu ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+    #[Groups('category:read')]
     private ?string $content = null;
 
     // Timestamp (creation)

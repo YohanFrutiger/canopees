@@ -30,6 +30,9 @@ class ContactMessageCrudController extends AbstractCrudController
     public function configureActions(Actions $actions): Actions
     {
         $actions->disable(Action::NEW);
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            $actions->disable(Action::DELETE);  // Pas create/delete, seulement edit
+        }
         return $actions;
     }
 

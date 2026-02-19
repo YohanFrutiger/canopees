@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
@@ -19,6 +20,7 @@ use ApiPlatform\Metadata\Delete;
 #[ORM\Entity(repositoryClass: RealizationRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbackspour createdAt et updatedAt
 #[ApiResource(
+    normalizationContext: ['groups' => ['category:read']],
     operations: [
         new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
         new Get(security: null),            // Public : voir une categorie
@@ -33,6 +35,7 @@ class Realization
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups('category:read')]
     private ?int $id = null;
 
     // description
@@ -44,15 +47,18 @@ class Realization
         maxMessage: 'La description ne doit pas dépasser {{ limit }} caractères',
     )]
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups('category:read')]
     private ?string $description = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(name: 'category_id', nullable: false)]
+    #[Groups('category:read')]
     private ?Category $category = null;
 
     // image
     #[Assert\NotBlank(message: 'L\'image est obligatoire')]    
     #[ORM\Column(length: 255)]
+    #[Groups('category:read')]
     private ?string $image = null;
 
     // Timestamp (realization)
