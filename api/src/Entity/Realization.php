@@ -24,9 +24,9 @@ use ApiPlatform\Metadata\Delete;
     operations: [
         new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
         new Get(security: null),            // Public : voir une categorie
-        new Post(security: "is_granted('ROLE_SUPER_ADMIN')"),  
-        new Put(security: "is_granted('ROLE_SUPER_ADMIN')"),
-        new Delete(security: "is_granted('ROLE_SUPER_ADMIN')"),
+        // new Post(security: "is_granted('ROLE_SUPER_ADMIN')"),  
+        // new Put(security: "is_granted('ROLE_SUPER_ADMIN')"),
+        // new Delete(security: "is_granted('ROLE_SUPER_ADMIN')"),
     ]
 )]
 class Realization

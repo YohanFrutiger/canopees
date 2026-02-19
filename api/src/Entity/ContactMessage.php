@@ -17,15 +17,15 @@ use Symfony\Component\Serializer\Attribute\Groups;
 #[ORM\Entity(repositoryClass: ContactMessageRepository::class)]
 #[ApiResource(
     operations: [
-        new GetCollection(security: "is_granted('ROLE_ADMIN')"),
-        new Get(security: "is_granted('ROLE_ADMIN')"), 
+        // new GetCollection(security: "is_granted('ROLE_ADMIN')"),
+        // new Get(security: "is_granted('ROLE_ADMIN')"), 
         new Post(
             uriTemplate: '/contact_messages',
             normalizationContext: ['groups' => ['contact_message:read']],
             denormalizationContext: ['groups' => ['contact_message:write']]
         ),
-        new Put(security: "is_granted('ROLE_ADMIN')"),
-        new Delete(security: "is_granted('ROLE_SUPER_ADMIN')"),
+        // new Put(security: "is_granted('ROLE_ADMIN')"),
+        // new Delete(security: "is_granted('ROLE_SUPER_ADMIN')"),
     ]
 )]
 class ContactMessage
