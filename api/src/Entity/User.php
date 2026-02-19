@@ -20,7 +20,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     // User firstname
-    #[Assert\NotBlank(message:'Le prénom est obligatoire')]
+    #[Assert\NotBlank(message: 'Le prénom est obligatoire')]
     #[Assert\Length(
         min: 2,
         max: 50,
@@ -31,7 +31,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?string $firstname = null;
 
     // User lastname
-    #[Assert\NotBlank(message:'Le nom est obligatoire')]
+    #[Assert\NotBlank(message: 'Le nom est obligatoire')]
     #[Assert\Length(
         min: 2,
         max: 50,
@@ -43,25 +43,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     // User email
     #[Assert\Email(message: 'L\'adresse email est invalide')]
-    #[Assert\NotBlank(message:'L\'adresse email est obligatoire')]
+    #[Assert\NotBlank(message: 'L\'adresse email est obligatoire')]
     #[ORM\Column(length: 180)]
     private ?string $email = null;
 
     // User role
-    #[Assert\NotBlank(message:'Veuillez choisir le rôle de l\'utilisateur')]
+    #[Assert\NotBlank(message: 'Veuillez choisir le rôle de l\'utilisateur')]
     #[ORM\Column(type: 'json')]
     private array $roles = [];
+
+    // Plain password (non persisté en base)
+    #[Assert\NotBlank(message: 'Le mot de passe est obligatoire', groups: ['create'])]
+    #[Assert\PasswordStrength(
+        minScore: PasswordStrength::STRENGTH_MEDIUM,
+        message: 'Le mot de passe n\'est pas assez fort',
+        groups: ['create']
+    )]
+    private ?string $plainPassword = null;
+
 
     /**
      * @var string The hashed password
      */
-    #[Assert\NotBlank(message:'Le mot de passe est obligatoire')]
+    // #[Assert\NotBlank(message: 'Le mot de passe est obligatoire')]
     // #[Assert\PasswordStrength(
     //     minScore: PasswordStrength::STRENGTH_VERY_STRONG, // Very strong password required
-    //     message: 'Le mot de passe n\'est pas assez fort' 
+    //     message: 'Le mot de passe n\'est pas assez fort'
     // )]
     #[ORM\Column]
-    private ?string $password = null;    
+    private ?string $password = null;
 
     public function getId(): ?int
     {
@@ -96,11 +106,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        // $roles[] = 'ROLE_USER';
-
         return array_unique($roles);
-
     }
 
     /**
@@ -110,6 +116,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         $this->roles = $roles;
 
+        return $this;
+    }
+
+    public function getPlainPassword(): ?string
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword(?string $plainPassword): static
+    {
+        $this->plainPassword = $plainPassword;
         return $this;
     }
 
@@ -134,7 +151,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
 
         return $data;
     }
@@ -168,5 +185,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-
 }

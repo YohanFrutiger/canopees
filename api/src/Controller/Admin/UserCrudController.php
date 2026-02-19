@@ -19,6 +19,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormEvents;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Component\HttpFoundation\Response;
@@ -72,6 +73,18 @@ class UserCrudController extends AbstractCrudController
                     ->allowMultipleChoices(true)
                     ->renderExpanded(false)
                     ->setRequired(true),
+                TextField::new('plainPassword', 'Mot de passe')
+                    ->onlyWhenCreating()
+                    ->setFormType(RepeatedType::class)
+                    ->setFormTypeOptions([
+                        'type' => PasswordType::class,
+                        'first_options' => ['label' => 'Mot de passe'],
+                        'second_options' => ['label' => 'Confirmer le mot de passe'],
+                        'invalid_message' => 'Les mots de passe ne correspondent pas.',
+                    ])
+
+
+
             ];
         }
 
@@ -98,28 +111,27 @@ class UserCrudController extends AbstractCrudController
         parent::updateEntity($entityManager, $entityInstance);
     }
 
+
     private function hashPassword(User $user): void
     {
-        $plainPassword = $user->getPassword();
+        $plainPassword = $user->getPlainPassword();
 
-        if (!$plainPassword) return;
-
-        if (str_starts_with($plainPassword, '$2y$')) return;
+        if (!$plainPassword) {
+            return;
+        }
 
         $hashed = $this->passwordHasher->hashPassword($user, $plainPassword);
         $user->setPassword($hashed);
+
+        // On efface le mot de passe en clair
+        $user->setPlainPassword(null);
     }
 
-    // Ajout pour valider et ajouter erreurs au form (au lieu d'exception globale)
     public function configureCrud(Crud $crud): Crud
     {
-        // return parent::configureCrud($crud)
-        //     ->setFormOptions([
-        //         'validation_groups' => ['Default'],  // Active tes groups si needed
-        //     ]);
         return $crud
-            ->setPageTitle('index', 'Liste des utilisateurs') // Remplace par ton titre personnalisé
-            ->setPageTitle('edit', 'Modifier un utilisateur'); // Remplace par ton titre personnalisé
+            ->setPageTitle('index', 'Liste des utilisateurs')
+            ->setPageTitle('edit', 'Modifier un utilisateur');
     }
 
     public function configureActions(Actions $actions): Actions
@@ -217,13 +229,28 @@ class UserCrudController extends AbstractCrudController
             if (!$this->passwordHasher->isPasswordValid($user, $currentPassword)) {
                 $this->addFlash('danger', 'Mot de passe actuel incorrect.');
             } else {
-                $hashed = $this->passwordHasher->hashPassword($user, $newPassword);
-                $user->setPassword($hashed);
-                $em->flush();
+                // On injecte le nouveau mot de passe dans plainPassword
+                $user->setPlainPassword($newPassword);
 
-                $this->addFlash('success', 'Mot de passe modifié avec succès.');
+                // On valide uniquement plainPassword
+                $errors = $this->validator->validate($user, null, ['create']);
 
-                return $this->redirectToRoute('admin');
+                if (count($errors) > 0) {
+                    foreach ($errors as $error) {
+                        $this->addFlash('danger', $error->getMessage());
+                    }
+                } else {
+                    // Hash seulement si validation OK
+                    $hashed = $this->passwordHasher->hashPassword($user, $newPassword);
+                    $user->setPassword($hashed);
+                    $user->setPlainPassword(null);
+
+                    $em->flush();
+
+                    $this->addFlash('success', 'Mot de passe modifié avec succès.');
+
+                    return $this->redirectToRoute('admin');
+                }
             }
         }
 

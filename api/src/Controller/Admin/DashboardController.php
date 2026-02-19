@@ -12,13 +12,13 @@ use App\Entity\ContentSection;
 use App\Entity\ContactMessage;
 
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 
 use Symfony\Component\Security\Core\User\UserInterface;
-use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -49,22 +49,20 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToRoute('Mon profil', 'fas fa-user', 'admin');
-        // yield MenuItem::linkToCrud('Modifier mon profil', 'fas fa-home', User::class)->setAction('edit')->setEntityId($this->getUser()->getId());
-        // yield MenuItem::linkToDashboard('Dashboard', 'fa fa-home');
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
             yield MenuItem::linkToCrud('Utilisateurs', 'fas fa-list', User::class);
-        }
-        // Lien vers "Mon profil" pour tous les utilisateurs
-        
+        }        
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
         yield MenuItem::linkToCrud('Services', 'fas fa-list', Service::class);
         yield MenuItem::linkToCrud('Réalisations', 'fas fa-list', Realization::class);
         yield MenuItem::linkToCrud('Slider', 'fas fa-list', SliderImage::class);
         yield MenuItem::linkToCrud('Équipe', 'fas fa-list', TeamMember::class);
         yield MenuItem::linkToCrud('Contenu du site ', 'fas fa-list', ContentSection::class);
-        yield MenuItem::linkToCrud('Messages de contact', 'fas fa-envelope', ContactMessage::class);
+        yield MenuItem::linkToCrud('Messages', 'fas fa-envelope', ContactMessage::class);
         // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
+
+
   
 
 
