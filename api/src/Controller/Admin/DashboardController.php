@@ -57,7 +57,7 @@ class DashboardController extends AbstractDashboardController
         // Lien vers "Mon profil" pour tous les utilisateurs
         
         yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
-        yield MenuItem::linkToCrud('Prestations', 'fas fa-list', Service::class);
+        yield MenuItem::linkToCrud('Services', 'fas fa-list', Service::class);
         yield MenuItem::linkToCrud('Réalisations', 'fas fa-list', Realization::class);
         yield MenuItem::linkToCrud('Slider', 'fas fa-list', SliderImage::class);
         yield MenuItem::linkToCrud('Équipe', 'fas fa-list', TeamMember::class);

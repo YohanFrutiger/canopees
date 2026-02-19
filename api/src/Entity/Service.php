@@ -5,11 +5,26 @@ namespace App\Entity;
 use App\Repository\ServiceRepository;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
 #[ORM\Entity(repositoryClass: ServiceRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
-#[ApiResource()]
+#[ApiResource(
+    operations: [
+        new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
+        new Get(security: null),            // Public : voir une categorie
+        new Post(security: "is_granted('ROLE_SUPER_ADMIN')"),  
+        new Put(security: "is_granted('ROLE_SUPER_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_SUPER_ADMIN')"),
+    ]
+)]
 class Service
 {
     #[ORM\Id]
@@ -17,6 +32,14 @@ class Service
     #[ORM\Column]
     private ?int $id = null;
 
+    // title
+    #[Assert\NotBlank(message: 'Le titre est obligatoire')]
+    #[Assert\Length(
+        min: 5,
+        max: 50,
+        minMessage: 'Le titre doit avoir au moins {{ limit }} caractères',
+        maxMessage: 'Le titre ne doit pas dépasser {{ limit }} caractères',
+    )]
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
@@ -24,16 +47,26 @@ class Service
     #[ORM\JoinColumn(name: 'category_id', nullable: false)]
     private ?Category $category = null;
 
+    // price
+    #[Assert\NotBlank(message: 'Le prix est obligatoire')]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Le prix doit avoir au moins {{ limit }} caractères',
+        maxMessage: 'Le prix ne doit pas dépasser {{ limit }} caractères',
+    )]
     #[ORM\Column(length: 50)]
     private ?string $price = null;
 
+    // Timestamp (creation)
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    // Timestamp (update
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
    
-
+    // Relation ManyToOne avec User (chaque catégorie est créée ou modifiée par un utilisateur)
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;

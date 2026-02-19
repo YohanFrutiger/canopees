@@ -29,13 +29,13 @@ use ApiPlatform\Metadata\Delete;
 )]
 class Category
 {
-    // Category id    
+    // id    
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    // Category title
+    // title
     #[Assert\NotBlank(message: 'Le titre est obligatoire')]
     #[Assert\Length(
         min: 5,
@@ -46,7 +46,7 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $title = null;
 
-    // Category description
+    // description
     #[Assert\NotBlank(message: 'La description est obligatoire')]
     #[Assert\Length(
         min: 10,
@@ -57,16 +57,16 @@ class Category
     #[ORM\Column(type: Types::TEXT)]
     private ?string $description = null;
 
-    // Category image
+    // image
     #[Assert\NotBlank(message: 'L\'image est obligatoire')]
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
-    // Category info
+    // info
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $info = null;
 
-    // Category tag
+    // tag
     #[Assert\NotBlank(message: 'Le tag est obligatoire')]
     #[Assert\Length(
         min: 3,
