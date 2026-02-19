@@ -38,7 +38,7 @@ class Category
     // title
     #[Assert\NotBlank(message: 'Le titre est obligatoire')]
     #[Assert\Length(
-        min: 5,
+        min: 4,
         max: 50,
         minMessage: 'Le titre doit avoir au moins {{ limit }} caractères',
         maxMessage: 'Le titre ne doit pas dépasser {{ limit }} caractères',

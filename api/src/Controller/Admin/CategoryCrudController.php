@@ -13,7 +13,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
-use Symfony\Component\Security\Core\Security;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class CategoryCrudController extends AbstractCrudController

@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class ContentSectionCrudController extends AbstractCrudController
 {
@@ -19,12 +20,30 @@ class ContentSectionCrudController extends AbstractCrudController
         return ContentSection::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('index', 'Contenus du site') // Remplace par ton titre personnalisé
+            ->setPageTitle('edit', 'Modifier un contenu'); // Remplace par ton titre personnalisé
+    }
+
     public function configureActions(Actions $actions): Actions
     {
         if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             $actions->disable(Action::NEW, Action::DELETE);  // Pas create/delete, seulement edit
         }
-        return $actions;
+                return $actions
+            // Pour le bouton "Add Category" sur la page liste (INDEX)
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action->setLabel('Ajouter un contenu'); // Ton label personnalisé
+            })
+            // Pour les liens "Edit" sur la page edit
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+            })
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+            });
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
@@ -65,13 +84,12 @@ class ContentSectionCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->onlyOnIndex(),
-            TextField::new('section_key'),                   
-            TextField::new('title'),                        
-                                 
-            TextEditorField::new('content'),
-            DateTimeField::new('createdAt')->onlyOnIndex(),
-            DateTimeField::new('updatedAt')->onlyOnIndex(),
-            IdField::new('user.id', 'User ID')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
+            TextField::new('section_key'),
+            TextField::new('title','Titre'),
+            TextEditorField::new('content','Contenu'),
+            DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
+            DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
+            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
         ];
     }
 }
