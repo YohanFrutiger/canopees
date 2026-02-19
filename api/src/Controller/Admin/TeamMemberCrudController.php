@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class TeamMemberCrudController extends AbstractCrudController
 {
@@ -20,13 +21,31 @@ class TeamMemberCrudController extends AbstractCrudController
         return TeamMember::class;
     }
 
-    // public function configureActions(Actions $actions): Actions
-    // {
-    //     if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
-    //         $actions->disable(Action::NEW, Action::DELETE);  // Pas create/delete, seulement edit
-    //     }
-    //     return $actions;
-    // }
+     public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('index', 'Liste des membres') // Remplace par ton titre personnalisé
+            ->setPageTitle('edit', 'Modifier un membre'); // Remplace par ton titre personnalisé
+    }   
+
+    public function configureActions(Actions $actions): Actions
+    {
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            $actions->disable(Action::NEW, Action::DELETE);  // Pas create/delete, seulement edit
+        }
+        return $actions
+            // Pour le bouton "Add Category" sur la page liste (INDEX)
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action->setLabel('Ajouter un membre'); // Ton label personnalisé
+            })
+            // Pour les liens "Edit" sur la page edit
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+            })
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+            });
+    }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
@@ -66,17 +85,16 @@ class TeamMemberCrudController extends AbstractCrudController
     {
         return [
             IdField::new('id')->onlyOnIndex(),
-            TextField::new('firstName'),                   
-            TextField::new('lastName'),                                  
+            TextField::new('firstName','Nom'),                   
+            TextField::new('lastName','Prénom'),                                  
             ImageField::new('image', 'Image')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),
-            TextEditorField::new('biography'),
-            DateTimeField::new('createdAt')->onlyOnIndex(),
-            DateTimeField::new('updatedAt')->onlyOnIndex(),
-            IdField::new('user.id', 'User ID')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
+            DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
+            DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
+            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
         ];
     }
 

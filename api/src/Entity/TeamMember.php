@@ -6,33 +6,77 @@ use App\Repository\TeamMemberRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
 use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\Metadata\Delete;
 
 #[ORM\Entity(repositoryClass: TeamMemberRepository::class)]
 #[ORM\HasLifecycleCallbacks] // Active les callbacks pour createdAt et updatedAt
-#[ApiResource()]
+#[ApiResource(
+    operations: [
+        new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
+        new Get(security: null),            // Public : voir une categorie
+        new Post(security: "is_granted('ROLE_SUPER_ADMIN')"),
+        new Put(security: "is_granted('ROLE_SUPER_ADMIN')"),
+        new Delete(security: "is_granted('ROLE_SUPER_ADMIN')"),
+    ]
+)]
 class TeamMember
 {
+    // id
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    // lastname
+    #[Assert\NotBlank(message: 'Le nom est obligatoire')]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Le nom doit avoir au moins {{ limit }} caractères',
+        maxMessage: 'Le nom ne doit pas dépasser {{ limit }} caractères',
+    )]
     #[ORM\Column(length: 255)]
     private ?string $lastname = null;
 
+    // firstname
+    #[Assert\NotBlank(message: 'Le prénom est obligatoire')]
+    #[Assert\Length(
+        min: 2,
+        max: 50,
+        minMessage: 'Le prénom doit avoir au moins {{ limit }} caractères',
+        maxMessage: 'Le prénom ne doit pas dépasser {{ limit }} caractères',
+    )]
     #[ORM\Column(length: 255)]
     private ?string $firstname = null;
 
+    // biography
+    #[Assert\NotBlank(message: 'La biographie est obligatoire')]
+    #[Assert\Length(
+        min: 20,
+        max: 1000,
+        minMessage: 'La biographie doit avoir au moins {{ limit }} caractères',
+        maxMessage: 'La biographie ne doit pas dépasser {{ limit }} caractères',
+    )]
     #[ORM\Column(type: Types::TEXT)]
     private ?string $biography = null;
 
+    // image
+    #[Assert\NotBlank(message: 'L\'image est obligatoire')]
     #[ORM\Column(length: 255)]
     private ?string $image = null;
 
+    // Timestamp (creation)
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
+    // Timestamp (update)
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
 
@@ -86,7 +130,7 @@ class TeamMember
         return $this->image;
     }
 
-    public function setImage(string $image): static
+    public function setImage(?string $image): static
     {
         $this->image = $image;
 
@@ -99,13 +143,13 @@ class TeamMember
         $this->createdAt = new \DateTimeImmutable(); // Date et heure actuelles
     }
 
-      // Nouveau callback pour PreUpdate (updatedAt)
+    // Nouveau callback pour PreUpdate (updatedAt)
     #[ORM\PreUpdate]
     public function setUpdatedAtValue(): void
     {
         $this->updatedAt = new \DateTimeImmutable(); // Date et heure actuelles
     }
-    
+
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;

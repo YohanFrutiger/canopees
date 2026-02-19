@@ -104,7 +104,7 @@ class CategoryCrudController extends AbstractCrudController
             TextEditorField::new('info'),
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
-            IdField::new('user.lastname', 'Dernier utilisateur')->onlyOnIndex(),  // Changement pour afficher le prénom de l'utilisateur
+            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),  // Changement pour afficher le prénom de l'utilisateur
         ];
     }
 }
