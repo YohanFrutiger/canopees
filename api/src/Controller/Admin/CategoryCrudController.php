@@ -98,8 +98,8 @@ class CategoryCrudController extends AbstractCrudController
             ImageField::new('image', 'Image')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
-                ->setRequired(false),
-            // ->setUploadedFileNamePattern('[randomhash].[extension]'),
+                ->setRequired(false)
+                ->setUploadedFileNamePattern('[randomhash].[extension]'),
             TextField::new('tag'),
             TextEditorField::new('info'),
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),

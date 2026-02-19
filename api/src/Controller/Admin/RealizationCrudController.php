@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class RealizationCrudController extends AbstractCrudController
 {
@@ -21,12 +22,30 @@ class RealizationCrudController extends AbstractCrudController
         return Realization::class;
     }
 
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setPageTitle('index', 'Liste des réalisations') // Remplace par ton titre personnalisé
+            ->setPageTitle('edit', 'Modifier une réalisation'); // Remplace par ton titre personnalisé
+    }
+
     public function configureActions(Actions $actions): Actions
     {
         if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
             $actions->disable(Action::NEW, Action::DELETE);  // Pas create/delete, seulement edit
         }
-        return $actions;
+        return $actions
+            // Pour le bouton "Add Category" sur la page liste (INDEX)
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action->setLabel('Ajouter une réalisation'); // Ton label personnalisé
+            })
+            // Pour les liens "Edit" sur la page edit
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+            })
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+            });
     }
 
     public function persistEntity(EntityManagerInterface $entityManager, $entityInstance): void
@@ -72,15 +91,14 @@ class RealizationCrudController extends AbstractCrudController
             AssociationField::new('category', 'Categorie') // 'service' est la propriété, 'Catégorie' est le label
                 ->setRequired(true) // Obligatoire si needed
                 ->autocomplete(), // Active l'autocomplétion pour un select searchable si beaucoup de catégories
-                // ->setFormTypeOptions(['choice_label' => 'title']), // Affiche le 'title' de service dans le select (ajuste si champ différent)
-            DateTimeField::new('realizedAt'),
+            DateTimeField::new('realizedAt','Réalisé le'),
             ImageField::new('image', 'Image')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),
-            DateTimeField::new('createdAt')->onlyOnIndex(),
-            DateTimeField::new('updatedAt')->onlyOnIndex(),
+            DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
+            DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
             IdField::new('user.id', 'User ID')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
         ];
     }
