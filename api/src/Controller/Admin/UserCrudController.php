@@ -16,6 +16,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 
+
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\FormEvents;
@@ -45,6 +46,8 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
+
+
     public function configureFields(string $pageName): iterable
     {
         $user = $this->getUser();
@@ -58,10 +61,10 @@ class UserCrudController extends AbstractCrudController
         if ($this->isGranted('ROLE_SUPER_ADMIN')) {
             $fields = [
                 IdField::new('id')->hideOnForm(),
-                TextField::new('firstname'),
-                TextField::new('lastname'),
+                TextField::new('firstname', 'Nom'),
+                TextField::new('lastname', 'Prénom'),
                 TextField::new('email'),
-                ChoiceField::new('roles')
+                ChoiceField::new('roles', 'Rôle')
                     ->setChoices([
                         'Admin' => 'ROLE_ADMIN',
                         'Super Admin' => 'ROLE_SUPER_ADMIN',
@@ -73,18 +76,6 @@ class UserCrudController extends AbstractCrudController
         }
 
 
-        // if ($pageName === Crud::PAGE_NEW || $pageName === Crud::PAGE_EDIT) {
-        //     $fields[] = TextField::new('password')
-        //         ->setFormType(RepeatedType::class)
-        //         ->setFormTypeOptions([
-        //             'type' => \Symfony\Component\Form\Extension\Core\Type\PasswordType::class,
-        //             'first_options' => ['label' => 'Mot de passe'],
-        //             'second_options' => ['label' => 'Confirmation du mot de passe'],
-        //             'invalid_message' => 'Les mots de passe ne correspondent pas.',
-        //         ])
-        //         ->setRequired($pageName === Crud::PAGE_NEW);
-        //         // ->onlyOnIndex();
-        // }
 
         return $fields;
     }
@@ -122,49 +113,68 @@ class UserCrudController extends AbstractCrudController
     // Ajout pour valider et ajouter erreurs au form (au lieu d'exception globale)
     public function configureCrud(Crud $crud): Crud
     {
-        return parent::configureCrud($crud)
-            ->setFormOptions([
-                'validation_groups' => ['Default'],  // Active tes groups si needed
-            ]);
+        // return parent::configureCrud($crud)
+        //     ->setFormOptions([
+        //         'validation_groups' => ['Default'],  // Active tes groups si needed
+        //     ]);
+        return $crud
+            ->setPageTitle('index', 'Liste des utilisateurs') // Remplace par ton titre personnalisé
+            ->setPageTitle('edit', 'Modifier un utilisateur'); // Remplace par ton titre personnalisé
     }
 
-public function configureActions(Actions $actions): Actions
-{
-    $user = $this->getUser();
+    public function configureActions(Actions $actions): Actions
+    {
+        $user = $this->getUser();
 
-    // 🔐 Bouton modifier mot de passe (uniquement sur son propre profil)
-    $changePassword = Action::new('changePassword', 'Modifier mot de passe')
-        ->linkToRoute('admin_change_password')
-        ->setCssClass('btn btn-warning')
-        ->displayIf(function ($entity) use ($user) {
-            if (!$entity || !$user) {
-                return false;
-            }
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+            $actions->disable(Action::NEW, Action::DELETE);  // Pas create/delete, seulement edit
+        }
 
-            // visible uniquement si l'utilisateur édite SON profil
-            return $entity->getId() === $user->getId();
-        });
 
-    $actions->add(Crud::PAGE_EDIT, $changePassword);
+        // 🔐 Bouton modifier mot de passe (uniquement sur son propre profil)
+        $changePassword = Action::new('changePassword', 'Modifier mon mot de passe')
+            ->linkToRoute('admin_change_password')
+            ->setCssClass('btn btn-warning')
+            ->displayIf(function ($entity) use ($user) {
+                if (!$entity || !$user) {
+                    return false;
+                }
 
-    // 🔒 Restrictions pour non super admin
-    if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+                // visible uniquement si l'utilisateur édite SON profil
+                return $entity->getId() === $user->getId();
+            });
 
-        // pas accès liste, création, suppression
-        $actions->disable(Action::INDEX, Action::NEW, Action::DELETE);
+        $actions->add(Crud::PAGE_EDIT, $changePassword);
 
-        // empêche édition autre profil (sécurité UI)
-        $actions->update(
-            Crud::PAGE_EDIT,
-            Action::SAVE_AND_RETURN,
-            fn (Action $action) => $action->displayIf(function ($entity) use ($user) {
-                return $entity && $entity->getId() === $user->getId();
+        // 🔒 Restrictions pour non super admin
+        if (!$this->isGranted('ROLE_SUPER_ADMIN')) {
+
+            // pas accès liste, création, suppression
+            $actions->disable(Action::INDEX, Action::NEW, Action::DELETE);
+
+            // empêche édition autre profil (sécurité UI)
+            $actions->update(
+                Crud::PAGE_EDIT,
+                Action::SAVE_AND_RETURN,
+                fn(Action $action) => $action->displayIf(function ($entity) use ($user) {
+                    return $entity && $entity->getId() === $user->getId();
+                })
+            );
+        }
+
+        return $actions
+            // Pour le bouton "Add Category" sur la page liste (INDEX)
+            ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
+                return $action->setLabel('Ajouter un utilisateur'); // Ton label personnalisé
             })
-        );
+            // Pour les liens "Edit" sur la page edit
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
+                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+            })
+            ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
+                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+            });
     }
-
-    return $actions;
-}
 
 
 
@@ -221,6 +231,8 @@ public function configureActions(Actions $actions): Actions
             'form' => $form->createView(),
         ]);
     }
+
+
 
 
     // Pour erreurs par champ : override createEditFormBuilder ou similar, mais simple ici avec event
