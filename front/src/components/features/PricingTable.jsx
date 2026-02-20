@@ -3,37 +3,35 @@
 
 import { useState } from "react";
 import parse from "html-react-parser";
-import { useCategories } from "../../hooks/useCategories";  // Toutes les catégories 
-import { useServices } from "../../hooks/useServices";  // Tous les services (services)
+import { useCategories } from "../../hooks/useCategories";  
+import { useServices } from "../../hooks/useServices"; 
 
 
 export default function PricingTable() {
   const [selected, setSelected] = useState(0);
-  const categories = useCategories();  // Categories
-  const services = useServices();  // Tous les services
+  const categories = useCategories();  
+  const services = useServices();  
 
-  // Gestion loading/error commun (attend les deux hooks)
+  // Gestion loading/error
   if (categories.loading || services.loading) {
     return <p className="text-center">Chargement des tarifs...</p>;
   }
-
   if (categories.error || services.error) {
     return <p className="text-center text-red-500">Erreur lors de la récupération des données.</p>;
   }
-
   if (!categories.data?.member?.length) {
     return <p className="text-center">Aucune catégorie disponible.</p>;
   }
 
   // Onglets dynamiques
   const categoriesTabs = (
-    <div className="flex flex-col justify-start gap-8 mt-2 ">
+    <div className="flex">
       {categories.data.member.map((cat, index) => (
         <button
           key={cat.id}
           onClick={() => setSelected(index)}
-          className={`p-2  text-xl   transition-all w-full  ${
-            selected === index ? "underline " : " text-gray-600 hover:scale-105 "
+          className={`  px-4 border-r border-violet   transition-all w-full  ${
+            selected === index ? "text-xl text-violet font-extrabold " : "text-lg text-violet/90 hover:scale-105 hover:text-violet/80 "
           }`}
         >
           {cat.title}
@@ -48,7 +46,7 @@ export default function PricingTable() {
 
   // Tableau des tarifs (si services pour cette catégorie, sinon message)
   const pricingTable = (
-    <div className="rounded-sm shadow-2xl p-4 md:p-8 border-2 max-w-2xl w-[6500px]">
+    <div className=" p-4 md:p-8 max-w-2xl w-[6500px]">
       <table className="w-full text-left">
         <thead>
           <tr className="border-b-2 border-violet/30">
@@ -86,7 +84,7 @@ export default function PricingTable() {
   );
 
   return (
-    <div className="flex justify-center mt-12 lg:gap-24 lmd:gap-32 gap-4 ">
+    <div className="flex flex-wrap justify-center mt-12 lg:gap-8 lmd:gap-32 gap-4 ">
       {categoriesTabs}
       {pricingTable}
     </div>

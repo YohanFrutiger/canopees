@@ -1,9 +1,9 @@
-// src/components/featuresPrestations.jsx
-// Carte "Prestation" pour la page Prestations
+// src/pages/categories.jsx
+// Page Prestations
 
 import { Link } from 'react-router-dom';
 import { useContentSections } from '../hooks/useContentSections';
-import { useCategories } from '../hooks/useCategories'; 
+import { useCategories } from '../hooks/useCategories';
 import PrestationCard from "../components/features/PrestationCard";
 import Line from "../components/layout/Line";
 import parse from "html-react-parser";
@@ -14,9 +14,9 @@ export default function Categories() {
   const categoriesPageIntroSection = content.getSectionByKey('prestations-intro');
 
   // Texte d'introduction de la page "Prestations"
-  let PrestationsIntroContent; 
+  let PrestationsIntroContent;
   if (content.loading) {
-    PrestationsIntroContent = <p>Chargement...</p>;  // Décommenté pour cohérence UX
+    // PrestationsIntroContent = <p>Chargement...</p>; 
   } else if (content.error) {
     PrestationsIntroContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
   } else if (categoriesPageIntroSection) {
@@ -29,26 +29,20 @@ export default function Categories() {
     PrestationsIntroContent = <p>Aucune section "prestations-intro" trouvée.</p>;
   }
 
-  // Contenu des prestations (gestion loading/error pour éviter crash)
+  // Gestion loading/error
   let PrestationsContent;
   if (categories.loading) {
-    PrestationsContent = <p className="text-center">Chargement des catégories...</p>;
+    // PrestationsContent = <p className="text-center">Chargement des catégories...</p>;
   } else if (categories.error) {
     PrestationsContent = <p className="text-center text-red-500">Erreur : Une erreur est survenue lors de la récupération des catégories.</p>;
   } else if (categories.data?.member?.length > 0) {
     PrestationsContent = (
       <div className="gap-4 flex flex-wrap justify-center py-4">
-        {categories.data.member.map((cat, index) => (           
-            <PrestationCard
-              key={cat.id}
-              cat={cat}
-              // catTitle={cat.title}
-              // img={`http://127.0.0.1:8000/uploads/${cat.image}`}  // Ajoute base URL pour images (ajuste si VichUploader)
-              // text={cat.description}  // Assume champs de ton Entity\Category ; ajuste si différent (ex: info au lieu de description)
-              // tag={cat.tag}
-              // alt={cat.title}  // Utilise title comme alt par défaut si pas de champ alt
-            />
-         
+        {categories.data.member.map((cat, index) => (
+          <PrestationCard
+            key={cat.id}
+            cat={cat}
+          />
         ))}
       </div>
     );
@@ -58,12 +52,14 @@ export default function Categories() {
 
   return (
     <>
-      {PrestationsIntroContent}  
-      {/* <Line /> */}
+      {PrestationsIntroContent}
+
       <div className="mt-4">
         {PrestationsContent}
-        </div>  {/* Affichage conditionnel des cards */}
+      </div>
+
       <p className="text-center">Besoin d'un devis ? Une question ?</p>
+
       <div className="text-center">
         <Link to="/contact" className="text-center mx-auto text-blue font-semibold hover:text-blue/80 transition transform hover:scale-120">
           Cliquez ici !

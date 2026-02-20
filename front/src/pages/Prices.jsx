@@ -1,3 +1,4 @@
+// src/pages/Prices.jsx
 // Page Tarifs
 import { useContentSections } from '../hooks/useContentSections';
 import PricingTable from "../components/features/PricingTable";
@@ -25,10 +26,9 @@ export default function Tarifs() {
   }
 
   return (
-    <div className="text-center pb-8  min-h-screen">
-      {pricesIntroContent}
-      
-      {/* <Line /> */}
+    <div className="text-center min-h-screen">
+      {pricesIntroContent}      
+      <Line />
       <PricingTable />
       <ContactButton
         btnContent="Demandez un devis gratuit !"

@@ -9,20 +9,19 @@ export default function Carrousel() {
   // État pour l'index de l'image actuellement au centre
   const [currentIndex, setCurrentIndex] = useState(0);
 
-// Utilise le hook pour fetch les données
-const { loading, error, data } = useRealizations();
+  // Hook pour fetch les données
+  const { loading, error, data } = useRealizations();
 
-// Prépare les images dynamiques
-let images = [];
-if (data && data.member) { // Changé en data.member (clé réelle dans ton JSON)
-  const realizations = data.member;
-  // Trie par realizedAt descendant (plus récente en premier)
-  const sorted = realizations.sort((a, b) => new Date(b.realizedAt) - new Date(a.realizedAt));
-  // Limite aux 6 plus récentes (ou moins si <6)
-  const limited = sorted.slice(0, 6);
-  // Extrait les URLs d'images (ajuste le préfixe selon ta config VichUploader)
-  images = limited.map(item => `http://127.0.0.1:8000/uploads/${item.image}`); // ← Ajuste '/uploads/realizations/' si nécessaire (ex: '/media/' ou '/images/')
-}
+  let images = [];
+  if (data && data.member) { 
+    const realizations = data.member;
+    // Trie par realizedAt descendant (plus récente en premier)
+    const sorted = realizations.sort((a, b) => new Date(b.realizedAt) - new Date(a.realizedAt));
+    // Limite aux 6 plus récentes (ou moins si <6)
+    const limited = sorted.slice(0, 6);
+    // Extrait les URLs d'images 
+    images = limited.map(item => `http://127.0.0.1:8000/uploads/${item.image}`); 
+  }
 
   // Passe à l'image précédente (revient à la fin si on est au début)
   function prevSlide() {
@@ -34,13 +33,6 @@ if (data && data.member) { // Changé en data.member (clé réelle dans ton JSON
     setCurrentIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
   }
 
-  /**
-   * Retourne les 3 indices d'images à afficher :
-   * - image précédente
-   * - image actuelle (centrale)
-   * - image suivante
-   * Gère le défilement circulaire (boucle infinie)
-   */
   function getVisibleIndices() {
     // Calcul de l'index précédent (si on est à 0 → dernière image)
     const prev = currentIndex === 0 ? images.length - 1 : currentIndex - 1;
@@ -54,13 +46,13 @@ if (data && data.member) { // Changé en data.member (clé réelle dans ton JSON
   const visible = getVisibleIndices();
 
   // Gestion du loading et error
-if (loading) {
-  return <div className="w-full h-96 md:h-[400px] flex items-center justify-center">Chargement des réalisations...</div>;
-}
+  if (loading) {
+    return <div className="w-full h-96 md:h-[400px] flex items-center justify-center">Chargement des réalisations...</div>;
+  }
 
-if (error || images.length === 0) {
-  return <div className="w-full h-96 md:h-[400px] flex items-center justify-center">Erreur lors du chargement ou aucune réalisation disponible.</div>;
-}
+  if (error || images.length === 0) {
+    return <div className="w-full h-96 md:h-[400px] flex items-center justify-center">Erreur lors du chargement ou aucune réalisation disponible.</div>;
+  }
 
   return (
     <div className="w-full h-96 md:h-[400px] flex items-center justify-center overflow-hidden">

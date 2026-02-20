@@ -1,3 +1,4 @@
+// src/hooks/useCatgories.js
 // Custom hook pour charger les catégories depuis l'API
 
 import { useState, useEffect } from 'react';

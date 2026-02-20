@@ -1,3 +1,6 @@
+// src/hooks/useSlider.js
+// Custom hook pour charger les images du slider depuis l'API
+
 import { useState, useEffect } from 'react';
 
 export const useSlider = () => {

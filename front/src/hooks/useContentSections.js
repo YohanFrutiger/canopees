@@ -1,3 +1,6 @@
+// src/hooks/useConentSections.js
+// Custom hook pour charger le contenu des sections depuis l'API
+
 import { useState, useEffect } from 'react';
 
 export const useContentSections = () => {

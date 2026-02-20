@@ -1,3 +1,6 @@
+// src/componenets/features/ContactForm.jsx
+// Formulaire de contact
+
 import { useState } from "react";
 
 const API_URL = "http://127.0.0.1:8000/api/contact_messages";
@@ -100,14 +103,14 @@ export default function ContactForm() {
 
   return (
     <div className="p-8 md:w-[600px] mx-auto">
+
       <form onSubmit={handleSubmit} className="bg-gray-50 p-8 rounded-xl shadow-2xl space-y-8" noValidate>
+
         <p className="text-center">Besoin d'un devis ? Une question ?</p>
         <p className="text-center mb-4">Remplissez le formulaire, nous vous répondons sous 48h.</p>
-        {/* <p className="text-left text-sm font-light  mb-4">*Tous les champs sont requis</p> */}
-        
 
         <div className="text-left flex flex-col gap-10">
-          
+
           {/* NOM */}
           <div>
             <label className="block text-lg font-medium pb-2">Nom</label>

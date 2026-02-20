@@ -3,7 +3,7 @@
 
 export default function TargetAudienceCard({ icon, title, text }) {
   return (
-    <div className={`flex flex-col items-center  text-center py-8 rounded-md  border-2 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300`}>
+    <div className={`flex flex-col items-center text-center py-8 rounded-md  border-2 shadow-lg hover:shadow-2xl hover:scale-105 transition-all duration-300`}>
       {/* Icône */}
       <div className={`mb-2 text-6xl`}>
         {icon}

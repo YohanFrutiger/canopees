@@ -1,4 +1,5 @@
-// Page GVU/CGU (accessible via lien dans le footer)
+// src/pages/LegalNotices.jsx
+// Page Mentions légales (accessible via lien dans le footer)
 
 import { useContentSections } from '../hooks/useContentSections';
 import parse from "html-react-parser";
@@ -9,13 +10,13 @@ export default function LegalNotices() {
 
     let pageContent;
     if (contentSections.loading) {
-        // introContent = <p>Chargement...</p>;
+        // pageContent = <p>Chargement...</p>;
     } else if (contentSections.error) {
         pageContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
     } else if (contentSectionsFiltered) {
         pageContent = (
             <section className="mt-16">
-                <h2> {contentSectionsFiltered.title} </h2>
+                <h2 className='text-left text-gray-900'> {contentSectionsFiltered.title} </h2>
                 <div> {parse(contentSectionsFiltered.content)} </div>
             </section>
         );

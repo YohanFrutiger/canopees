@@ -1,3 +1,6 @@
+// src/hooks/useTeamMembers.js
+// Custom hook pour charger la liste des membres de l'équipe depuis l'API
+
 import { useState, useEffect } from 'react';
 
 export const useTeamMembers = () => {

@@ -1,5 +1,5 @@
 // src/components/features/Modal.jsx
-// Fenêtre modale pour l'affichage des réalisations d'une catégorie (ouverte depuis PrestationCard)
+// Fenêtre modale pour l'affichage des réalisations d'une catégorie
 
 import { useRealizations } from "../../hooks/useRealizations";  // Toutes les réalisations 
 import parse from "html-react-parser";
@@ -9,6 +9,7 @@ export default function Modal({ isOpen, onClose, cat }) {
   const realizations = useRealizations();  // Toutes les réalisations 
   const filteredRealizations = realizations.getRealizationsByCategory(cat.id);  // Filtre par ID
 
+  // Gestion loading/error
   let modalGallery; // Galerie dans la modale
   if (realizations.loading) {
     // modalGallery = <p className="text-center">Chargement des réalisations...</p>;
@@ -21,7 +22,6 @@ export default function Modal({ isOpen, onClose, cat }) {
     modalGallery = (
       <div className="grid grid-cols-1 md:grid-cols-2 p-4 gap-8">
         {filteredRealizations.map((real, index) => (
-
           <div className="">
             <p className="p-2 font-light ">
               {parse(real.description)}
@@ -32,8 +32,6 @@ export default function Modal({ isOpen, onClose, cat }) {
               alt={real.alt}
               className="w-full h-80 object-cover rounded-xl"
             />
-            
-
           </div>
         ))}
       </div>
@@ -60,13 +58,9 @@ export default function Modal({ isOpen, onClose, cat }) {
           ×
         </button>
 
-        {/* En-tête violet */}
+        {/* En-tête avec descritpion de la catégorie */}
         <div className="bg-green/10 text-left rounded-t-3xl">
-          {/* <h1 className="text-4xl md:text-4xl font-rosario font-bold my-4 mb-2 ">
-            {cat.title}
-          </h1> */}
           <p className="pl-8 pr-24 py-4  leading-tight ">{parse(cat.description)}</p>
-          {/* <p className="text-xl mb-4 text-white">Découvrez nos réalisations !</p> */}
         </div>
 
         <div className="overflow-y-auto bg-gray-50">

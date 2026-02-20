@@ -11,10 +11,10 @@ function HeroSlider() {
 
   // Filtrage des images actives uniquement
   const activeSlides = slider.data?.member
-    ?.filter(item => item.active === true)          // Filtre important
+    ?.filter(item => item.active === true)         
     ?.map(item => ({
       id: item.id,
-      image: `http://127.0.0.1:8000/uploads/${item.image}`,   // Adaptez si votre chemin est différent
+      image: `http://127.0.0.1:8000/uploads/${item.image}`, 
       alt: item.alt || `Photo slider ${item.id}`,
     })) || [];
 
@@ -33,15 +33,14 @@ function HeroSlider() {
     setCurrentIndex(index);
   }
 
-  // ==================== Rendu conditionnel ====================
-  if (slider.loading) {
-    return (
-      <div className="absolute top-16 left-0 w-full h-[400px] bg-black flex items-center justify-center">
-        <p className="text-white text-xl">Chargement du slider...</p>
-      </div>
-    );
-  }
-
+  // Gestion loading/error
+  // if (slider.loading) {
+  //   return (
+  //     <div className="absolute top-16 left-0 w-full h-[400px] bg-black flex items-center justify-center">
+  //       <p className="text-white text-xl">Chargement du slider...</p>
+  //     </div>
+  //   );
+  // }
   if (slider.error) {
     return (
       <div className="absolute top-16 left-0 w-full h-[400px] bg-black flex items-center justify-center">
@@ -49,7 +48,6 @@ function HeroSlider() {
       </div>
     );
   }
-
   if (totalSlides === 0) {
     return (
       <div className="absolute top-16 left-0 w-full h-[400px] bg-black flex items-center justify-center">

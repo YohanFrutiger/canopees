@@ -1,3 +1,6 @@
+// src/hooks/useRealizations.js
+// Custom hook pour charger les réalisations depuis l'API
+
 import { useState, useEffect } from 'react';
 
 export const useRealizations = () => {
@@ -13,10 +16,10 @@ export const useRealizations = () => {
       .catch(err => setState({ loading: false, error: err, data: null }));
   }, []);
 
-    // Méthode pour filtrer services par catégorie (assume category est l'ID ou IRI ; ajuste si objet)
-const getRealizationsByCategory = (categoryId) => {
-  return state.data?.member?.filter(item => item.category === `/api/categories/${categoryId}`) || [];  // Match IRI string
-};
+  // Méthode pour filtrer services par catégorie
+  const getRealizationsByCategory = (categoryId) => {
+    return state.data?.member?.filter(item => item.category === `/api/categories/${categoryId}`) || [];
+  };
 
   return { ...state, getRealizationsByCategory };
 

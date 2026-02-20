@@ -1,5 +1,5 @@
 // src/components/features/PrestationCard.jsx
-// Carte Prestation de la page Prestations
+// Carte Prestation de la page Category
 
 import { useState } from "react";
 import Modal from "./Modal";
@@ -29,21 +29,6 @@ export default function PrestationCard({ cat }) {
           {cat.title}
         </h3>
       </div>
-
-      {/* Texte */}
-      {/* <p className="px-4 mb-4 flex-1 mt-4 text-base">
-        {parse(text)}
-      </p> */}
-
-      {/* Bouton */}
-      {/* <div className="px-6 pb-6 mx-auto">
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="block w-48 border text-center py-3 bg-violet text-white rounded-lg font-semibold transition transform hover:scale-105"
-        >
-          Voir nos réalisations
-        </button>
-      </div> */}
 
       {/* MODALE */}
       <Modal
