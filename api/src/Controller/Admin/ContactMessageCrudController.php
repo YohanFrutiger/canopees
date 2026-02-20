@@ -39,6 +39,12 @@ class ContactMessageCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            TextField::new('nom', 'Nom')
+                ->setRequired(false)  // Non obligatoire (déjà validé ailleurs si besoin)
+                ->setFormTypeOption('disabled', true),  // Rend read-only en édition (non éditable)
+            TextField::new('prenom', 'Prenom')
+                ->setRequired(false)  // Non obligatoire (déjà validé ailleurs si besoin)
+                ->setFormTypeOption('disabled', true),  // Rend read-only en édition (non éditable)
             TextField::new('email', 'Email')
                 ->setRequired(false)  // Non obligatoire (déjà validé ailleurs si besoin)
                 ->setFormTypeOption('disabled', true),  // Rend read-only en édition (non éditable)
@@ -46,9 +52,9 @@ class ContactMessageCrudController extends AbstractCrudController
                 ->setRequired(false)  // Non obligatoire (déjà validé ailleurs si besoin)
                 ->hideOnIndex()  // Pas dans la liste pour éviter surcharge
                 ->setFormTypeOption('disabled', true),  // Rend read-only en édition (non éditable)
+            DateTimeField::new('createdAt', 'Date de réception')->onlyOnIndex(), 
             BooleanField::new('treated', 'Traité')  // Le champ booléen modifiable
-                ->renderAsSwitch(false),  // Affiche comme toggle pour facilité
-            DateTimeField::new('createdAt', 'Date de réception')->onlyOnIndex(),  // Exemple pour autres champs read-only
+                ->renderAsSwitch(false),
         ];
     }
 }

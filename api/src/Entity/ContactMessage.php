@@ -30,32 +30,38 @@ use Symfony\Component\Serializer\Attribute\Groups;
 )]
 class ContactMessage
 {
+    // id
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    // nom
     #[ORM\Column(length: 100)]
     #[Groups(['contact_message:write', 'contact_message:read'])]
     #[Assert\NotBlank]
     private ?string $nom = null;
 
+    // prenom
     #[ORM\Column(length: 100)]
     #[Groups(['contact_message:write', 'contact_message:read'])]
     #[Assert\NotBlank]
     private ?string $prenom = null;
 
+    // email
     #[ORM\Column(length: 255)]
     #[Groups(['contact_message:write', 'contact_message:read'])]
     #[Assert\NotBlank]
     #[Assert\Email]
     private ?string $email = null;
 
+    // message
     #[ORM\Column(type: 'text')]
     #[Groups(['contact_message:write', 'contact_message:read'])]
     #[Assert\NotBlank]
     private ?string $message = null;
 
+    // createdAt
     #[ORM\Column]
     #[Groups(['contact_message:read'])]
     private ?\DateTimeImmutable $createdAt = null;
