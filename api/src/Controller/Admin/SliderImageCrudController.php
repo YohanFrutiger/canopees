@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\SliderImage;
+
 use Doctrine\ORM\EntityManagerInterface;
+
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
@@ -24,8 +26,8 @@ class SliderImageCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Images du slider') // Remplace par ton titre personnalisé
-            ->setPageTitle('edit', 'Modifier une image du slider'); // Remplace par ton titre personnalisé
+            ->setPageTitle('index', 'Images du slider') 
+            ->setPageTitle('edit', 'Modifier une image du slider'); 
     }
 
     public function configureActions(Actions $actions): Actions
@@ -36,14 +38,14 @@ class SliderImageCrudController extends AbstractCrudController
         return $actions
             // Pour le bouton "Add Category" sur la page liste (INDEX)
             ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
-                return $action->setLabel('Ajouter une image'); // Ton label personnalisé
+                return $action->setLabel('Ajouter une image');
             })
             // Pour les liens "Edit" sur la page edit
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
-                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+                return $action->setLabel('Enregistrer et continuer les modifications');
             })
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
-                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+                return $action->setLabel('Enregistrer');
             });
     }
 
@@ -53,14 +55,11 @@ class SliderImageCrudController extends AbstractCrudController
             return;
         }
 
-        // Récupère l'utilisateur connecté
         $currentUser = $this->getUser();
 
         if ($currentUser) {
             $entityInstance->setUser($currentUser);
         }
-
-        // Le createdAt est déjà géré par l'entité, pas besoin de le setter ici
 
         parent::persistEntity($entityManager, $entityInstance);
     }
@@ -76,8 +75,6 @@ class SliderImageCrudController extends AbstractCrudController
             $entityInstance->setUser($currentUser); // Met à jour avec l'utilisateur qui modifie
         }
 
-        // Le updatedAt est déjà géré par l'entité via PreUpdate
-
         parent::updateEntity($entityManager, $entityInstance);
     }
 
@@ -91,10 +88,10 @@ class SliderImageCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),          
             TextField::new('altDescription','Descrption alternative'),           
-            BooleanField::new('active','activé')->renderAsSwitch(false), // Affiche comme un toggle simple
+            BooleanField::new('active','activé')->renderAsSwitch(false), 
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
-            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
+            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),  
         ];
     }
 }

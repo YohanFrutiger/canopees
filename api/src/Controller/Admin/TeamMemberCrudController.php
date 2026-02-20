@@ -3,7 +3,9 @@
 namespace App\Controller\Admin;
 
 use App\Entity\TeamMember;
+
 use Doctrine\ORM\EntityManagerInterface;
+
 use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
@@ -24,8 +26,8 @@ class TeamMemberCrudController extends AbstractCrudController
      public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Liste des membres') // Remplace par ton titre personnalisé
-            ->setPageTitle('edit', 'Modifier un membre'); // Remplace par ton titre personnalisé
+            ->setPageTitle('index', 'Liste des membres') 
+            ->setPageTitle('edit', 'Modifier un membre'); 
     }   
 
     public function configureActions(Actions $actions): Actions
@@ -36,14 +38,14 @@ class TeamMemberCrudController extends AbstractCrudController
         return $actions
             // Pour le bouton "Add Category" sur la page liste (INDEX)
             ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
-                return $action->setLabel('Ajouter un membre'); // Ton label personnalisé
+                return $action->setLabel('Ajouter un membre'); 
             })
             // Pour les liens "Edit" sur la page edit
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
-                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+                return $action->setLabel('Enregistrer et continuer les modifications'); 
             })
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
-                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+                return $action->setLabel('Enregistrer'); 
             });
     }
 
@@ -60,8 +62,6 @@ class TeamMemberCrudController extends AbstractCrudController
             $entityInstance->setUser($currentUser);
         }
 
-        // Le createdAt est déjà géré par l'entité, pas besoin de le setter ici
-
         parent::persistEntity($entityManager, $entityInstance);
     }
 
@@ -75,8 +75,6 @@ class TeamMemberCrudController extends AbstractCrudController
         if ($currentUser) {
             $entityInstance->setUser($currentUser); // Met à jour avec l'utilisateur qui modifie
         }
-
-        // Le updatedAt est déjà géré par l'entité via PreUpdate
 
         parent::updateEntity($entityManager, $entityInstance);
     }
@@ -94,9 +92,7 @@ class TeamMemberCrudController extends AbstractCrudController
                 ->setRequired(false),
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
-            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
+            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),
         ];
     }
-
-
 }

@@ -16,9 +16,6 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
-use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
-
-use Symfony\Component\Security\Core\User\UserInterface;
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -58,16 +55,7 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Slider', 'fas fa-list', SliderImage::class);
         yield MenuItem::linkToCrud('Équipe', 'fas fa-list', TeamMember::class);
         yield MenuItem::linkToCrud('Contenu du site ', 'fas fa-list', ContentSection::class);
-        yield MenuItem::linkToCrud('Messages', 'fas fa-envelope', ContactMessage::class);
-        // yield MenuItem::linkToCrud('The Label', 'fas fa-list', EntityClass::class);
     }
-
-
-  
-
-
-
-
    
 }
  

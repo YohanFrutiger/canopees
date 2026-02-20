@@ -23,8 +23,8 @@ class ContentSectionCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Contenus du site') // Remplace par ton titre personnalisé
-            ->setPageTitle('edit', 'Modifier un contenu'); // Remplace par ton titre personnalisé
+            ->setPageTitle('index', 'Contenus du site') 
+            ->setPageTitle('edit', 'Modifier un contenu'); 
     }
 
     public function configureActions(Actions $actions): Actions
@@ -35,14 +35,14 @@ class ContentSectionCrudController extends AbstractCrudController
                 return $actions
             // Pour le bouton "Add Category" sur la page liste (INDEX)
             ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
-                return $action->setLabel('Ajouter un contenu'); // Ton label personnalisé
+                return $action->setLabel('Ajouter un contenu'); 
             })
             // Pour les liens "Edit" sur la page edit
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
-                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+                return $action->setLabel('Enregistrer et continuer les modifications'); 
             })
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
-                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+                return $action->setLabel('Enregistrer'); 
             });
     }
 
@@ -52,14 +52,11 @@ class ContentSectionCrudController extends AbstractCrudController
             return;
         }
 
-        // Récupère l'utilisateur connecté
         $currentUser = $this->getUser();
 
         if ($currentUser) {
             $entityInstance->setUser($currentUser);
         }
-
-        // Le createdAt est déjà géré par l'entité, pas besoin de le setter ici
 
         parent::persistEntity($entityManager, $entityInstance);
     }
@@ -75,8 +72,6 @@ class ContentSectionCrudController extends AbstractCrudController
             $entityInstance->setUser($currentUser); // Met à jour avec l'utilisateur qui modifie
         }
 
-        // Le updatedAt est déjà géré par l'entité via PreUpdate
-
         parent::updateEntity($entityManager, $entityInstance);
     }
 
@@ -89,7 +84,7 @@ class ContentSectionCrudController extends AbstractCrudController
             TextEditorField::new('content','Contenu'),
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
-            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
+            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(), 
         ];
     }
 }

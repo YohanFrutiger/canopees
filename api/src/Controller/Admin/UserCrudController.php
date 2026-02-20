@@ -47,8 +47,6 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-
-
     public function configureFields(string $pageName): iterable
     {
         $user = $this->getUser();
@@ -82,13 +80,8 @@ class UserCrudController extends AbstractCrudController
                         'second_options' => ['label' => 'Confirmer le mot de passe'],
                         'invalid_message' => 'Les mots de passe ne correspondent pas.',
                     ])
-
-
-
             ];
         }
-
-
 
         return $fields;
     }
@@ -110,7 +103,6 @@ class UserCrudController extends AbstractCrudController
 
         parent::updateEntity($entityManager, $entityInstance);
     }
-
 
     private function hashPassword(User $user): void
     {
@@ -188,8 +180,6 @@ class UserCrudController extends AbstractCrudController
             });
     }
 
-
-
     public function edit(AdminContext $context): Response|KeyValueStore
     {
         $user = $this->getUser();
@@ -229,10 +219,10 @@ class UserCrudController extends AbstractCrudController
             if (!$this->passwordHasher->isPasswordValid($user, $currentPassword)) {
                 $this->addFlash('danger', 'Mot de passe actuel incorrect.');
             } else {
-                // On injecte le nouveau mot de passe dans plainPassword
+                // Injecte le nouveau mot de passe dans plainPassword
                 $user->setPlainPassword($newPassword);
 
-                // On valide uniquement plainPassword
+                // Valide uniquement plainPassword
                 $errors = $this->validator->validate($user, null, ['create']);
 
                 if (count($errors) > 0) {

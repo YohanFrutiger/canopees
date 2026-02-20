@@ -25,8 +25,8 @@ class RealizationCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setPageTitle('index', 'Liste des réalisations') // Remplace par ton titre personnalisé
-            ->setPageTitle('edit', 'Modifier une réalisation'); // Remplace par ton titre personnalisé
+            ->setPageTitle('index', 'Liste des réalisations')
+            ->setPageTitle('edit', 'Modifier une réalisation');
     }
 
     public function configureActions(Actions $actions): Actions
@@ -37,14 +37,14 @@ class RealizationCrudController extends AbstractCrudController
         return $actions
             // Pour le bouton "Add Category" sur la page liste (INDEX)
             ->update(Crud::PAGE_INDEX, Action::NEW, function (Action $action) {
-                return $action->setLabel('Ajouter une réalisation'); // Ton label personnalisé
+                return $action->setLabel('Ajouter une réalisation');
             })
             // Pour les liens "Edit" sur la page edit
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_CONTINUE, function (Action $action) {
-                return $action->setLabel('Enregistrer et continuer les modifications'); // Ton label personnalisé
+                return $action->setLabel('Enregistrer et continuer les modifications');
             })
             ->update(Crud::PAGE_EDIT, Action::SAVE_AND_RETURN, function (Action $action) {
-                return $action->setLabel('Enregistrer'); // Ton label personnalisé
+                return $action->setLabel('Enregistrer');
             });
     }
 
@@ -61,12 +61,10 @@ class RealizationCrudController extends AbstractCrudController
             $entityInstance->setUser($currentUser);
         }
 
-        // Le createdAt est déjà géré par l'entité, pas besoin de le setter ici
-
         parent::persistEntity($entityManager, $entityInstance);
     }
 
-     // Nouvelle surcharge pour les mises à jour
+    // Nouvelle surcharge pour les mises à jour
     public function updateEntity(EntityManagerInterface $entityManager, $entityInstance): void
     {
         if (!$entityInstance instanceof Realization) {
@@ -78,12 +76,10 @@ class RealizationCrudController extends AbstractCrudController
             $entityInstance->setUser($currentUser); // Met à jour avec l'utilisateur qui modifie
         }
 
-        // Le updatedAt est déjà géré par l'entité via PreUpdate
-
         parent::updateEntity($entityManager, $entityInstance);
     }
 
-        public function configureFields(string $pageName): iterable
+    public function configureFields(string $pageName): iterable
     {
         return [
             IdField::new('id')->onlyOnIndex(),
@@ -91,7 +87,7 @@ class RealizationCrudController extends AbstractCrudController
             AssociationField::new('category', 'Categorie') // 'service' est la propriété, 'Catégorie' est le label
                 ->setRequired(true) // Obligatoire si needed
                 ->autocomplete(), // Active l'autocomplétion pour un select searchable si beaucoup de catégories
-            DateTimeField::new('realizedAt','Réalisé le'),
+            DateTimeField::new('realizedAt', 'Réalisé le'),
             ImageField::new('image', 'Image')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
@@ -102,6 +98,4 @@ class RealizationCrudController extends AbstractCrudController
             IdField::new('user.id', 'Drnier utilisateur')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
         ];
     }
-
-
 }
