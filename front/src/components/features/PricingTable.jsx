@@ -14,13 +14,13 @@ export default function PricingTable() {
 
   // Gestion loading/error
   if (categories.loading || services.loading) {
-    return <p className="text-center">Chargement des tarifs...</p>;
+    // return <p className="text-center">Chargement des tarifs...</p>;
   }
   if (categories.error || services.error) {
     return <p className="text-center text-red-500">Erreur lors de la récupération des données.</p>;
   }
   if (!categories.data?.member?.length) {
-    return <p className="text-center">Aucune catégorie disponible.</p>;
+    return <p className="text-center"></p>;
   }
 
   // Onglets dynamiques
@@ -50,7 +50,7 @@ export default function PricingTable() {
       <table className="w-full text-left">
         <thead>
           <tr className="border-b-2 border-violet/30">
-            <th className="py-6 text-2xl  font-bold text-violet">
+            <th className="py-6 text-2xl font-bold text-violet">
               {selectedCategory.title}
             </th>
             <th className="py-6 text-2xl font-semibold text-blue text-right">

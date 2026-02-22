@@ -51,7 +51,7 @@ function HeroSlider() {
   if (totalSlides === 0) {
     return (
       <div className="absolute top-16 left-0 w-full h-[400px] bg-black flex items-center justify-center">
-        <p className="text-white">Aucune image active dans le slider</p>
+        {/* <p className="text-white">Aucune image active dans le slider</p> */}
       </div>
     );
   }
