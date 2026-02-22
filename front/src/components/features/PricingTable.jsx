@@ -42,7 +42,7 @@ export default function PricingTable() {
 
   // Filtre services pour la catégorie sélectionnée (via méthode du hook)
   const selectedCategory = categories.data.member[selected];  // Catégorie actuelle
-  const servicesData = services.getServicesByCategory(selectedCategory.id);  // Filtre par ID (ajuste si IRI '/api/categories/1')
+  const servicesData = services.getServicesByCategory(selectedCategory.id);  // Filtre par ID 
 
   // Tableau des tarifs (si services pour cette catégorie, sinon message)
   const pricingTable = (
