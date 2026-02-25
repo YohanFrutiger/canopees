@@ -96,7 +96,12 @@ class RealizationCrudController extends AbstractCrudController
                 ->setRequired(false),
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
-            IdField::new('user.id', 'Drnier utilisateur')->onlyOnIndex(),  // Changement ici : 'user.id' au lieu de 'user_id'
+            AssociationField::new('user', 'Dernier utilisateur')
+            ->formatValue(function ($value, $entity) {
+                $user = $entity->getUser();
+                return $user ? $user->getFirstname() . ' ' . $user->getLastname() : 'N/A';
+            })
+            ->onlyOnIndex(),
         ];
     }
 }

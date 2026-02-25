@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class SliderImageCrudController extends AbstractCrudController
@@ -91,7 +92,12 @@ class SliderImageCrudController extends AbstractCrudController
             BooleanField::new('active','activé')->renderAsSwitch(false), 
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
-            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(),  
+            AssociationField::new('user', 'Dernier utilisateur')
+            ->formatValue(function ($value, $entity) {
+                $user = $entity->getUser();
+                return $user ? $user->getFirstname() . ' ' . $user->getLastname() : 'N/A';
+            })
+            ->onlyOnIndex(),  
         ];
     }
 }

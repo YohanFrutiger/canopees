@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 
 class ContentSectionCrudController extends AbstractCrudController
@@ -84,7 +85,12 @@ class ContentSectionCrudController extends AbstractCrudController
             TextEditorField::new('content','Contenu'),
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
-            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(), 
+            AssociationField::new('user', 'Dernier utilisateur')
+            ->formatValue(function ($value, $entity) {
+                $user = $entity->getUser();
+                return $user ? $user->getFirstname() . ' ' . $user->getLastname() : 'N/A';
+            })
+            ->onlyOnIndex(), 
         ];
     }
 }

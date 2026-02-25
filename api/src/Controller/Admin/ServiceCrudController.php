@@ -91,7 +91,12 @@ class ServiceCrudController extends AbstractCrudController
             TextField::new('price', 'prix'),
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
             DateTimeField::new('updatedAt', 'Mis à jour le')->onlyOnIndex(),
-            IdField::new('user.id', 'Dernier utilisateur')->onlyOnIndex(), 
+            AssociationField::new('user', 'Dernier utilisateur')
+            ->formatValue(function ($value, $entity) {
+                $user = $entity->getUser();
+                return $user ? $user->getFirstname() . ' ' . $user->getLastname() : 'N/A';
+            })
+            ->onlyOnIndex(),
         ];
     }
 }
