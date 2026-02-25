@@ -7,7 +7,8 @@ export const useCategories = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null }); 
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/categories')
+    // fetch('http://127.0.0.1:8000/api/categories')
+    fetch('https://yohanfrutiger.alwaysdata.net/api/categories') // à remplacer par VITE_API_URL=https://yohanfrutiger.alwaysdata.net/api
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement des catégories');
         return res.json();

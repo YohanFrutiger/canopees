@@ -16,7 +16,7 @@ export default function PrestationCard({ cat }) {
         className="w-full h-60 overflow-hidden relative cursor-pointer hover:brightness-125 hover:scale-105 transition-all duration-300"
         onClick={() => setIsModalOpen(true)}>
         <img
-          src={`http://127.0.0.1:8000/uploads/${cat.image}`}
+          src={`https://yohanfrutiger.alwaysdata.net/uploads/${cat.image}`}
           alt={cat.title}
           className="w-full h-full object-cover object-center"
         />

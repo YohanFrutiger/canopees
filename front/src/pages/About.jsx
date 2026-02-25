@@ -60,7 +60,7 @@ export default function About() {
           <section key={index} className="team-member mt-4">
             <div className="flex flex-col items-center md:flex-row">
               <img
-                src={`http://127.0.0.1:8000/uploads/${item.image}`}
+                src={`https://yohanfrutiger.alwaysdata.net/uploads/${item.image}`}
                 alt={`${item.firstname} ${item.lastname}`}
                 className="max-w-[170px] rounded-full shadow-2xl object-cover"
               />

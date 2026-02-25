@@ -7,7 +7,8 @@ export const useContentSections = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null });
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/content_sections')
+    // fetch('http://127.0.0.1:8000/api/content_sections')
+    fetch('https://yohanfrutiger.alwaysdata.net/api/content_sections')
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement du contenu');
         return res.json();

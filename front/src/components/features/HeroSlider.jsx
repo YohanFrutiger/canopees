@@ -14,7 +14,7 @@ function HeroSlider() {
     ?.filter(item => item.active === true)         
     ?.map(item => ({
       id: item.id,
-      image: `http://127.0.0.1:8000/uploads/${item.image}`, 
+      image: `https://yohanfrutiger.alwaysdata.net/uploads/${item.image}`, 
       alt: item.alt || `Photo slider ${item.id}`,
     })) || [];
 

@@ -20,7 +20,7 @@ export default function Carrousel() {
     // Limite aux 6 plus récentes (ou moins si <6)
     const limited = sorted.slice(0, 6);
     // Extrait les URLs d'images 
-    images = limited.map(item => `http://127.0.0.1:8000/uploads/${item.image}`); 
+    images = limited.map(item => `https://yohanfrutiger.alwaysdata.net/uploads/${item.image}`); 
   }
 
   // Passe à l'image précédente (revient à la fin si on est au début)

@@ -11,7 +11,7 @@ import LegalNotices from "./pages/LegalNotices";
 
 function App() {
   return (
-    <BrowserRouter basename="/canopees">  
+    <BrowserRouter basename="/canopees-frontend">  
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow mt-[32px]  mx-auto max-w-6xl px-6 w-full">

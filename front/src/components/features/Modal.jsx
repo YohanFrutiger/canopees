@@ -28,7 +28,7 @@ export default function Modal({ isOpen, onClose, cat }) {
             </p>
             <img
               key={real.id}
-              src={`http://127.0.0.1:8000/uploads/${real.image}`}
+              src={`https://yohanfrutiger.alwaysdata.net/uploads/${real.image}`}
               alt={real.alt}
               className="w-full h-80 object-cover rounded-xl"
             />

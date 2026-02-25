@@ -7,7 +7,8 @@ export const useRealizations = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null });
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/realizations')
+    // fetch('http://127.0.0.1:8000/api/realizations')
+    fetch('https://yohanfrutiger.alwaysdata.net/api/realizations')
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement des prestations');
         return res.json();

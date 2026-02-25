@@ -30,8 +30,8 @@ export default function PricingTable() {
         <button
           key={cat.id}
           onClick={() => setSelected(index)}
-          className={`  px-4 border-r border-violet   transition-all w-full  ${
-            selected === index ? "text-xl text-violet font-extrabold " : "text-lg text-violet/90 hover:scale-105 hover:text-violet/80 "
+          className={`  px-4 transition-all w-full  ${
+            selected === index ? "text-xl text-green font-extrabold " : " text-gray-900 text-lg font-light hover:scale-105 hover:text-green/80 "
           }`}
         >
           {cat.title}
@@ -50,7 +50,7 @@ export default function PricingTable() {
       <table className="w-full text-left">
         <thead>
           <tr className="border-b-2 border-violet/30">
-            <th className="py-6 text-2xl font-bold text-violet">
+            <th className="py-6 text-2xl text-gray-900 font-bold">
               {selectedCategory.title}
             </th>
             <th className="py-6 text-2xl font-semibold text-blue text-right">

@@ -7,7 +7,8 @@ export const useServices = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null });
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/services')
+    // fetch('http://127.0.0.1:8000/api/services')
+    fetch('https://yohanfrutiger.alwaysdata.net/api/services')
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement des services');
         return res.json();

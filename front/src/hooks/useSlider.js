@@ -7,7 +7,8 @@ export const useSlider = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null });
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/slider_images')
+    // fetch('http://127.0.0.1:8000/api/slider_images')
+    fetch('https://yohanfrutiger.alwaysdata.net/api/slider_images')
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement des images du slider');
         return res.json();

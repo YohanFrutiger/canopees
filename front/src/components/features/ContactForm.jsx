@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 
-const API_URL = "http://127.0.0.1:8000/api/contact_messages";
+const API_URL = "https://yohanfrutiger.alwaysdata.net/api/contact_messages";
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
