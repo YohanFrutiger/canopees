@@ -88,6 +88,12 @@
             "./bin/phpunit"
         ]
     },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "version": "1.0"
+        }
+    },
     "symfony/asset-mapper": {
         "version": "7.4",
         "recipe": {
