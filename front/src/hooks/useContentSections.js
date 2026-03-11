@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 
 export const useContentSections = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null });
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    // fetch('http://127.0.0.1:8000/api/content_sections')
-    fetch('https://yohanfrutiger.alwaysdata.net/api/content_sections')
+    fetch(`${API_URL}/content_sections`)
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement du contenu');
         return res.json();

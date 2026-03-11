@@ -46,7 +46,7 @@ export default function PricingTable() {
 
   // Tableau des tarifs (si services pour cette catégorie, sinon message)
   const pricingTable = (
-    <div className=" p-4 md:p-8 max-w-2xl w-[6500px]">
+    <div className=" p-4 md:p-8 max-w-2xl border-gray-900 rounded-xl">
       <table className="w-full text-left">
         <thead>
           <tr className="border-b-2 border-violet/30">

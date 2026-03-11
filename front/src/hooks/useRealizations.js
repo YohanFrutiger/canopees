@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 
 export const useRealizations = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null });
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    // fetch('http://127.0.0.1:8000/api/realizations')
-    fetch('https://yohanfrutiger.alwaysdata.net/api/realizations')
+    fetch(`${API_URL}/realizations`)
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement des prestations');
         return res.json();

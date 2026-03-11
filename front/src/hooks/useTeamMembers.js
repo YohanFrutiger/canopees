@@ -5,10 +5,10 @@ import { useState, useEffect } from 'react';
 
 export const useTeamMembers = () => {
   const [state, setState] = useState({ loading: true, error: null, data: null });
+  const API_URL = import.meta.env.VITE_API_URL;
 
   useEffect(() => {
-    // fetch('http://127.0.0.1:8000/api/team_members')
-    fetch('https://yohanfrutiger.alwaysdata.net/api/team_members')
+    fetch(`${API_URL}/team_members`)
       .then(res => {
         if (!res.ok) throw new Error('Erreur lors du chargement des membres');
         return res.json();
