@@ -11,10 +11,10 @@ function HeroSlider() {
 
   // Filtrage des images actives uniquement
   const activeSlides = slider.data?.member
-    ?.filter(item => item.active === true)         
+    ?.filter(item => item.active === true)
     ?.map(item => ({
       id: item.id,
-      image: `https://yohanfrutiger.alwaysdata.net/uploads/${item.image}`, 
+      image: `https://yohanfrutiger.alwaysdata.net/uploads/${item.image}`,
       alt: item.alt || `Photo slider ${item.id}`,
     })) || [];
 
@@ -79,22 +79,28 @@ function HeroSlider() {
         <ContactButton btnContent="Votre devis en 48h !" />
       </div>
 
+
       {/* Flèche gauche */}
       <button
-        onClick={prevSlide}
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full transition z-10"
-        aria-label="Précédent"
+        onClick={nextSlide}
+        className="absolute left-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full transition z-20"
+        aria-label="Suivant"
       >
-        ‹
+        <div className="relative bottom-1">
+          ‹
+        </div>
       </button>
 
       {/* Flèche droite */}
       <button
         onClick={nextSlide}
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full transition z-10"
+        className="absolute right-4 top-1/2 -translate-y-1/2 w-12 h-12 bg-white/20 hover:bg-white/40 backdrop-blur-sm text-white text-4xl font-thin rounded-full transition z-20"
         aria-label="Suivant"
       >
-        ›
+        <div className="relative bottom-1">
+          ›
+        </div>
+
       </button>
 
       {/* Dots (indicateurs) */}
@@ -103,11 +109,10 @@ function HeroSlider() {
           <button
             key={index}
             onClick={() => goToSlide(index)}
-            className={`transition-all duration-300 rounded-full ${
-              index === currentIndex
+            className={`transition-all duration-300 rounded-full ${index === currentIndex
                 ? 'bg-white w-10 h-3'
                 : 'bg-white/60 hover:bg-white/90 w-3 h-3'
-            }`}
+              }`}
             aria-label={`Slide ${index + 1}`}
           />
         ))}
