@@ -25,13 +25,13 @@ export default function PricingTable() {
 
   // Onglets dynamiques
   const categoriesTabs = (
-    <div className="flex">
+    <div className="flex bg-gray-200">
       {categories.data.member.map((cat, index) => (
         <button
           key={cat.id}
           onClick={() => setSelected(index)}
-          className={`  px-4 transition-all w-full  ${
-            selected === index ? "text-xl text-green font-extrabold " : " text-gray-900 text-lg font-light hover:scale-105 hover:text-green/80 "
+          className={`  px-4 transition-all w-full border-white border-r ${
+            selected === index ? "text-xl bg-gray-600 text-white font-extrabold " : "font-light hover:scale-105 hover:text-gray-500 "
           }`}
         >
           {cat.title}
@@ -46,24 +46,14 @@ export default function PricingTable() {
 
   // Tableau des tarifs (si services pour cette catégorie, sinon message)
   const pricingTable = (
-    <div className=" p-4 md:p-8 max-w-2xl border-gray-900 rounded-xl">
-      <table className="w-full text-left">
-        <thead>
-          <tr className="border-b-2 border-violet/30">
-            <th className="py-6 text-2xl text-gray-900 font-bold">
-              {selectedCategory.title}
-            </th>
-            <th className="py-6 text-2xl font-semibold text-blue text-right">
-              Tarif H.T.
-            </th>
-          </tr>
-        </thead>
+    <div className="l">
+      <table className="w-[450px]">
         <tbody>
           {servicesData.length > 0 ? (
             servicesData.map((service) => (
-              <tr key={service.id} className="border-b border-violet/30">
-                <td className="py-5 text-gray-900">{service.title}</td>  
-                <td className="py-5 text-right font-bold text-blue">
+              <tr key={service.id} >
+                <td className="py-2 text-left">{service.title}</td>  
+                <td className="py-2 text-right font-bold">
                   {service.price}  
                 </td>
               </tr>
@@ -77,14 +67,14 @@ export default function PricingTable() {
           )}
         </tbody>
       </table>
-      <p className="mt-8 text-center text-sm text-gray-600 font-light">
+      <p className="mt-8 text-center text-sm text-whitefont-light">
         {selectedCategory.info ? parse(selectedCategory.info) : "Aucune information disponible pour cette catégorie."}
       </p>
     </div>
   );
 
   return (
-    <div className="flex flex-wrap justify-center mt-12 lg:gap-8 lmd:gap-32 gap-4 ">
+    <div className="flex flex-wrap justify-center mt-12 lg:gap-8 md:gap-32 gap-4">
       {categoriesTabs}
       {pricingTable}
     </div>

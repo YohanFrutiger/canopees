@@ -28,7 +28,6 @@ export default function Tarifs() {
   return (
     <div className="text-center min-h-screen">
       {pricesIntroContent}      
-      <Line />
       <PricingTable />
       <ContactButton
         btnContent="Demandez un devis gratuit !"
