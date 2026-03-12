@@ -7,7 +7,7 @@ import parse from "html-react-parser";
 
 export default function PrestationCard({ cat }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL || ''; // ← fallback vide
   return (
     <div className="flex flex-col border rounded rounded-t-md shadow-xl w-[355px] xs:min-w-[200px] overflow-hidden mb-4 text-center">
 
@@ -16,7 +16,7 @@ export default function PrestationCard({ cat }) {
         className="w-full h-60 overflow-hidden relative cursor-pointer hover:brightness-125 hover:scale-105 transition-all duration-300"
         onClick={() => setIsModalOpen(true)}>
         <img
-          src={`https://yohanfrutiger.alwaysdata.net/uploads/${cat.image}`}
+          src={`${UPLOADS_URL}/${cat.image}`}
           alt={cat.title}
           className="w-full h-full object-cover object-center"
         />

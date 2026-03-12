@@ -6,6 +6,7 @@ import parse from "html-react-parser";
 
 export default function Modal({ isOpen, onClose, cat }) {
   if (!isOpen) return null;
+  const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL || ''; // ← fallback vide
   const realizations = useRealizations();  // Toutes les réalisations 
   const filteredRealizations = realizations.getRealizationsByCategory(cat.id);  // Filtre par ID
 
@@ -28,7 +29,7 @@ export default function Modal({ isOpen, onClose, cat }) {
             </p>
             <img
               key={real.id}
-              src={`https://yohanfrutiger.alwaysdata.net/uploads/${real.image}`}
+              src={`${UPLOADS_URL}/${real.image}`}
               alt={real.alt}
               className="w-full h-80 object-cover rounded-xl"
             />
