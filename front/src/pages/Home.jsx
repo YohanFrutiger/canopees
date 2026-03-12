@@ -133,22 +133,28 @@ export default function Home() {
 
       {targetCardSectionTitle}
 
-      <div className="gap-4 grid grid-cols-1 md:grid-cols-3  mb-12">
-        <TargetAudienceCard
-          icon="🏡"
-          title={targetAudienceCard_individualTitle}
-          text={targetAudienceCard_individualContent}
-        />
-        <TargetAudienceCard
-          icon="🏢"
-          title={targetAudienceCard_societyTitle}
-          text={targetAudienceCard_societyContent}
-        />
-        <TargetAudienceCard
-          icon="🏛️"
-          title={targetAudienceCard_communityTitle}
-          text={targetAudienceCard_communityContent}
-        />
+      <div className="gap-4 grid grid-cols-1 md:grid-cols-3  mb-12 mt-8">
+        <div className='-rotate-3'>
+          <TargetAudienceCard
+            icon="🏡"
+            title={targetAudienceCard_individualTitle}
+            text={targetAudienceCard_individualContent}
+          />
+        </div>
+        <div className='-translate-y-3'>
+          <TargetAudienceCard
+            icon="🏢"
+            title={targetAudienceCard_societyTitle}
+            text={targetAudienceCard_societyContent}
+          />
+        </div>
+        <div className='rotate-3'>
+          <TargetAudienceCard
+            icon="🏛️"
+            title={targetAudienceCard_communityTitle}
+            text={targetAudienceCard_communityContent}
+          />
+        </div>
       </div>
 
       {carrouselTitle}
