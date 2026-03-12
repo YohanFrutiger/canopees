@@ -23,15 +23,15 @@ export default function Prices() {
   const categories = useCategories();
   const services = useServices();
 
-  // Intro (inchangé)
+  // Intro 
   let pricesIntroContent;
   if (content.loading) {
-    pricesIntroContent = <p className="text-center mt-16">Chargement des tarifs...</p>;
+    pricesIntroContent = <p className="text-center ">Chargement des tarifs...</p>;
   } else if (content.error) {
-    pricesIntroContent = <p className="text-center mt-16 text-red-500">Erreur lors du chargement.</p>;
+    pricesIntroContent = <p className="text-center  text-red-500">Erreur lors du chargement.</p>;
   } else if (pricesPageIntroSection) {
     pricesIntroContent = (
-      <section className="text-center mt-16">
+      <section className="text-center ">
         <p className="prose mx-auto">{parse(pricesPageIntroSection.content)}</p>
       </section>
     );
@@ -39,25 +39,26 @@ export default function Prices() {
 
   return (
     <div className="min-h-screen">
+     <h3 className='mt-16'>Découvrez nos tarifs</h3>
       {pricesIntroContent}
 
       {/* CARROUSEL AVEC EFFET CIRCULAIRE */}
-      <div className="py-12 px-6 relative">
+      <div className="pt-6 px-6 relative">
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
           effect="coverflow"
           centeredSlides={true}
-          slidesPerView={2}
-          spaceBetween={5}
+          slidesPerView={3}
+          spaceBetween={0}
           loop={true}
           navigation
-          pagination={{ clickable: true }}
+          // pagination={{ clickable: true }}
           // scrollbar={{ draggable: true }}
           coverflowEffect={{
-            rotate: 10,
+            rotate: -15,
             stretch: 0,
-            depth: 225,
-            modifier: 1.8,
+            depth:525,
+            modifier: 0.9,
             slideShadows: false,
           }}
           breakpoints={{
