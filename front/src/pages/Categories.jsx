@@ -21,7 +21,7 @@ export default function Categories() {
     PrestationsIntroContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
   } else if (categoriesPageIntroSection) {
     PrestationsIntroContent = (
-      <section className="text-center mt-16">
+      <section className="text-center">
         <p className="prose mx-auto">{parse(categoriesPageIntroSection.content)}</p>
       </section>
     );
@@ -52,9 +52,10 @@ export default function Categories() {
 
   return (
     <>
+    <h3 className='mt-16'>Nos prestations</h3>
       {PrestationsIntroContent}
 
-      <div className="mt-4">
+      <div className="">
         {PrestationsContent}
       </div>
 
