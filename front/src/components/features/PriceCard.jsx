@@ -3,10 +3,10 @@ import parse from "html-react-parser";
 
 export default function PriceCard({ cat, services }) {
   return (
-    <div className="w-full max-w-[320px] mx-auto h-[450px] flex flex-col rounded-lg bg-violet/10 shadow-md border border-violet/70 hover:shadow-lg transition-shadow duration-300 overflow-hidden">
+    <div className="w-full max-w-[320px] mx-auto h-[465px] flex flex-col rounded-lg shadow-md border border-violet/50 hover:shadow-lg transition-shadow duration-300 overflow-hidden">
       
       {/* Titre violet */}
-      <h2 className="text-base font-semibold text-center mb-4 bg-violet/90 text-white p-3">
+      <h2 className="text-base font-semibold text-center mb-4 bg-violet/90 text-white p-3 mt-6">
         {cat.title}
       </h2>
 
