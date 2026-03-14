@@ -134,21 +134,21 @@ export default function Home() {
       {targetCardSectionTitle}
 
       <div className="gap-4 grid grid-cols-1 md:grid-cols-3  mb-12 mt-8">
-        <div className='-rotate-3'>
+        <div>
           <TargetAudienceCard
             icon="🏡"
             title={targetAudienceCard_individualTitle}
             text={targetAudienceCard_individualContent}
           />
         </div>
-        <div className='-translate-y-3'>
+        <div className>
           <TargetAudienceCard
             icon="🏢"
             title={targetAudienceCard_societyTitle}
             text={targetAudienceCard_societyContent}
           />
         </div>
-        <div className='rotate-3'>
+        <div>
           <TargetAudienceCard
             icon="🏛️"
             title={targetAudienceCard_communityTitle}
