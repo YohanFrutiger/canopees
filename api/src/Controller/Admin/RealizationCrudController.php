@@ -91,7 +91,7 @@ class RealizationCrudController extends AbstractCrudController
             ImageField::new('image', 'Image')
                 ->setBasePath('uploads/')
                 // ->setUploadDir('public/uploads') // dev
-                ->setUploadDir('uploads')  //prod
+                ->setUploadDir('public/uploads')  //prod
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),
             DateTimeField::new('createdAt', 'Crée le')->onlyOnIndex(),
