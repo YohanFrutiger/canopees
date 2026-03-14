@@ -42,13 +42,13 @@ export default function Carrousel() {
   }
 
   return (
-    <div className="pt-6 px-6 mx-auto">
+    <div>
       <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
-        effect="coverflow"
-        centeredSlides={true}          
-        slidesPerView={3}              
-        spaceBetween={150}
+        // effect="cube"
+        centeredSlides={true}
+        slidesPerView={3}
+        spaceBetween={0} 
         loop={true}
         navigation
         pagination={{ clickable: true }}
@@ -60,24 +60,25 @@ export default function Carrousel() {
           slideShadows: false,
         }}
         breakpoints={{
-          320: { slidesPerView: 1 },     // mobile : 1 seule image centrée
+          320: { slidesPerView: 1 },
           640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },    // desktop : 3 images avec centre mis en avant
+          1024: { slidesPerView: 3 },
         }}
         className="mySwiper"
       >
         {slides.map((slide, index) => (
-          <SwiperSlide key={index} className="flex justify-center">
-            <div className="w-72 h-72 md:w-96 md:h-80 overflow-hidden">
+          <SwiperSlide key={index} className="mx-12">
+            <div className="w-72 h-72 md:w-[450px] md:h-80">
               <img
                 src={slide.image}
                 alt={slide.title}
-                className="w-full h-full object-cover rounded-lg  transition-all duration-500"
+                className="w-full h-full object-cover rounded-lg transition-all duration-500"
               />
             </div>
           </SwiperSlide>
-        ))}
-      </Swiper>
-    </div>
+        ))
+        }
+      </Swiper >
+    </div >
   );
 }
