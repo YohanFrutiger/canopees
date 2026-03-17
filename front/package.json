@@ -3,9 +3,9 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://yohanfrutiger.github.io/canopees-frontend/",
+  "homepage": "https://yohanfrutiger.github.io/canopees/",
   "scripts": {
-    "predeploy": "npm run build && cp dist/index.html dist/404.html",
+    "predeploy": "npm run build && copy dist\\index.html dist\\404.html",
     "deploy": "gh-pages -d dist",
     "start": "vite",
     "build": "vite build",
