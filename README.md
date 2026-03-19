@@ -1,14 +1,13 @@
-#🌿 Application **Canopées**, entreprise spécialisée dans la conception et l’entretien d’espaces verts.
+🌿 Canopées
+Application web (site vitrine + API) pour une entreprise spécialisée dans la conception et l’entretien d’espaces verts.
 
-Frontend :
-https://canopees.vercel.app/
+🔗 Accès
+Frontend : https://canopees.vercel.app/
+Backend API : https://yohanfrutiger.alwaysdata.net
 
-Backend API :
-https://yohanfrutiger.alwaysdata.net
+🔑 Démo (backend)
+Email : admin@canopees.fr
+Mot de passe : admin123
 
-Compte de démonstration :
-
-email : admin@canopees.fr  
-mot de passe : admin123
-
-Ce projet a été réalisé dans le cadre d’une mise en situation professionnelle durant la formation Développeur Web et Web Mobile.
+🎓 Contexte
+Projet réalisé dans le cadre d’une mise en situation professionnelle (formation Développeur Web et Web Mobile).
