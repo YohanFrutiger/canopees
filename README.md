@@ -8,7 +8,7 @@ Backend API : https://yohanfrutiger.alwaysdata.net
 
 🔑 Démo (backend)
 
-Email : 'admin@canopees.fr'
+Email : `admin@canopees.fr`
 
 Mot de passe : admin123
 
