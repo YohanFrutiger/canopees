@@ -1,4 +1,4 @@
-# 🌿 Application **Canopees**, entreprise spécialisée dans la conception et l’entretien d’espaces verts.
+🌿 Application **Canopées**, entreprise spécialisée dans la conception et l’entretien d’espaces verts.
 
 Frontend :
 https://canopees.vercel.app/
