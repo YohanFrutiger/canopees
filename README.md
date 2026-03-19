@@ -13,4 +13,5 @@ Email : admin@canopees.fr
 Mot de passe : admin123
 
 🎓 Contexte
+
 Projet réalisé dans le cadre d’une mise en situation professionnelle (formation Développeur Web et Web Mobile).
