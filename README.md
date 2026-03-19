@@ -1,5 +1,4 @@
-🌿 Canopées
-Application web (site vitrine + API) pour une entreprise spécialisée dans la conception et l’entretien d’espaces verts.
+**🌿 Canopées - Application web (site vitrine + API) pour une entreprise spécialisée dans la conception et l’entretien d’espaces verts**
 
 🔗 Accès
 Frontend : https://canopees.vercel.app/
