@@ -85,7 +85,8 @@ class TeamMemberCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('firstName','Nom'),                   
-            TextField::new('lastName','Prénom'),                                  
+            TextField::new('lastName','Prénom'),
+            TextEditorField::new('biography','Biographie'),                                  
             ImageField::new('image', 'Image')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads')
