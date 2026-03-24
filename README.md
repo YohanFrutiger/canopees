@@ -4,7 +4,7 @@
 
 Frontend : https://canopees.vercel.app/
 
-Backend API : https://yohanfrutiger.alwaysdata.net
+Backend API : https://yohanfrutiger.alwaysdata.net/login
 
 🔑 Accès backend :
 
