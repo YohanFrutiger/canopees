@@ -1,12 +1,12 @@
 **🌿 Canopées - Application web (site vitrine + API) pour entreprise spécialisée dans la conception et l’entretien d’espaces verts**
 
-🔗 Liens
+🔗 Liens :
 
 Frontend : https://canopees.vercel.app/
 
 Backend API : https://yohanfrutiger.alwaysdata.net
 
-🔑 Accès backend
+🔑 Accès backend :
 
 Email : `admin@canopees.fr`
 
