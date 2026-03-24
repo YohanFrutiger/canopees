@@ -57,57 +57,11 @@ Le back-office est sécurisé grâce à un système d’authentification permett
 
 ---
 
-# ⚙ Installation du projet
-
-Clone du repository :
-
-```bash
-git clone https://github.com/yohanfrutiger/canopees-backend.git
-```
-
-Installation des dépendances :
-
-```bash
-composer install
-```
-
-Configuration du fichier `.env` :
-
-```
-DATABASE_URL="mysql://user:password@127.0.0.1:3306/canopees"
-```
-
-Création de la base de données :
-
-```bash
-php bin/console doctrine:database:create
-```
-
-Migration de la base :
-
-```bash
-php bin/console doctrine:migrations:migrate
-```
-
-Lancer le serveur :
-
-```bash
-symfony server:start
-```
-
-L’API sera accessible sur :
-
-```
-http://localhost:8000
-```
-
----
-
 # 🔗 Frontend
 
 Le frontend du projet est disponible ici :
 
-https://github.com/yohanfrutiger/canopees-frontend
+https://canopees.vercel.app/
 
 ---
 
