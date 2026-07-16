@@ -2,7 +2,6 @@
 // Page d'accueil du site
 import { useContentSections } from '../hooks/useContentSections';
 import HeroSlider from "../components/features/HeroSlider";
-import Line from "../components/layout/Line";
 import TargetAudienceCard from "../components/features/TargetAudienceCard";
 import Carrousel from "../components/features/Carrousel";
 import parse from "html-react-parser";
@@ -43,7 +42,7 @@ export default function Home() {
     targetCardSectionTitle = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
   } else if (targetCardSection) {
     targetCardSectionTitle = (
-      <h2 className="mx-auto">{parse(targetCardSection.title)}</h2>
+      <h1 className="mx-auto">{parse(targetCardSection.title)}</h1>
     );
   } else {
     targetCardSectionTitle = <p>Aucune section "target-card" trouvée.</p>;
@@ -57,7 +56,7 @@ export default function Home() {
     carrouselTitle = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
   } else if (carrouselSection) {
     carrouselTitle = (
-      <h2 className="text-center mt-16">{parse(carrouselSection.title)}</h2>
+      <h1 className="text-center mt-16">{parse(carrouselSection.title)}</h1>
     );
   } else {
     carrouselTitle = <p>Aucune section "carrousel" trouvée.</p>;

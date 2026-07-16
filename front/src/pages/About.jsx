@@ -8,7 +8,7 @@ import parse from "html-react-parser";
 export default function About() {
   const contentSections = useContentSections();
   const teamMembers = useTeamMembers();
-  const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL || ''; // ← fallback vide
+  const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL || ''; //  fallback vide
   
   // Filtre les sections spécifiques (rapide, en mémoire)
   const introSection = contentSections.getSectionByKey('about-us-introducing');
@@ -25,7 +25,7 @@ export default function About() {
   } else if (ourValuesSection) {
     ourValuesContent = (
       <section>
-        <h3>{ourValuesSection.title}</h3>
+        <h1>{ourValuesSection.title}</h1>
         <p className="prose mx-auto">{parse(ourValuesSection.content)}</p>
       </section>
     );
@@ -42,7 +42,7 @@ export default function About() {
     teamTitleContent = <p>Erreur : Une erreur est survenue lors de la récupération des données.</p>;
   } else if (teamSectionTitle) {
     teamTitleContent = (
-      <h3 className="">{teamSectionTitle.title}</h3>
+      <h1 className="">{teamSectionTitle.title}</h1>
     );
   } else {
     teamTitleContent = <p>Aucune section "team-section-title" trouvée.</p>;

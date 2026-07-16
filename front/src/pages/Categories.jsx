@@ -52,7 +52,7 @@ export default function Categories() {
 
   return (
     <>
-    <h3 className='mt-16'>Nos prestations</h3>
+    <h1 className='mt-16'>Nos prestations</h1>
       {PrestationsIntroContent}
 
       <div className="">

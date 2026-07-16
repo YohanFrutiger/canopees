@@ -39,7 +39,7 @@ export default function Prices() {
 
   return (
     <div className="min-h-screen">
-     <h3 className='mt-16'>Découvrez nos tarifs</h3>
+     <h1 className='mt-16'>Découvrez nos tarifs</h1>
       {pricesIntroContent}
 
       {/* CARROUSEL AVEC EFFET CIRCULAIRE */}
