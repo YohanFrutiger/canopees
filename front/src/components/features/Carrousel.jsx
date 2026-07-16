@@ -12,7 +12,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import 'swiper/css/effect-coverflow';   // ← IMPORTANT pour l'effet circulaire
+import 'swiper/css/effect-coverflow';   
 
 export default function Carrousel() {
   const UPLOADS_URL = import.meta.env.VITE_UPLOADS_URL || '';
