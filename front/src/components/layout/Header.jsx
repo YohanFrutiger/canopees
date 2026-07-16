@@ -16,28 +16,28 @@ export default function Header() {
 
   return (
     <>
-      <header className="h-16 bg-green/90 text-white shadow-lg fixed top-0 left-0 right-0 z-50">
+      <header className="h-16 bg-green shadow-lg fixed top-0 left-0 right-0 z-50">
         <div className="h-full max-w-7xl mx-auto flex items-center justify-between">
           {/* Logo + bande verte */}
           <div className="flex items-center">
-            <div className="w-6 md:block" />
+            <div className="w-12 md:block" />
               <NavLink to="/">
                 <img
                   src={logo}
                   alt="Canopées - Entreprise de paysagisme"
-                  className="bg-white h-16 px-5 w-auto max-w-[120px] lg:max-w-[200px] object-contain"
+                  className=" bg-white h-16  p-4  max-w-[120px] lg:max-w-[200px] object-contain"
                 />
               </NavLink>
           </div>
 
           {/* Navigation desktop */}
-          <nav className="hidden md:flex items-center justify-center flex-1 md:gap-4 lg:gap-10 ">
+          <nav className="hidden md:flex items-center justify-center flex-1 md:gap-6 md:text-lg lg:gap-14 ">
             {navItems.map((item) => (
               <NavLink
                 key={item.to}
                 to={item.to}
                 className={({ isActive }) =>
-                  ` font-rosario text-xl font-medium transition-colors hover:text-orange ${isActive ? "text-orange" : "text-white"}`
+                  ` font-rosario  font-extrabold transition-all ${isActive ? "lg:text-2xl text-orange" : "lg:text-xl text-white hover:scale-105"}`
                 }
               >
                 {item.label}
@@ -53,7 +53,7 @@ export default function Header() {
             aria-expanded={isOpen}
             aria-controls="mobile-menu"
             aria-label="Ouvrir le menu de navigation"
-            className="md:hidden text-4xl p-2 m-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-green-700 rounded"
+            className="md:hidden text-4xl p-2 m-2 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-orange-300 focus-visible:ring-offset-2 focus-visible:ring-offset-green-700 rounded text-white"
           >
             {isOpen ? "" : "☰"}
           </button>
