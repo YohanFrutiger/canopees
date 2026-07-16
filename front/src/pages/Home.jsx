@@ -132,7 +132,7 @@ export default function Home() {
 
       {targetCardSectionTitle}
 
-      <div className="gap-4 grid grid-cols-1 md:grid-cols-3  mb-12 mt-8">
+      <div className="gap-4 w-full max-w-72 mx-auto md:max-w-full grid grid-cols-1 md:grid-cols-3 mb-12 mt-8">
         <div>
           <TargetAudienceCard
             icon="🏡"
