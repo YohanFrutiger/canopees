@@ -17,8 +17,9 @@ h5,
 h6 {
   font-family: 'Rosario', serif;
   color: "#111827";
-    text-transform: uppercase;
+  text-transform: uppercase;
   letter-spacing: 0.025em;
+  color: #692b85
 }
 
 h1 {
@@ -34,10 +35,9 @@ h1 {
 h2 {
   font-size: clamp(1.5rem, 4vw, 2.5rem);    
   line-height: 1.3;
-  font-weight: 600;
+  font-weight: 800;
   margin: 2.5rem 0 1rem;
   text-align: center;
-  color: #692b85
 }
 
 h3 {
