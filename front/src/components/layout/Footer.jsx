@@ -39,7 +39,7 @@ export default function Footer() {
         {/* LOGO */}
         <div className="absolute left-1/2 -translate-x-1/2 hidden md:block">
           <p className="text-md">
-            Canopées © 2025
+            Canopées © 2026
           </p>
           {/* <img
             src={logo}
