@@ -63,10 +63,11 @@ export default function About() {
               <img
                 src={`${UPLOADS_URL}/${member.image}`}
                 alt={`${member.firstname} ${member.lastname}`}
-                className="max-w-[170px] rounded-full shadow-2xl object-cover"
+                className="max-w-[170px] rounded-full shadow-2xl object-cover mt-8"
               />
-              <p className="biography px-5 text-right">{parse(member.biography)}</p>
+              <p className="biography px-5 mt-2 text-center md:text-right">{parse(member.biography)}</p>
             </div>
+           
           </section>
         ))}
       </div>
@@ -77,16 +78,17 @@ export default function About() {
 
   return (
     <div className="text-center">
-      {/* {introContent} */}
-      {/* <Line /> */}
+
       <div className='mt-16'>
         {ourValuesContent}
       </div>
-      {/* <Line /> */}
+
       {teamTitleContent}
       {teamSectionContent}
-      {/* <Line /> */}
-      <ContactButton btnContent="Contactez-nous !" />
+
+      <div className="flex flex-row  justify-center items-center">
+        <ContactButton btnContent="Contactez-nous !" />
+      </div>
     </div>
   );
 }
