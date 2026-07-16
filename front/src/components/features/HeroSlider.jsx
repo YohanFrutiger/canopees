@@ -6,7 +6,7 @@ import ContactButton from './ContactButton';
 import { useSlider } from '../../hooks/useSlider';
 
 function HeroSlider() {
-  const slider = useSlider();
+  const slider = useSlider(); 
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Filtrage des images actives uniquement
@@ -75,7 +75,7 @@ function HeroSlider() {
       </div>
 
       {/* Overlay sombre + bouton */}
-      <div className="absolute inset-0 bg-black/40 flex flex-col items-center justify-center z-10">
+      <div className="absolute inset-0 -translate-y-3 bg-black/40 flex flex-col items-center justify-center z-10">
         <ContactButton btnContent="Votre devis en 48h !" />
       </div>
 
