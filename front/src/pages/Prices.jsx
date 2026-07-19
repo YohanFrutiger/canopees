@@ -9,6 +9,8 @@ import parse from "html-react-parser";
 // Swiper
 import { Navigation, Pagination, Scrollbar, A11y, EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import "../../src/custom-swiper.css";
+
 
 // Styles Swiper
 import 'swiper/css';
@@ -42,13 +44,17 @@ export default function Prices() {
      <h1 className='mt-16'>Découvrez nos tarifs</h1>
       {pricesIntroContent}
 
+      <div className='gap-4 flex flex-wrap justify-center py-4'>
+        
+      </div>
+
       {/* CARROUSEL AVEC EFFET CIRCULAIRE */}
-      <div className="pt-6 px-6 relative">
+      <div className="pt-6 ">
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
           effect="coverflow"
           centeredSlides={true}
-          slidesPerView={3}
+          slidesPerView={1}
           spaceBetween={0}
           loop={true}
           navigation
@@ -57,13 +63,13 @@ export default function Prices() {
           coverflowEffect={{
             rotate: -15,
             stretch: 0,
-            depth:525,
+            depth:5,
             modifier: 0.9,
             slideShadows: false,
           }}
           breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 2 },
+            // 640: { slidesPerView: 1 },
+            1092: { slidesPerView: 3 },
           }}
           className="mySwiper"
         >
@@ -78,7 +84,9 @@ export default function Prices() {
         </Swiper>
       </div>
 
-      <ContactButton btnContent="Demandez un devis gratuit !" />
+      <div className="flex flex-row  justify-center items-center">
+        <ContactButton btnContent="Demandez un devis gratuit !" />
+      </div>
     </div>
   );
 }
