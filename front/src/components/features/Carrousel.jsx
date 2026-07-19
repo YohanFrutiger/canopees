@@ -43,42 +43,87 @@ export default function Carrousel() {
 
   return (
     <div>
-      <Swiper
-        modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
-        // effect="cube"
-        centeredSlides={true}
-        slidesPerView={3}
-        spaceBetween={0} 
-        loop={true}
-        navigation
-        pagination={{ clickable: true }}
-        coverflowEffect={{
-          rotate: 0,
-          stretch: 0,
-          depth: 0,
-          modifier: 0,
-          slideShadows: false,
-        }}
-        breakpoints={{
-          320: { slidesPerView: 1 },
-          640: { slidesPerView: 2 },
-          1024: { slidesPerView: 3 },
-        }}
-        className="mySwiper"
-      >
-        {slides.map((slide, index) => (
-          <SwiperSlide key={index} className="mx-12">
-            <div className="w-72 h-72 md:w-[450px] md:h-80">
-              <img
-                src={slide.image}
-                alt={slide.title}
-                className="w-full h-full object-cover rounded-lg transition-all duration-500"
-              />
-            </div>
-          </SwiperSlide>
-        ))
-        }
-      </Swiper >
+      <div>
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
+          effect="coverflow"
+          // centeredSlides={true}
+          slidesPerView={1}
+          spaceBetween={10}
+          loop={true}
+          navigation
+          pagination={{ clickable: true }}
+         coverflowEffect={{
+            rotate: -15,
+            stretch: 0,
+            depth:250,
+            modifier: 0.9,
+            slideShadows: false,
+          }}
+          breakpoints={{
+            // 320: { slidesPerView: 1 },
+             640: { slidesPerView: 3 },
+            // 1024: { slidesPerView: 3 },
+            //  640:{spaceBetween:10}
+          }}
+        >
+          {slides.map((slide, index) => (
+            <SwiperSlide key={index} >
+              <div className="w-72 h-72 md:w-[450px] md:h-80 mx-auto border-8 border-white">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="w-full h-full  object-cover transition-all duration-500"
+                />
+              </div>
+            </SwiperSlide>
+          ))
+          }
+        </Swiper >
+      </div>
+
+      ///////////////////////
+      <div>
+        <Swiper
+          modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
+          effect="coverflow"
+          // centeredSlides={true}
+          slidesPerView={1}
+          spaceBetween={10}
+          loop={true}
+          autoplay={true, 1000}
+          navigation
+          pagination={{ clickable: true }}
+           coverflowEffect={{
+            rotate: -15,
+            stretch: 0,
+            depth:500,
+            modifier: 0.9,
+            slideShadows: false,
+          }}
+          breakpoints={{
+            // 320: { slidesPerView: 1 },
+            //  640: { slidesPerView: 3 },
+            // 1024: { slidesPerView: 3 },
+            //  640:{spaceBetween:10}
+          }}
+        >
+          {slides.map((slide, index) => (
+            <SwiperSlide key={index} >
+              <div className="absolute block top-200 z-99 w-full h-72  md:h-80 mx-auto border-8 border-white">
+                <img
+                  src={slide.image}
+                  alt={slide.title}
+                  className="absolute  left-0 w-full h-[400px] overflow-hidden bg-black object-cover"
+                />
+              </div>
+            </SwiperSlide>
+          ))
+          }
+        </Swiper >
+
+      </div>
+      /////////////////
     </div >
   );
 }
