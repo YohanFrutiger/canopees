@@ -3,22 +3,22 @@ import logo from "../../assets/logo.png";
 
 export default function Footer() {
   return (
-    <footer className="h-[80px] bg-green/90 text-white mt-16 min-w-80">
+    <footer className="h-[90px] bg-green/90 text-white mt-16 min-w-80">
       <div className="h-full max-w-7xl mx-auto flex items-center justify-between ">
         {/* COLONNE GAUCHE */}
         <div className="flex flex-col ml-2 md:ml-5 font-thin gap-1">
-          <p className="text-xs sm:text-sm">
+          <p className="text-xs sm:text-sm lg:text-lg">
             SARL Canopées
           </p>
-          <p className="text-xs sm:text-sm">
+          <p className="text-xs sm:text-sm lg:text-lg">
             25 rue Rossignol 07320 Saint-Agrève
           </p>
-          <p className="text-xs sm:text-sm">
+          <p className="text-xs sm:text-sm lg:text-lg">
             04 72 32 45 67
           </p>
         </div>
         {/* COLONNE DROITE  */}
-        <div className="flex flex-col items-end text-right mr-2 md:mr-5 font-thin gap-1 text-xs sm:text-sm">
+        <div className="flex flex-col items-end text-right mr-2 md:mr-5 font-thin gap-1 text-xs sm:text-sm lg:text-lg">
           <a
             href="mailto:contact@canopees.fr"
             className="hover:text-orange transition "
@@ -37,8 +37,8 @@ export default function Footer() {
          
         </div>
         {/* LOGO */}
-        <div className="absolute left-1/2 -translate-x-1/2 hidden md:block">
-          <p className="text-md">
+        <div className="absolute left-1/2 -translate-x-1/2 hidden sm:block">
+          <p className="sm:text-sm md:text-md lg:text-xl">
             Canopées © 2025
           </p>
           {/* <img
