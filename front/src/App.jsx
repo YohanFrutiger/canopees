@@ -22,17 +22,15 @@ function App() {
       <div className="min-h-screen flex flex-col">
         <Header />
         <main className="flex-grow mt-[32px]  mx-auto max-w-6xl px-6 w-full">
-          <Suspense fallback={<div>Chargement...</div>}>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/about" element={<About />} />
-              <Route path="/categories" element={<Categories />} />
-              <Route path="/prices" element={<Prices />} />
-              <Route path="/contact" element={<Contact />} />
-              <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
-              <Route path="/legal-notices" element={<LegalNotices />} />
-            </Routes>
-          </Suspense>
+          <Routes> 
+            <Route path="/" element={<Home />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/categories" element={<Categories />} />
+            <Route path="/prices" element={<Prices />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
+            <Route path="/legal-notices" element={<LegalNotices />} />
+          </Routes>
         </main>
         <Footer />
       </div>
