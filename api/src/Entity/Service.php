@@ -22,8 +22,8 @@ use ApiPlatform\Metadata\Delete;
 #[ApiResource(
     normalizationContext: ['groups' => ['service:read']],
     operations: [
-        new GetCollection(security: null),  // Public : tout le monde peut lister les categories 
-        new Get(security: null),            // Public : voir une categorie
+        new GetCollection(security: null),  // Public : tout le monde peut lister les services
+        new Get(security: null),            // Public : voir un service
         // new Post(security: "is_granted('ROLE_SUPER_ADMIN')"),  
         // new Put(security: "is_granted('ROLE_SUPER_ADMIN')"),
         // new Delete(security: "is_granted('ROLE_SUPER_ADMIN')"),
@@ -72,11 +72,11 @@ class Service
     #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
-    // Timestamp (update
+    // Timestamp (update)
     #[ORM\Column(nullable: true)]
     private ?\DateTimeImmutable $updatedAt = null;
    
-    // Relation ManyToOne avec User (chaque catégorie est créée ou modifiée par un utilisateur)
+    // Relation ManyToOne avec User (chaque service est créée ou modifiée par un utilisateur)
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
