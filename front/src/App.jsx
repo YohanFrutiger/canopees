@@ -6,11 +6,15 @@ import Footer from "./components/layout/Footer";
 const Home = lazy(() => import("./pages/Home"));
 // import About from "./pages/About";
 const About = lazy(() => import("./pages/About"));
-import Categories from "./pages/Categories";
+// import Categories from "./pages/Categories";
+const Categories = lazy(() => import("./pages/Categories"));
 const Prices = lazy(() => import("./pages/Prices"));
-import Contact from "./pages/Contact";
-import TermsAndConditions from "./pages/TermsAndConditions";
-import LegalNotices from "./pages/LegalNotices";
+// import Contact from "./pages/Contact";
+const Contact = lazy(() => import("./pages/Contact"));
+// import TermsAndConditions from "./pages/TermsAndConditions";
+const TermsAndConditions = lazy(() => import("./pages/TermsAndConditions"));
+// import LegalNotices from "./pages/LegalNotices";
+const LegalNotices = lazy(() => import("./pages/LegalNotices"));
 
 function App() {
   return (
