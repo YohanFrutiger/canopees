@@ -49,7 +49,7 @@ export default function Prices() {
       </div>
 
       {/* CARROUSEL AVEC EFFET CIRCULAIRE */}
-      <div className="pt-6 ">
+      <div className="p-8 ">
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
           effect="coverflow"
