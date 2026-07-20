@@ -1,9 +1,11 @@
 //src/pages.home.jsx
 // Page d'accueil du site
+import { lazy, Suspense } from "react";
 import { useContentSections } from '../hooks/useContentSections';
 import HeroSlider from "../components/features/HeroSlider";
 import TargetAudienceCard from "../components/features/TargetAudienceCard";
-import Carrousel from "../components/features/Carrousel";
+// import Carrousel from "../components/features/Carrousel";
+const Carrousel = lazy(() => import("../components/features/Carrousel"));
 import parse from "html-react-parser";
 
 export default function Home() {
