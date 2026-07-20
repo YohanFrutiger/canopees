@@ -44,9 +44,9 @@ export default function Contact() {
 
   return (
     <>
-      <div className="text-center">
+      <div className="text-center flex flex-col">
 
-        <div className='mt-8'>
+        <div className='mt-8 '>
           {contactIntroContent}
         </div>
 
@@ -54,15 +54,15 @@ export default function Contact() {
           {contactInfoContent}
         </div>
 
-        <div className="mx-auto">
+        <div className="">
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5641.522447333289!2d4.393774974763695!3d45.00947056366621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47f58241422cd037%3A0x9afaf11bcf9d9067!2sSaint-Agr%C3%A8ve!5e0!3m2!1sfr!2sfr!4v1771412853703!5m2!1sfr!2sfr"
-            width="550"
-            height="450"
+            // width="275"
+            // height="275"
             allowfullscreen=""
             loading="lazy"
             referrerpolicy="no-referrer-when-downgrade"
-            className="mx-auto rounded-lg mt-8 border-2 border-gray-200 shadow-2xl"
+            className="w-64 h-64 sm:w-96 sm:h-96 rounded-lg mt-8 border-2 border-gray-200 shadow-2xl"
           >
 
           </iframe>
@@ -70,7 +70,7 @@ export default function Contact() {
 
       </div>
 
-      <div className="max-w-4xl mx-auto mt-8">
+      <div className="max-w-4xl min-w-[300px] mx-auto mt-8">
         <ContactForm />
       </div>
     </>
