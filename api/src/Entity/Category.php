@@ -54,7 +54,7 @@ class Category
     #[Assert\NotBlank(message: 'La description est obligatoire')]
     #[Assert\Length(
         min: 10,
-        max: 1000,
+        max: 100,
         minMessage: 'La description doit avoir au moins {{ limit }} caractères',
         maxMessage: 'La description ne doit pas dépasser {{ limit }} caractères',
     )]
