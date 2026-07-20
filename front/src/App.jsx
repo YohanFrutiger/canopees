@@ -4,7 +4,7 @@ import Footer from "./components/layout/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Categories from "./pages/Categories";
-import Prices from "./pages/Prices";
+const Prices = lazy(() => import("./pages/Prices"));
 import Contact from "./pages/Contact";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import LegalNotices from "./pages/LegalNotices";
