@@ -55,21 +55,22 @@ export default function Prices() {
           effect="coverflow"
           // centeredSlides={true}
           slidesPerView={1}
-          spaceBetween={0}
+          spaceBetween={10}
           loop={true}
           navigation
           pagination={{ clickable: true }}
-          // scrollbar={{ draggable: true }}
-          coverflowEffect={{
+         coverflowEffect={{
             rotate: -15,
             stretch: 0,
-            depth:5,
+            depth:250,
             modifier: 0.9,
             slideShadows: false,
           }}
           breakpoints={{
-            // 640: { slidesPerView: 1 },
-            1092: { slidesPerView: 3 },
+            // 320: { slidesPerView: 1 },
+             640: { slidesPerView: 3 },
+            // 1024: { slidesPerView: 3 },
+            //  640:{spaceBetween:10}
           }}
           className="mySwiper"
         >
