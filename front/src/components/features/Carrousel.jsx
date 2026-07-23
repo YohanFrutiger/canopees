@@ -82,7 +82,6 @@ export default function Carrousel() {
         </Swiper >
       </div>
 
-      ///////////////////////
       <div>
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
@@ -123,7 +122,6 @@ export default function Carrousel() {
         </Swiper >
 
       </div>
-      /////////////////
     </div >
   );
 }
