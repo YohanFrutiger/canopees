@@ -9,7 +9,7 @@ import parse from "html-react-parser";
 // Swiper
 import { Navigation, Pagination, Scrollbar, A11y, EffectCoverflow } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import "../../src/style/custom-swiper.css";
+// import "../../src/style/custom-swiper.css";
 
 
 // Styles Swiper
