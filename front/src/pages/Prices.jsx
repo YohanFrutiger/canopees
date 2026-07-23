@@ -71,7 +71,7 @@ export default function Prices() {
             // 640: { slidesPerView: 1 },
             1092: { slidesPerView: 3 },
           }}
-          className="mySwiper"
+          // className="mySwiper"
         >
           {categories.data?.member?.map((cat) => {
             const servicesByCat = services.getServicesByCategory(cat.id);
