@@ -102,18 +102,18 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="p-8 md:w-[600px] mx-auto">
+    <div className="md:p-8 md:w-[600px] mx-auto">
 
-      <form onSubmit={handleSubmit} className="bg-gray-50 p-8 rounded-xl shadow-2xl space-y-8" noValidate>
+      <form onSubmit={handleSubmit} className="bg-gray-50 p-2 sm:p-8 rounded-xl shadow-2xl space-y-8" noValidate>
 
-        <p className="text-center">Besoin d'un devis ? Une question ?</p>
-        <p className="text-center mb-4">Remplissez le formulaire, nous vous répondons sous 48h.</p>
+        <p className="text-center text-base sm:text-lg">Besoin d'un devis ? Une question ?</p>
+        <p className="text-center mb-4 text-base sm:text-lg">Remplissez le formulaire, nous vous répondons sous 48h.</p>
 
-        <div className="text-left flex flex-col gap-10">
+        <div className="text-left flex flex-col gap-4 sm:gap-10">
 
           {/* NOM */}
           <div>
-            <label className="block text-lg font-medium pb-2">Nom</label>
+            <label className="block text-sm sm:text-lg font-medium pb-2">Nom</label>
             <input
               type="text"
               name="nom"
@@ -127,7 +127,7 @@ export default function ContactForm() {
 
           {/* PRENOM */}
           <div>
-            <label className="block text-lg font-medium pb-2">Prénom</label>
+            <label className="block text-sm sm:text-lg font-medium pb-2">Prénom</label>
             <input
               type="text"
               name="prenom"
@@ -141,7 +141,7 @@ export default function ContactForm() {
 
           {/* EMAIL */}
           <div>
-            <label className="block text-lg font-medium pb-2">Email</label>
+            <label className="block text-sm sm:text-lg font-medium pb-2">Email</label>
             <input
               type="email"
               name="email"
@@ -155,7 +155,7 @@ export default function ContactForm() {
 
           {/* MESSAGE */}
           <div>
-            <label className="block text-lg font-medium pb-2">Votre message</label>
+            <label className="block text-sm sm:text-lg font-medium pb-2">Votre message</label>
             <textarea
               name="message"
               value={formData.message}
