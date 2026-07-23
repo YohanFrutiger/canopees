@@ -58,8 +58,8 @@ export default function Prices() {
           spaceBetween={0}
           loop={true}
           navigation
-          // pagination={{ clickable: true }}
-          // scrollbar={{ draggable: true }}
+          pagination={{ clickable: true }}
+          scrollbar={{ draggable: true }}
           coverflowEffect={{
             rotate: -15,
             stretch: 0,
