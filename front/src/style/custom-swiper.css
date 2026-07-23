@@ -1,7 +1,6 @@
 .swiper-button-next,
 .swiper-button-prev{
-    color:white;
-    background-color: #2a4c9b5e;
+    background-color: rgb(202, 195, 195);
     padding: 10px;
-    border-radius: 999px;
+    border-radius: 999px;    
 }
