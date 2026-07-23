@@ -52,7 +52,7 @@ export default function Prices() {
       <div className="p-8 ">
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
-          // effect="coverflow"
+          effect="coverflow"
           centeredSlides={true}
           slidesPerView={1}
           spaceBetween={0}
@@ -60,13 +60,13 @@ export default function Prices() {
           navigation
           pagination={{ clickable: true }}
           // scrollbar={{ draggable: true }}
-          // coverflowEffect={{
-          //   rotate: -15,
-          //   stretch: 0,
-          //   depth:5,
-          //   modifier: 0.9,
-          //   slideShadows: false,
-          // }}
+          coverflowEffect={{
+            rotate: -15,
+            stretch: 0,
+            depth:5,
+            modifier: 0.9,
+            slideShadows: false,
+          }}
           breakpoints={{
             // 640: { slidesPerView: 1 },
             1092: { slidesPerView: 3 },
